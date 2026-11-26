@@ -1,4 +1,6 @@
-[
+// Generated from public/criteria.json. Plain JS so every bundler (Cloudflare, Vercel, Node) can load it.
+// Regenerate after changing the standards: python3 -I ../scripts/criteria_to_js.py
+export default [
  {
   "id": "eval_plan-error-analysis-first",
   "artifact": "eval_plan",
@@ -2714,4 +2716,4 @@
    "Gabor Meyer"
   ]
  }
-]
+];

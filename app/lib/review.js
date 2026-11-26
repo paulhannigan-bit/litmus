@@ -4,7 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
-import CRITERIA from "./criteria.json" with { type: "json" };
+import CRITERIA from "./criteria.js";
 const TYPES = ["prd", "prototype", "eval_plan"];
 const DEFAULT_MODEL = "claude-opus-5-5";
 const MAX_DRAFT_CHARS = 60_000;
