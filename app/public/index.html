@@ -75,6 +75,7 @@ textarea { width: 100%; min-height: 380px; resize: vertical; font: 13px/1.6 var(
 .ghost { font: 500 13px var(--body); background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 8px; padding: 9px 14px; cursor: pointer; }
 .status { font-size: 13px; color: var(--muted); }
 .human-check:empty { display: none; }
+.human-check { min-height: 0; }
 .status.err { color: var(--pen); }
 
 .report { padding: 22px; display: grid; gap: 26px; }
@@ -452,20 +453,38 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
   }
 
   // ---------- Turnstile human check (Cloudflare) ----------
+  // The widget shows its own small status box ("Verifying...", "Success!") so people can see the check
+  // running. Pressing Test before it finishes simply waits for it, up to 20 seconds.
   const TS_KEY = (document.querySelector('meta[name="turnstile-sitekey"]') || {}).content || "";
-  let tsWidget = null;
-  const humanToken = () => (tsWidget !== null && window.turnstile ? window.turnstile.getResponse(tsWidget) || "" : "");
-  const resetHumanCheck = () => { if (tsWidget !== null && window.turnstile) window.turnstile.reset(tsWidget); };
+  let tsWidget = null, tsToken = "", tsError = "", tsWaiters = [];
+  const settle = () => { const w = tsWaiters; tsWaiters = []; w.forEach((f) => f()); };
+  const humanToken = () => tsToken;
+  const resetHumanCheck = () => { tsToken = ""; if (tsWidget !== null && window.turnstile) window.turnstile.reset(tsWidget); };
   window.litmusTurnstileReady = () => {
     if (!TS_KEY || tsWidget !== null) return;
-    tsWidget = window.turnstile.render("#human-check", { sitekey: TS_KEY, appearance: "interaction-only", action: "review" });
+    tsWidget = window.turnstile.render("#human-check", {
+      sitekey: TS_KEY, action: "review", size: "flexible",
+      callback: (t) => { tsToken = t; tsError = ""; settle(); },
+      "expired-callback": () => { tsToken = ""; },
+      "error-callback": (code) => { tsToken = ""; tsError = String(code || "error"); settle(); },
+      "unsupported-callback": () => { tsError = "unsupported"; settle(); },
+    });
   };
   if (TS_KEY) {
     const sc = document.createElement("script");
     sc.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=litmusTurnstileReady";
     sc.async = true; sc.defer = true;
+    sc.onerror = () => { tsError = "script"; settle(); };
     document.head.append(sc);
   }
+  function waitForHuman(ms = 20000) {
+    if (!TS_KEY || tsToken) return Promise.resolve(true);
+    return new Promise((resolve) => {
+      const t = setTimeout(() => resolve(!!tsToken), ms);
+      tsWaiters.push(() => { clearTimeout(t); resolve(!!tsToken); });
+    });
+  }
+  const HUMAN_FAIL = "The human check couldn't finish. If you use an ad or privacy blocker, allow challenges.cloudflare.com for this page, or try another browser, then reload.";
 
   // ---------- reviewing (POST /api/review on this app's own server) ----------
   async function run() {
@@ -473,12 +492,13 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     const st = $("#status");
     st.classList.remove("err");
     if (draft.length < 80) { st.textContent = "Paste a draft of at least a few lines first."; st.classList.add("err"); return; }
+    $("#run").disabled = true;
     if (TS_KEY && !humanToken()) {
-      st.textContent = "Finishing a quick human check. Press Test again in a moment.";
-      return;
+      st.textContent = "Running a quick human check\u2026";
+      if (!(await waitForHuman())) { st.textContent = HUMAN_FAIL; st.classList.add("err"); $("#run").disabled = false; return; }
     }
     ctl = new AbortController();
-    $("#run").disabled = true; $("#stop").hidden = false;
+    $("#stop").hidden = false;
     const n = CRITERIA.filter((c) => chosen === "auto" || c.artifact === chosen).length;
     st.textContent = `Testing against ${n} standards. This usually takes 20 to 60 seconds.`;
     try {
