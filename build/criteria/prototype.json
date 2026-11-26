@@ -1,0 +1,753 @@
+[
+  {
+    "id": "prototype-shared-picture",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Use the prototype to give stakeholders one shared, concrete picture of the experience instead of relying on a written description.",
+    "check": "Look for evidence the prototype is meant to be shown and discussed (who it is for, what decision it informs). Fails if it is built as a private toy or if the plan still expects alignment to happen through a long doc alone.",
+    "slop_signal": false,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Brian Balfour",
+        "file": "2025-02-25-reforge-growth-crash-course.md",
+        "date": "2025-02-25",
+        "ts": "00:58:32",
+        "seconds": 3512,
+        "youtube_url": "https://www.youtube.com/watch?v=sWWRBOXo6rA",
+        "quote": "It's about, okay, how do we get everybody to have the same picture in their head?"
+      },
+      {
+        "speaker": "Benjamin Humphrey",
+        "file": "2024-11-27-what-it-means-to-be-design-led-with.md",
+        "date": "2024-11-27",
+        "ts": "00:23:26",
+        "seconds": 1406,
+        "youtube_url": "https://www.youtube.com/watch?v=Rdo2N_xO8z8",
+        "quote": "And I find that the best thing is just like just to visualize where we're going."
+      },
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:20:11",
+        "seconds": 1211,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "rather than just writing a proposal for how something works, just build a prototype of how something could work and you put that in people's hands"
+      },
+      {
+        "speaker": "Sam Kawsarani",
+        "file": "2024-09-09-product-management-ai-era.md",
+        "date": "2024-09-09",
+        "ts": "01:18:03",
+        "seconds": 4683,
+        "youtube_url": "https://www.youtube.com/watch?v=Q3jc5NAAUT4",
+        "quote": "So I absolutely think you probably need that prototype because it helps with buying even more versus just putting a strategy doc."
+      }
+    ]
+  },
+  {
+    "id": "prototype-customer-reactions",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Put the prototype in front of real customers and capture how they interpret and use it.",
+    "check": "Check for a named plan to test with actual users (think-aloud sessions, a set of customers, recorded walkthroughs). Fails if the only audience is the team or if success is judged by how impressive it looks.",
+    "slop_signal": false,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Jeremy Epling",
+        "file": "2025-05-26-jeremy-epling-podcast.md",
+        "date": "2025-05-26",
+        "ts": "00:04:38",
+        "seconds": 278,
+        "youtube_url": "https://www.youtube.com/watch?v=o-eelkFXF-w",
+        "quote": "Maybe it will get better there, but it's enough to show a customer and get a reaction."
+      },
+      {
+        "speaker": "Pawel Huryn",
+        "file": "2024-11-21-how-to-do-product-discovery-right.md",
+        "date": "2024-11-21",
+        "ts": "00:32:29",
+        "seconds": 1949,
+        "youtube_url": "https://www.youtube.com/watch?v=KkqYDbSPrbQ",
+        "quote": "So as they were going through the prototype, they were asked to describe what they see on the screen and how they interpret what they see"
+      },
+      {
+        "speaker": "Tanguy Crusson",
+        "file": "2025-07-08-tanguy-crusson-podcast.md",
+        "date": "2025-07-08",
+        "ts": "00:42:48",
+        "seconds": 2568,
+        "youtube_url": "https://www.youtube.com/watch?v=6oottgko7pQ",
+        "quote": "Get the same 10 people in a video after you've presented your solutions and get them to explain how that's solving it for them."
+      }
+    ]
+  },
+  {
+    "id": "prototype-problem-first",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Ground the prototype in a researched customer problem before you start generating screens.",
+    "check": "The draft or its prompt should name the customer problem or opportunity and the research behind it. Fails if it starts from a cool feature or 'add AI to X' with no stated user need.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Nadav Abrahami",
+        "file": "2026-02-27-nadav-abrahami-podcast.md",
+        "date": "2026-02-27",
+        "ts": "00:06:36",
+        "seconds": 396,
+        "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+        "quote": "There's a lot to do before you even get to prototyping, and I would never give up that step."
+      },
+      {
+        "speaker": "Dan Olsen",
+        "file": "2025-06-20-dan-olsen-podcast.md",
+        "date": "2025-06-20",
+        "ts": "00:30:58",
+        "seconds": 1858,
+        "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+        "quote": "of course you should start off with discovery research. You should talk to customers to understand their needs and preferences"
+      },
+      {
+        "speaker": "Dan Olsen",
+        "file": "2025-06-20-dan-olsen-podcast.md",
+        "date": "2025-06-20",
+        "ts": "01:12:43",
+        "seconds": 4363,
+        "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+        "quote": "The other thing is you're not starting with a customer problem."
+      },
+      {
+        "speaker": "Teresa Torres",
+        "file": "2025-08-12-teresa-torres-podcast.md",
+        "date": "2025-08-12",
+        "ts": "00:17:35",
+        "seconds": 1055,
+        "youtube_url": "https://www.youtube.com/watch?v=wGuRuuPuYNQ",
+        "quote": "I've chosen a target opportunity. Ideally, I've brainstormed multiple solutions for that target opportunity."
+      }
+    ]
+  },
+  {
+    "id": "prototype-diverge-variants",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Generate and compare several distinct variants instead of accepting the first output.",
+    "check": "Look for two or more meaningfully different directions and a note on how they were compared. Fails if there is a single design with no alternatives considered.",
+    "slop_signal": true,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:09:36",
+        "seconds": 576,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "AI shouldn't be used just to create one output. We should be using it to create multiple outputs, just the way we'd use a designer."
+      },
+      {
+        "speaker": "Guest",
+        "file": "2026-08-06-oji-udezue-claude-skills.md",
+        "date": "2026-08-06",
+        "ts": "00:39:45",
+        "seconds": 2385,
+        "youtube_url": "https://www.youtube.com/watch?v=Eo26_4JcyNA",
+        "quote": "And then we will generate a set of X prototypes to evaluate what direction to take this in."
+      },
+      {
+        "speaker": "Tyler Folkman",
+        "file": "2026-09-04-how-to-build-product-loops-in-claude-code.md",
+        "date": "2026-09-04",
+        "ts": "00:16:10",
+        "seconds": 970,
+        "youtube_url": "https://www.youtube.com/watch?v=XsnSvFo4MHQ",
+        "quote": "It's actually using our product skill, which the first step is to build a bunch of prototypes."
+      }
+    ]
+  },
+  {
+    "id": "prototype-generic-look",
+    "artifact": "prototype",
+    "kind": "avoid",
+    "criterion": "Don't ship a prototype that looks like every other AI-generated prototype.",
+    "check": "Compare the screenshots against default tool output: stock layouts, placeholder copy, generic component styling. Fails if nothing in it is specific to this product, user, or problem.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Jayesh Govindarajan",
+        "file": "2026-11-03-salesforce-ai-native-product-team.md",
+        "date": "2026-11-03",
+        "ts": "00:37:01",
+        "seconds": 2221,
+        "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+        "quote": "AI slop comes in many different forms. You know, prototype that looks like any other prototype, AI slop."
+      },
+      {
+        "speaker": "Dan Olsen",
+        "file": "2025-06-20-dan-olsen-podcast.md",
+        "date": "2025-06-20",
+        "ts": "00:10:07",
+        "seconds": 607,
+        "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+        "quote": "These things will generate kind of plain vanilla UI, and they are getting better and better."
+      },
+      {
+        "speaker": "Elizabeth Laraki",
+        "file": "2025-10-07-elizabeth-laraki-podcast.md",
+        "date": "2025-10-07",
+        "ts": "00:42:09",
+        "seconds": 2529,
+        "youtube_url": "https://www.youtube.com/watch?v=83ajrVQDowc",
+        "quote": "I think what I find frustrating with design tools is that my expectations are pretty high and the output does not match what I want from them."
+      }
+    ]
+  },
+  {
+    "id": "prototype-existing-product-baseline",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "When the idea extends an existing product, start from a faithful baseline of that product and its design system.",
+    "check": "Check whether the prototype recreates the real product screen or design system before adding the new feature. Fails if a feature for an existing product is shown in an invented UI that looks nothing like it.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Dan Olsen",
+        "file": "2025-06-20-dan-olsen-podcast.md",
+        "date": "2025-06-20",
+        "ts": "00:25:14",
+        "seconds": 1514,
+        "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+        "quote": "Well, if a new PM comes in and says, I'm just going to create a vibe-coding prototype, and it looks nothing like it, that's going to be a problem, right?"
+      },
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "01:05:40",
+        "seconds": 3940,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "As I said, the best way to start is with a baseline."
+      },
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:26:33",
+        "seconds": 1593,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "the first thing I asked it to do was please recreate the screenshot of LinkedIn."
+      }
+    ]
+  },
+  {
+    "id": "prototype-deliberate-visual-direction",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Set a deliberate visual direction from chosen references or a design brief rather than leaving aesthetics to the tool's defaults.",
+    "check": "Look for named inspiration screenshots, a design brief, or defined type and color choices in the prompt or plan. Fails if styling is whatever the tool produced by default.",
+    "slop_signal": true,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:47:19",
+        "seconds": 2839,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "find some inspiration as a screenshot. okay, I wanna build a feature like this."
+      },
+      {
+        "speaker": "Gabor Meyer",
+        "file": "2026-04-30-claude-code-dev-team.md",
+        "date": "2026-04-30",
+        "ts": "00:47:06",
+        "seconds": 2826,
+        "youtube_url": "https://www.youtube.com/watch?v=kQelqKkI-EQ",
+        "quote": "I create a app guideline, design guideline or design brief with typology and color definitions and all the different buttons and color transitions"
+      }
+    ]
+  },
+  {
+    "id": "prototype-structured-spec",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Write a structured spec or PRD-style prompt, broken into parts, before asking the tool to build.",
+    "check": "Inspect the prompt or plan: it should state goal, users, key flows and constraints, and be split into manageable pieces. Fails if it is a one-line vague request.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Gabor Meyer",
+        "file": "2026-04-30-claude-code-dev-team.md",
+        "date": "2026-04-30",
+        "ts": "00:13:49",
+        "seconds": 829,
+        "youtube_url": "https://www.youtube.com/watch?v=kQelqKkI-EQ",
+        "quote": "If you build a good specification and you break it down appropriately, then you will have a much better quality end product."
+      },
+      {
+        "speaker": "Mahesh Yadav",
+        "file": "2025-09-13-mahesh-yadav-podcast.md",
+        "date": "2025-09-13",
+        "ts": "00:32:17",
+        "seconds": 1937,
+        "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+        "quote": "Do you structure your prompt? And that tells me that, yes, you have done some interactions with AI."
+      },
+      {
+        "speaker": "Colin Matthews",
+        "file": "2025-02-28-ai-prototyping-for-pms.md",
+        "date": "2025-02-28",
+        "ts": "00:10:11",
+        "seconds": 611,
+        "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+        "quote": "I find that creating a PRD gives us something that we can reference back to."
+      },
+      {
+        "speaker": "Alex Danilowicz",
+        "file": "2025-11-16-alex-danilowicz-podcast.md",
+        "date": "2025-11-16",
+        "ts": "00:33:09",
+        "seconds": 1989,
+        "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+        "quote": "If you already have a PRD, I don't think it replaces the PRD, right? Like use the PRD as the prompt."
+      }
+    ]
+  },
+  {
+    "id": "prototype-one-prompt-done",
+    "artifact": "prototype",
+    "kind": "avoid",
+    "criterion": "Don't treat the output of one or two prompts as a finished prototype.",
+    "check": "Check how many deliberate passes went into it and whether anything was refined after the first generation. Fails if the first output is presented as ready to ship or test.",
+    "slop_signal": true,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Gabor Meyer",
+        "file": "2026-04-30-claude-code-dev-team.md",
+        "date": "2026-04-30",
+        "ts": "00:13:49",
+        "seconds": 829,
+        "youtube_url": "https://www.youtube.com/watch?v=kQelqKkI-EQ",
+        "quote": "they start by giving one prompt and then they expect that at the end of that one prompt there will be a completely beautifully done software on the other side"
+      },
+      {
+        "speaker": "Colin Matthews",
+        "file": "2026-01-22-colin-matthews-podcast.md",
+        "date": "2026-01-22",
+        "ts": "00:38:53",
+        "seconds": 2333,
+        "youtube_url": "https://www.youtube.com/watch?v=Q2MfgGBUVwQ",
+        "quote": "I think some people might have the tendency to want to, like, ship the AI prototype when we did right at the beginning."
+      }
+    ]
+  },
+  {
+    "id": "prototype-show-iterations",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Show how the prototype improved across iterations, with specific changes driven by user insight.",
+    "check": "Look for a version history or notes explaining what changed between iterations and why. Fails if there is only one version or changes are broad re-rolls with no stated reason.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Mahesh Yadav",
+        "file": "2025-09-13-mahesh-yadav-podcast.md",
+        "date": "2025-09-13",
+        "ts": "00:33:05",
+        "seconds": 1985,
+        "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+        "quote": "second once you build it show me what kind of user insights you are bringing in your second iteration"
+      },
+      {
+        "speaker": "Alex Danilowicz",
+        "file": "2025-11-16-alex-danilowicz-podcast.md",
+        "date": "2025-11-16",
+        "ts": "00:28:35",
+        "seconds": 1715,
+        "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+        "quote": "I always recommend iterating very specifically, like using select mode and being very specific on exactly what you want to update."
+      }
+    ]
+  },
+  {
+    "id": "prototype-core-happy-path",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Scope the prototype to the core flow that solves the most pressing problem, not every use case.",
+    "check": "Check that the screens center on one main flow. Fails if it is padded with settings, filters, secondary features or backend plumbing that the test does not need.",
+    "slop_signal": true,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Pawel Huryn",
+        "file": "2024-11-21-how-to-do-product-discovery-right.md",
+        "date": "2024-11-21",
+        "ts": "00:32:29",
+        "seconds": 1949,
+        "youtube_url": "https://www.youtube.com/watch?v=KkqYDbSPrbQ",
+        "quote": "we selected a very small subset of functionality, basically solving the most pressing problem simple way, so not implementing all the additional use cases"
+      },
+      {
+        "speaker": "Alex Danilowicz",
+        "file": "2025-11-16-alex-danilowicz-podcast.md",
+        "date": "2025-11-16",
+        "ts": "00:26:25",
+        "seconds": 1585,
+        "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+        "quote": "When you realize that you don't actually need Supabase, but you've spent two hours debugging Supabase, and all you need is an interactive prototype"
+      },
+      {
+        "speaker": "Colin Matthews",
+        "file": "2025-02-28-ai-prototyping-for-pms.md",
+        "date": "2025-02-28",
+        "ts": "00:30:29",
+        "seconds": 1829,
+        "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+        "quote": "But I personally find for the purpose of prototyping, most of the time, I don't need to do that."
+      }
+    ]
+  },
+  {
+    "id": "prototype-fit-to-end-goal",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Choose the fidelity and technical depth based on the end goal and audience of the prototype.",
+    "check": "The draft should say who will see it and what it must prove, and its fidelity should match. Fails if it is over-built (auth, databases) for a usability check, or too thin to answer the question asked.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Alex Danilowicz",
+        "file": "2025-11-16-alex-danilowicz-podcast.md",
+        "date": "2025-11-16",
+        "ts": "00:27:00",
+        "seconds": 1620,
+        "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+        "quote": "I always have them think, like, what's the end goal? Like, what am I trying to accomplish with this?"
+      },
+      {
+        "speaker": "Mike Davey",
+        "file": "2025-02-11-how-he-became-a-series-c-vp-of-product.md",
+        "date": "2025-02-11",
+        "ts": "00:23:47",
+        "seconds": 1427,
+        "youtube_url": "https://www.youtube.com/watch?v=59mpQHNXsPI",
+        "quote": "I don't need a working prototype to be able to prove that something is usable and viable."
+      },
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "01:00:43",
+        "seconds": 3643,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "So you really want to ask yourself, do you need that capability or not?"
+      }
+    ]
+  },
+  {
+    "id": "prototype-real-experience",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Prototype the actual experience, including live AI output where it matters, not just static UI.",
+    "check": "For AI or dynamic features, check whether the prototype shows real model responses or behavior a user can react to. Fails if an AI feature is represented only by mocked screens with canned text.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Colin Matthews",
+        "file": "2025-02-28-ai-prototyping-for-pms.md",
+        "date": "2025-02-28",
+        "ts": "00:31:49",
+        "seconds": 1909,
+        "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+        "quote": "You can't really prototype an experience like that and get user feedback inside of Figma."
+      },
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:37:04",
+        "seconds": 2224,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "not only am I prototyping interactions, I am literally able to see the different output coming from different models."
+      },
+      {
+        "speaker": "Anthony Maggio",
+        "file": "2025-04-11-airtable-vp-of-pm-heres-how-to-automate.md",
+        "date": "2025-04-11",
+        "ts": "01:12:35",
+        "seconds": 4355,
+        "youtube_url": "https://www.youtube.com/watch?v=vh-urCCJhTs",
+        "quote": "getting hands-on to understand where the edges are of what's possible in a way that just never existed to the same extent."
+      }
+    ]
+  },
+  {
+    "id": "prototype-instrument-feedback",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Build in ways to collect feedback and usage data from the prototype beyond one-on-one demos.",
+    "check": "Look for embedded surveys, analytics events, or heatmaps tied to the key actions. Fails if the only feedback plan is informal impressions.",
+    "slop_signal": false,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:41:07",
+        "seconds": 2467,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "I could go and do one-on-one customer interviews, which I should certainly do, but now I'm showing you how do you scale that feedback?"
+      },
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:41:59",
+        "seconds": 2519,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "Now, this is really interesting from the perspective of, I can say, do people even come back to my prototypes, right?"
+      }
+    ]
+  },
+  {
+    "id": "prototype-learning-goal",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "State the assumption the prototype tests and what result would change your decision.",
+    "check": "The draft should name a hypothesis or learning goal and how it will be judged. Fails if the prototype exists to show that something can be built, with no question it answers.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Frederic de Todaro",
+        "file": "2025-08-29-frederic-de-todaro-podcast.md",
+        "date": "2025-08-29",
+        "ts": "00:37:45",
+        "seconds": 2265,
+        "youtube_url": "https://www.youtube.com/watch?v=MC1FfWdAyX4",
+        "quote": "As a product manager, my goal isn't to just, you know, build and deliver faster. It's to learn faster, right?"
+      },
+      {
+        "speaker": "Teresa Torres",
+        "file": "2025-08-12-teresa-torres-podcast.md",
+        "date": "2025-08-12",
+        "ts": "00:17:35",
+        "seconds": 1055,
+        "youtube_url": "https://www.youtube.com/watch?v=wGuRuuPuYNQ",
+        "quote": "Yeah, I like it in the context of assumption testing."
+      },
+      {
+        "speaker": "Tim Herbig",
+        "file": "2026-10-14-how-the-best-pms-think-about-product-strategy.md",
+        "date": "2026-10-14",
+        "ts": "00:04:00",
+        "seconds": 240,
+        "youtube_url": "https://www.youtube.com/watch?v=u2NFqrbvAeY",
+        "quote": "companies are excited about amping up the output 100 times, but somewhere down the line, They have to ask themselves, did any of that make a difference?"
+      },
+      {
+        "speaker": "Frederic de Todaro",
+        "file": "2025-08-29-frederic-de-todaro-podcast.md",
+        "date": "2025-08-29",
+        "ts": "00:59:37",
+        "seconds": 3577,
+        "youtube_url": "https://www.youtube.com/watch?v=MC1FfWdAyX4",
+        "quote": "They have a prototype, they go and show that prototype to 10 users and then they think that all their users will love the feature."
+      }
+    ]
+  },
+  {
+    "id": "prototype-not-the-product",
+    "artifact": "prototype",
+    "kind": "avoid",
+    "criterion": "Don't treat the vibe-coded prototype as the production product or ship it to users as the test.",
+    "check": "Check whether the plan positions the prototype as a discovery tool handed to engineering. Fails if it proposes launching the vibe-coded app itself as the real product.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:51:39",
+        "seconds": 3099,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "I think that if a PM is trying to get a full version of their product out through these vibe coding tools, they're doing it wrong."
+      },
+      {
+        "speaker": "Tanguy Crusson",
+        "file": "2025-07-08-tanguy-crusson-podcast.md",
+        "date": "2025-07-08",
+        "ts": "00:08:34",
+        "seconds": 514,
+        "youtube_url": "https://www.youtube.com/watch?v=6oottgko7pQ",
+        "quote": "No, that's still the most expensive way you can test stuff because now people have an app."
+      },
+      {
+        "speaker": "Linda Tong",
+        "file": "2026-11-10-can-saas-survive-the-ai-era.md",
+        "date": "2026-11-10",
+        "ts": "00:24:06",
+        "seconds": 1446,
+        "youtube_url": "https://www.youtube.com/watch?v=vPBUYcJIk1c",
+        "quote": "if you vibe code that in an afternoon, software, just like everything else, it deteriorates over time."
+      }
+    ]
+  },
+  {
+    "id": "prototype-pair-with-strategy",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Pair the prototype with written reasoning on strategy and failure cases it cannot show.",
+    "check": "Look for accompanying notes on why this matters (differentiation, acquisition, monetization) and how failures or edge cases are handled. Fails if the prototype is presented alone as the whole case.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:55:00",
+        "seconds": 3300,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "It doesn't touch product strategy and all the strategic questions that a good PRD includes."
+      },
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:22:53",
+        "seconds": 1373,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "the value of PRDs is you can do a prototype, but you may be missing a bunch of things in that prototype."
+      },
+      {
+        "speaker": "Nadav Abrahami",
+        "file": "2026-02-27-nadav-abrahami-podcast.md",
+        "date": "2026-02-27",
+        "ts": "01:03:07",
+        "seconds": 3787,
+        "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+        "quote": "And I think the prototype and the PRD, they're not coming to replace each other."
+      }
+    ]
+  },
+  {
+    "id": "prototype-evals-not-vibes",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "For AI-powered prototypes, define what good output looks like and test against it instead of eyeballing it.",
+    "check": "Check for defined quality criteria or test cases (evals) for the AI behavior, including edge cases. Fails if quality was judged only by 'looks good' after a few tries.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Aman Khan",
+        "file": "2025-06-15-aman-khan-podcast.md",
+        "date": "2025-06-15",
+        "ts": "01:10:10",
+        "seconds": 4210,
+        "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+        "quote": "you've made tweaks to the prompt and you're like, looks good, looks fine. But I think that going one step beyond that is actually being able to run evals."
+      },
+      {
+        "speaker": "Colin Matthews",
+        "file": "2026-01-22-colin-matthews-podcast.md",
+        "date": "2026-01-22",
+        "ts": "00:38:53",
+        "seconds": 2333,
+        "youtube_url": "https://www.youtube.com/watch?v=Q2MfgGBUVwQ",
+        "quote": "This is going to help you really understand the corner edge cases, like some of the things we used to have in a deeper PRD"
+      },
+      {
+        "speaker": "Jayesh Govindarajan",
+        "file": "2026-11-03-salesforce-ai-native-product-team.md",
+        "date": "2026-11-03",
+        "ts": "00:37:01",
+        "seconds": 2221,
+        "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+        "quote": "how do you translate that skepticism into test cases and evals that are failing?"
+      }
+    ]
+  },
+  {
+    "id": "prototype-directional-with-design",
+    "artifact": "prototype",
+    "kind": "do",
+    "criterion": "Present the prototype as directional input to design, not a replacement for designers' work.",
+    "check": "Check how the prototype is framed when a designer exists: as illustrative and open to design refinement. Fails if the PM presents generated UI as final design.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Dan Olsen",
+        "file": "2025-06-20-dan-olsen-podcast.md",
+        "date": "2025-06-20",
+        "ts": "00:29:27",
+        "seconds": 1767,
+        "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+        "quote": "It's always with the intent that if it needs to go through a design process, this is just kind of directional and illustrative."
+      },
+      {
+        "speaker": "Jeremy Epling",
+        "file": "2025-05-26-jeremy-epling-podcast.md",
+        "date": "2025-05-26",
+        "ts": "00:07:31",
+        "seconds": 451,
+        "youtube_url": "https://www.youtube.com/watch?v=o-eelkFXF-w",
+        "quote": "for pms i think them being able to prototype but then not having to kind of obsess on the exact ui and then partner with the designer"
+      }
+    ]
+  },
+  {
+    "id": "prototype-unstructured-code",
+    "artifact": "prototype",
+    "kind": "avoid",
+    "criterion": "Don't let the prototype pile up as one tangled, unstructured code blob from loose prompting.",
+    "check": "If code or a build plan is visible, check for reasonable structure (small files, clear components). Fails if it is one giant file or the prompts invite sprawling, unreviewed code.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Andre Albuquerque",
+        "file": "2026-05-18-claude-code-non-technical-pms.md",
+        "date": "2026-05-18",
+        "ts": "00:40:36",
+        "seconds": 2436,
+        "youtube_url": "https://www.youtube.com/watch?v=bYiXxeinhbg",
+        "quote": "it's very easy with very simple prompts to be creating a lot of slop or a lot of trash"
+      },
+      {
+        "speaker": "Gabor Meyer",
+        "file": "2026-04-30-claude-code-dev-team.md",
+        "date": "2026-04-30",
+        "ts": "00:19:37",
+        "seconds": 1177,
+        "youtube_url": "https://www.youtube.com/watch?v=kQelqKkI-EQ",
+        "quote": "vibe coding is just the rebranding of unmaintainable low quality source code"
+      },
+      {
+        "speaker": "Colin Matthews",
+        "file": "2025-02-28-ai-prototyping-for-pms.md",
+        "date": "2025-02-28",
+        "ts": "00:13:11",
+        "seconds": 791,
+        "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+        "quote": "this is a good pattern where we don't just have one massive file, but we have a couple of small files."
+      }
+    ]
+  }
+]

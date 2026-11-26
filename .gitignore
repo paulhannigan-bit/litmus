@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+.env
+.env.*
+.vercel/
+.wrangler/
+.impeccable/
+# Raw transcript excerpts: the source repo's license forbids re-hosting the raw files as a dataset.
+build/passages/

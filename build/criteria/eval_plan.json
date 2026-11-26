@@ -1,0 +1,753 @@
+[
+  {
+    "id": "eval_plan-error-analysis-first",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Ground the eval plan in error analysis: review a batch of real traces, write notes on what went wrong, and cluster them into named failure modes before choosing metrics.",
+    "check": "Look for a step where someone reads real traces (roughly 50-100), annotates them, and groups the notes into failure modes that the evals then target. Fails if the metrics are picked up front with no reference to observed failures.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Shreya Shankar",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "00:00:57",
+        "seconds": 57,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "The ability to look at your outputs and systematically figure out what makes for a bad output, quantify how many of these failure modes you see in a big batch of traces for your system"
+      },
+      {
+        "speaker": "Shreya Shankar",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "00:59:41",
+        "seconds": 3581,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "Then after going through about 100 of those, they will try to merge similar notes together into clusters. And this determines your failure modes."
+      },
+      {
+        "speaker": "Hamel Husain",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "01:04:24",
+        "seconds": 3864,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "you should be grounding it in things that are going wrong or the things that will probably go wrong."
+      },
+      {
+        "speaker": "Teresa Torres",
+        "file": "2025-08-12-teresa-torres-podcast.md",
+        "date": "2025-08-12",
+        "ts": "00:46:50",
+        "seconds": 2810,
+        "youtube_url": "https://www.youtube.com/watch?v=wGuRuuPuYNQ",
+        "quote": "once I've done a batch of 50, I'm looking across my annotations and I'm looking for what are my common errors."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-no-generic-metrics",
+    "artifact": "eval_plan",
+    "kind": "avoid",
+    "criterion": "Avoid generic, off-the-shelf metrics like a 'hallucination score' or 'helpfulness score'; define evals specific to your product's domain and observed failures.",
+    "check": "Flag any metric that could be pasted into any AI product's plan unchanged (helpfulness, toxicity, hallucination score, general benchmarks) without a product-specific definition of what that failure looks like here.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Hamel Husain",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "00:17:07",
+        "seconds": 1027,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "So the first thing to know about evals where people go off the rails is do not reach for generic metrics."
+      },
+      {
+        "speaker": "Hamel Husain",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "00:42:51",
+        "seconds": 2571,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "And then there's another kind of eval, which is your domain specific eval evals for your business. And they're very, very different."
+      },
+      {
+        "speaker": "Jayesh Govindarajan",
+        "file": "2026-11-03-salesforce-ai-native-product-team.md",
+        "date": "2026-11-03",
+        "ts": "00:18:52",
+        "seconds": 1132,
+        "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+        "quote": "And these are not generic. These are very specific to the agent you're building or the code you're writing."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-validate-llm-judge",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Validate every LLM-as-judge against human labels and measure how often the judge agrees with the human before trusting its scores.",
+    "check": "Check that the plan includes a human-labeled set and an agreement check between judge and human labels, with a step to fix the judge where it disagrees. Fails if the judge prompt is written and run with no validation.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Aman Khan",
+        "file": "2025-06-15-aman-khan-podcast.md",
+        "date": "2025-06-15",
+        "ts": "01:24:40",
+        "seconds": 5080,
+        "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+        "quote": "I don't see too many people actually, when they talk about evals saying that you need to check the work of the LLM as a judge"
+      },
+      {
+        "speaker": "Hamel Husain",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "01:08:29",
+        "seconds": 4109,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "I would say 80% of people who are using LLM as a judge are just writing a prompt and just praying that is doing the right thing."
+      },
+      {
+        "speaker": "Laura Burkhauser",
+        "file": "2025-12-15-she-went-from-ic-pm-to-ceo-of-550m.md",
+        "date": "2025-12-15",
+        "ts": "00:14:23",
+        "seconds": 863,
+        "youtube_url": "https://www.youtube.com/watch?v=LR_WOmcE9WI",
+        "quote": "Then we have a human and an LLM both judge it and we see, does the LLM agree with the human or does the LLM disagree?"
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-pm-owns-labeling",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Have the PM personally label outputs and do the error analysis instead of outsourcing that judgment to someone else.",
+    "check": "Look for the PM (or named product owner) as the person labeling good/bad outputs and defining what the product should and should not do. Fails if labeling is assigned wholesale to contractors, engineers, or an unnamed 'annotation team'.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Aman Khan",
+        "file": "2025-06-15-aman-khan-podcast.md",
+        "date": "2025-06-15",
+        "ts": "01:15:28",
+        "seconds": 4528,
+        "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+        "quote": "And that's really an important role for an AI PM is to know when I'm looking at an output, is this what I want the LLM or the agent to actually generate?"
+      },
+      {
+        "speaker": "Shreya Shankar",
+        "file": "2026-01-15-hamel-shreya-podcast-2.md",
+        "date": "2026-01-15",
+        "ts": "01:00:25",
+        "seconds": 3625,
+        "youtube_url": "https://www.youtube.com/watch?v=J7N9FMouSKg",
+        "quote": "But then they think it's worth some human doing error analysis, not them. So they'll just outsource it out, which again, huge pitfall."
+      },
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:25:29",
+        "seconds": 1529,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "they're very well positioned to write evals because they have a very strong opinion on here's what the product should be good at and here's what the product should not attempt to do."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-define-pass-fail-bar",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Write down concrete pass/fail criteria (or graded levels like high pass, pass, fail) that spell out what a good output looks like for each kind of query.",
+    "check": "Check that each eval has an explicit rubric with observable properties (format, required elements, style) and defined grade levels. Fails if 'good' is left implicit or described only with adjectives like 'accurate and helpful'.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Laura Burkhauser",
+        "file": "2025-12-15-she-went-from-ic-pm-to-ceo-of-550m.md",
+        "date": "2025-12-15",
+        "ts": "00:14:23",
+        "seconds": 863,
+        "youtube_url": "https://www.youtube.com/watch?v=LR_WOmcE9WI",
+        "quote": "the role that the pm plays in setting up our evals is in setting up the decision criteria for what pass what high pass, pass, and fail looks like for different queries."
+      },
+      {
+        "speaker": "Jayesh Govindarajan",
+        "file": "2026-11-03-salesforce-ai-native-product-team.md",
+        "date": "2026-11-03",
+        "ts": "00:37:01",
+        "seconds": 2221,
+        "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+        "quote": "Can you set a bar on what good looks like? Because that's what translates into evals."
+      },
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:07:40",
+        "seconds": 460,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "And now you have to measure how do you know if it's good? You know, it might be formatted right. It might have all the ingredients listed."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-evals-must-fail",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Design evals with headroom so a meaningful share of cases currently fail; treat a 100% pass rate as a sign the eval gives no signal.",
+    "check": "Look for an expected or baseline pass rate well below 100% and a plan to replace evals that saturate. Fails if the plan's target is 100% or every listed test is expected to pass.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Hamel Husain",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "00:36:21",
+        "seconds": 2181,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "if you're getting 100% accuracy in your evals, it's likely your evals are worthless because they are providing you with no signal."
+      },
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:39:12",
+        "seconds": 2352,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "I think one of the most important things is to have evals that fail. If you only have evals that succeed, then you don't know what problems there are."
+      },
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:13:35",
+        "seconds": 815,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "A typical good eval will have something like 25%, 50% success rate."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-use-real-production-data",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Build test sets from real production queries or real user examples, randomly selected to be representative, not invented samples.",
+    "check": "Check where test cases come from: real logs, sampled production queries, or real user artifacts. Fails if the dataset is entirely synthetic or hypothetical with no source of real usage named.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Laura Burkhauser",
+        "file": "2025-12-15-she-went-from-ic-pm-to-ceo-of-550m.md",
+        "date": "2025-12-15",
+        "ts": "00:14:23",
+        "seconds": 863,
+        "youtube_url": "https://www.youtube.com/watch?v=LR_WOmcE9WI",
+        "quote": "We randomly select representative queries across real production data and don't share those with engineers"
+      },
+      {
+        "speaker": "Laura Burkhauser",
+        "file": "2025-12-15-she-went-from-ic-pm-to-ceo-of-550m.md",
+        "date": "2025-12-15",
+        "ts": "00:06:58",
+        "seconds": 418,
+        "youtube_url": "https://www.youtube.com/watch?v=LR_WOmcE9WI",
+        "quote": "I'm going to test this out on a bunch of production data and see if I would use the result as a customer"
+      },
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:47:48",
+        "seconds": 2868,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "I think that the best workflow looks like looking at real production examples."
+      },
+      {
+        "speaker": "Bryan Helmig",
+        "file": "2025-04-01-ai-draft-email-mcp.md",
+        "date": "2025-04-01",
+        "ts": "00:37:26",
+        "seconds": 2246,
+        "youtube_url": "https://www.youtube.com/watch?v=a9wO6GSAoGk",
+        "quote": "those are really great pieces to kind of ground either evals on or build some scoring mechanisms on"
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-suite-of-specific-evals",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Define a small suite of evals (typically three to ten), each naming one quality criterion and exactly how it will be measured.",
+    "check": "Each eval should state the criterion (e.g., conciseness) and the measurement (e.g., under 300 words). Fails if the plan relies on a single overall quality score or lists criteria with no measurement method.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Shreya Shankar",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "00:05:29",
+        "seconds": 329,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "I've never seen just one eval doing the job. I see three to five, sometimes even up to 10 evals that are really important for a product."
+      },
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2026-02-19-ai-evals-explained-simply.md",
+        "date": "2026-02-19",
+        "ts": "00:07:33",
+        "seconds": 453,
+        "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+        "quote": "I want to make sure that the summary of the job description should be less than 300 words. Otherwise, it's not a summary."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-match-method-to-criterion",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Pick the scoring method per criterion: code checks for deterministic rules, LLM judges for subjective qualities, and humans where judgment or final calls are needed.",
+    "check": "Look for each eval to be tagged with its method (code, LLM judge, human, or hybrid) and a reason. Fails if everything is routed to an LLM judge, including checks that simple code could do.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Aman Khan",
+        "file": "2025-06-15-aman-khan-podcast.md",
+        "date": "2025-06-15",
+        "ts": "01:15:28",
+        "seconds": 4528,
+        "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+        "quote": "So think of this as there are basically three types of evals that you have options to use right now."
+      },
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2026-02-19-ai-evals-explained-simply.md",
+        "date": "2026-02-19",
+        "ts": "00:31:10",
+        "seconds": 1870,
+        "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+        "quote": "Things which are very definitive. I am going to use code for the same, such as whether I have all the words mentioned or not."
+      },
+      {
+        "speaker": "Jayesh Govindarajan",
+        "file": "2026-11-03-salesforce-ai-native-product-team.md",
+        "date": "2026-11-03",
+        "ts": "00:18:52",
+        "seconds": 1132,
+        "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+        "quote": "Outcomes and having these custom scorers using both LLMs and other models to score the output."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-offline-and-online",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Plan both offline evals on a fixed dataset before release and online evals that run the same scorers on live production traffic, and compare the two.",
+    "check": "Check for an offline dataset run pre-launch and an online component scoring sampled production logs, with a note on comparing offline vs online scores. Fails if only one side exists.",
+    "slop_signal": false,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:03:29",
+        "seconds": 209,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "That's run offline during the development of your product. And you use that as a proxy for real user traffic."
+      },
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2026-02-19-ai-evals-explained-simply.md",
+        "date": "2026-02-19",
+        "ts": "00:37:03",
+        "seconds": 2223,
+        "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+        "quote": "you are going to run the online evals, which is the same evals on your production level data."
+      },
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:45:27",
+        "seconds": 2727,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "it gives you insight into how well the same eval functions that you're using to test things offline are actually translating into real-world performance."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-production-to-dataset-flywheel",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Feed failures and novel patterns found in production back into the offline eval dataset so it keeps growing.",
+    "check": "Look for a process that pulls low-scoring or new kinds of production examples into the test set. Fails if the dataset is described as fixed once built.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:46:20",
+        "seconds": 2780,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "it becomes a really good flywheel for you to find examples that are worth including in your offline eval."
+      },
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2026-02-19-ai-evals-explained-simply.md",
+        "date": "2026-02-19",
+        "ts": "00:38:26",
+        "seconds": 2306,
+        "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+        "quote": "We are going to create evaluations based on the mistake that we have found."
+      },
+      {
+        "speaker": "Tyler Fisk",
+        "file": "2025-10-16-tyler-fisk-podcast.md",
+        "date": "2025-10-16",
+        "ts": "01:31:57",
+        "seconds": 5517,
+        "youtube_url": "https://www.youtube.com/watch?v=WVU7MCfFet4",
+        "quote": "We put that into a Golden's database to reinforce what's going well."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-explicit-thresholds",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Set explicit numeric thresholds per eval that trigger an action, such as blocking a release or flagging a regression.",
+    "check": "Check for concrete numbers (e.g., accuracy below 98% flags; listed issues block deployment) and what happens when they are crossed. Fails if success is described without any target number or consequence.",
+    "slop_signal": false,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2026-02-19-ai-evals-explained-simply.md",
+        "date": "2026-02-19",
+        "ts": "00:39:03",
+        "seconds": 2343,
+        "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+        "quote": "So if we believe that accuracy is anytime going less than 98% in these evaluations, then we should get flagged"
+      },
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2026-02-19-ai-evals-explained-simply.md",
+        "date": "2026-02-19",
+        "ts": "00:50:28",
+        "seconds": 3028,
+        "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+        "quote": "This is the criteria that at any moment of time, we have any kind of these issues, we are going to make sure that we are going to block the deployment, right?"
+      },
+      {
+        "speaker": "Mahesh Yadav",
+        "file": "2026-04-20-how-to-become-a-builder-pm.md",
+        "date": "2026-04-20",
+        "ts": "00:27:35",
+        "seconds": 1655,
+        "youtube_url": "https://www.youtube.com/watch?v=PL7908aNeSE",
+        "quote": "You're able to detect 80% of risk correctly. But your modification quality, the suggestions AI is making, is only 30% as good as a human would have done."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-eval-as-requirements",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Use the eval (data plus scores) as the requirements handed to engineering, so the team knows what success looks like and can optimize against it.",
+    "check": "Look for the plan to function as a spec: a dataset and scoring the engineering team can run and improve against. Fails if requirements stay as prose with evals as an afterthought.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Aman Khan",
+        "file": "2025-06-15-aman-khan-podcast.md",
+        "date": "2025-06-15",
+        "ts": "01:47:00",
+        "seconds": 6420,
+        "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+        "quote": "What if that actually looked like an evals requirements doc? And instead of a doc, it's actually just, here's the data, here's the eval score."
+      },
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:07:49",
+        "seconds": 469,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "Fast forward to now, I think the modern PRD is an eval."
+      },
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:04:52",
+        "seconds": 292,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "an eval is the best way to communicate what your product should be doing and to Explain to the engineering team working on making the product work what success looks like."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-involve-domain-experts",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Involve subject matter experts to review outputs and define what counts as a mistake, especially in specialized or regulated domains.",
+    "check": "Check that a named domain expert role reviews outputs or shapes the criteria. Fails if a specialized-domain plan has criteria written only by PMs or engineers without domain review.",
+    "slop_signal": false,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2026-02-19-ai-evals-explained-simply.md",
+        "date": "2026-02-19",
+        "ts": "00:16:59",
+        "seconds": 1019,
+        "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+        "quote": "when you are writing good evals you are always going to involve the subject matter experts"
+      },
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:20:24",
+        "seconds": 1224,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "this kind of comes back to the absolute first point I was making is you really need to know the space to do these evals."
+      },
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:09:55",
+        "seconds": 595,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "They probably have great software engineers who are passionate about healthcare, but are not necessarily healthcare subject matter experts."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-iterate-on-evals",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Plan to revise the evals themselves when they disagree with your judgment, deciding each time whether the eval or the product was wrong.",
+    "check": "Look for a step that triages failures as 'eval wrong' vs 'output wrong' and updates the eval accordingly. Fails if evals are treated as fixed and correct once written.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:07:49",
+        "seconds": 469,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "oftentimes it will fit the eval and the product will still suck. And that means that it's actually on the product manager to then go and improve the evals."
+      },
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2025-07-27-ankit-shukla-podcast.md",
+        "date": "2025-07-27",
+        "ts": "01:00:35",
+        "seconds": 3635,
+        "youtube_url": "https://www.youtube.com/watch?v=MZlKnSJ_gaA",
+        "quote": "if the output was correct but the evaluation was wrong then you are going to improve the evaluation"
+      },
+      {
+        "speaker": "Aman Khan",
+        "file": "2025-06-15-aman-khan-podcast.md",
+        "date": "2025-06-15",
+        "ts": "01:21:58",
+        "seconds": 4918,
+        "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+        "quote": "Now, you might disagree with the LLM judge, and that's okay, right?"
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-rerun-on-model-changes",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Use the eval suite to rerun and compare whenever you switch models, prompts, or components, so changes are judged by numbers.",
+    "check": "Check that the plan names model or prompt swaps as triggers to rerun the suite and compare scores. Fails if model changes are decided by spot checks alone.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Shreya Shankar",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "00:48:30",
+        "seconds": 2910,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "Because you have good evals, you can just make that switch, run it, see if your numbers go up."
+      },
+      {
+        "speaker": "Hamel Husain",
+        "file": "2025-07-11-hamel-shreya-podcast.md",
+        "date": "2025-07-11",
+        "ts": "00:46:59",
+        "seconds": 2819,
+        "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+        "quote": "You should be able to switch models or switch components and see what the effect of that is."
+      },
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:39:12",
+        "seconds": 2352,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "If you have evals that are failing, then when a new model comes out, the first thing you should do is just rerun those evals."
+      },
+      {
+        "speaker": "Jan Oberhauser",
+        "file": "2026-10-05-n8n-vs-claude-code.md",
+        "date": "2026-10-05",
+        "ts": "01:02:25",
+        "seconds": 3745,
+        "youtube_url": "https://www.youtube.com/watch?v=PkoX6R5sn8Y",
+        "quote": "you need evos to kind of just get very fast a good understanding if the performance is the same way"
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-sized-dataset-with-answer-key",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Specify a test set of around 100 representative prompts spanning easy and hard cases, each paired with an expected answer or ground truth to score against.",
+    "check": "Look for a stated dataset size, a mix of difficulty, and an answer key or ground-truth values. Fails if the plan lists a handful of examples or has no reference answers to compare against.",
+    "slop_signal": false,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:07:40",
+        "seconds": 460,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "Come up with probably 100 prompts that are in this distribution. Can be less, can be more, but this is a typical size of an eval in the Gen AI world."
+      },
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:03:29",
+        "seconds": 209,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "And the answer key would be a correct answer or a plausibly correct answer with a way to score whether it's good."
+      },
+      {
+        "speaker": "Mahesh Yadav",
+        "file": "2026-04-20-how-to-become-a-builder-pm.md",
+        "date": "2026-04-20",
+        "ts": "00:26:06",
+        "seconds": 1566,
+        "youtube_url": "https://www.youtube.com/watch?v=PL7908aNeSE",
+        "quote": "it will go and run an automatic eval and suggest comparing to my ground truth here, which is my real values"
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-define-failure-handling",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "For evals that run inside the product, define what happens when an eval fails, such as regenerating with the failure as input or routing to a draft for human review.",
+    "check": "Check that runtime evals specify a failure path (retry, fallback, human review). Fails if the plan only says the eval 'checks' output with no defined consequence.",
+    "slop_signal": false,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Greg Greiner",
+        "file": "2026-11-13-ai-customer-research.md",
+        "date": "2026-11-13",
+        "ts": "00:26:10",
+        "seconds": 1570,
+        "youtube_url": "https://www.youtube.com/watch?v=JpyhPePe150",
+        "quote": "it starts building this loop that I think is really important of when an eval fails, what happens? So the eval should not just stop the whole process."
+      },
+      {
+        "speaker": "Greg Greiner",
+        "file": "2026-11-13-ai-customer-research.md",
+        "date": "2026-11-13",
+        "ts": "00:24:49",
+        "seconds": 1489,
+        "youtube_url": "https://www.youtube.com/watch?v=JpyhPePe150",
+        "quote": "If the eval fails, rerun the generation process and save. The new generation as a draft for review."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-review-cadence",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Set a recurring cadence for reviewing production examples and updating evals and prompts to catch drift.",
+    "check": "Look for a stated rhythm (daily standup review, weekly or per-release runs) and an owner. Fails if the plan ends at launch with no ongoing review.",
+    "slop_signal": false,
+    "era": "2026",
+    "sources": [
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:47:48",
+        "seconds": 2868,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "some of our customers have kind of like a ritual where every morning in stand up, they'll look at some examples from the previous day's usage of their product."
+      },
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2026-02-19-ai-evals-explained-simply.md",
+        "date": "2026-02-19",
+        "ts": "00:54:57",
+        "seconds": 3297,
+        "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+        "quote": "if you're not setting a cadence for improving your evals, improving your prompts, then you are going to suffer from data drift."
+      }
+    ]
+  },
+  {
+    "id": "eval_plan-log-traces",
+    "artifact": "eval_plan",
+    "kind": "do",
+    "criterion": "Make sure traces (inputs and outputs) are logged in production so there is data to review and score.",
+    "check": "Check that the plan states what is logged, at what sampling rate, and where. Fails if the plan assumes data for review exists without any logging or observability step.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Teresa Torres",
+        "file": "2025-08-12-teresa-torres-podcast.md",
+        "date": "2025-08-12",
+        "ts": "00:46:01",
+        "seconds": 2761,
+        "youtube_url": "https://www.youtube.com/watch?v=wGuRuuPuYNQ",
+        "quote": "So we need a way to log at least a percentage of our traces, if not all of our traces, so we can start to look at them."
+      },
+      {
+        "speaker": "Tyler Fisk",
+        "file": "2025-10-16-tyler-fisk-podcast.md",
+        "date": "2025-10-16",
+        "ts": "01:31:57",
+        "seconds": 5517,
+        "youtube_url": "https://www.youtube.com/watch?v=WVU7MCfFet4",
+        "quote": "They're so key because that's what gives you observability and a detailed audit trail to know what it is, what's happening in production"
+      }
+    ]
+  }
+]

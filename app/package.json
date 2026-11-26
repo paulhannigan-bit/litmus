@@ -1,0 +1,11 @@
+{
+  "name": "litmus",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest",
+    "zod": "latest"
+  }
+}

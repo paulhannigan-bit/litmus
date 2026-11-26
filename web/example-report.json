@@ -1,0 +1,32 @@
+{
+ "artifact": "prd",
+ "summary": "Every section is present but none says anything specific: no real user, no evidence for the problem, and nine features aimed at all knowledge workers.",
+ "results": [
+  {"id": "prd-problem-first", "verdict": "misses", "evidence": "Meetings are often unproductive.", "fix": "Replace the problem statement with one user and one observed failure, e.g. 'Engineering managers at 50-200 person companies lose decisions made in weekly syncs; 6 of 8 we interviewed re-litigated a decision within a month.' Say why it happens."},
+  {"id": "prd-clear-concise", "verdict": "partly", "evidence": "The engineering team will determine the best architecture.", "fix": "It's short, but short and vague. Cut each section to the one decision it records and delete any sentence a reader can't act on."},
+  {"id": "prd-no-detail-dump", "verdict": "meets", "evidence": "", "fix": ""},
+  {"id": "prd-own-thinking", "verdict": "misses", "evidence": "leverages cutting-edge large language models to revolutionize how teams collaborate", "fix": "Add the calls only you can make: which of the nine features you'd cut first and why, and what you learned that a competitor hasn't."},
+  {"id": "prd-human-first-draft", "verdict": "misses", "evidence": "unlock unprecedented productivity", "fix": "Write the problem, cause and intent yourself in five plain sentences, then use AI only to tighten and check them."},
+  {"id": "prd-real-context", "verdict": "misses", "evidence": "There is a significant opportunity to improve the meeting experience with AI.", "fix": "Name the company goal this serves, the research behind it, and the two competitors users already compare you to (Granola, Otter) with where you'll differ."},
+  {"id": "prd-own-voice", "verdict": "misses", "evidence": "seamlessly integrate into users' workflows", "fix": "Strip the stock phrases ('seamlessly', 'revolutionize', 'unprecedented') and rewrite in the voice of your team's best past PRD."},
+  {"id": "prd-strategy-why", "verdict": "misses", "evidence": "Drive revenue growth", "fix": "Add a 'Why now' paragraph: what changed, how this differentiates, and how it moves acquisition or monetization, with a number."},
+  {"id": "prd-success-criteria", "verdict": "misses", "evidence": "User satisfaction", "fix": "Pick one metric with a target and a date, e.g. '40% of weekly-active teams open a summary within 24 hours, by end of Q2.'"},
+  {"id": "prd-edge-cases", "verdict": "misses", "evidence": "AI may occasionally make mistakes.", "fix": "List the failure cases: crosstalk, a wrong owner on an action item, confidential meetings, a participant who didn't consent to recording. Say what the product does in each."},
+  {"id": "prd-scope-audience", "verdict": "misses", "evidence": "All knowledge workers who attend meetings.", "fix": "Name one target segment and add a 'Not in v1' list. Translation, sentiment analysis and speaking-time coaching are obvious candidates."},
+  {"id": "prd-self-sufficient", "verdict": "misses", "evidence": "The engineering team will determine the best architecture.", "fix": "Hand this to an engineer cold and write down every question they'd ask, then answer them in the doc."},
+  {"id": "prd-what-and-why-not-how", "verdict": "meets", "evidence": "We will use a state-of-the-art LLM.", "fix": ""},
+  {"id": "prd-multi-audience-narrative", "verdict": "partly", "evidence": "We will build an AI-powered meeting assistant", "fix": "Open with a three-sentence summary an exec can repeat: who, what changes for them, and the bet you're making."},
+  {"id": "prd-checklist-not-form", "verdict": "misses", "evidence": "Improve user productivity", "fix": "Delete any template section you can't fill with something specific. Goals, Risks and Technical Considerations are filler as written."},
+  {"id": "prd-show-dont-describe", "verdict": "misses", "evidence": "", "fix": "Link a clickable prototype of the summary view and cut the feature list down to what the prototype can't show."},
+  {"id": "prd-assumptions-living-doc", "verdict": "misses", "evidence": "", "fix": "Add an Assumptions table: each assumption, its evidence today, and how you'll test it (e.g. 'Users trust AI-assigned action items: untested, run a 10-team pilot')."},
+  {"id": "prd-evals-as-requirements", "verdict": "misses", "evidence": "Accuracy of summaries", "fix": "Define 'accurate' with 20 real meeting transcripts and the ideal summary and action items for each, plus pass/fail rules (e.g. every action item has the correct owner)."},
+  {"id": "prd-agent-ready", "verdict": "misses", "evidence": "As a user, I want summaries so that I can save time.", "fix": "Rewrite each requirement as something checkable: 'Summary lists every decision stated in the meeting; tested against the 20-transcript set.'"},
+  {"id": "prd-defined-terms", "verdict": "misses", "evidence": "Increase engagement", "fix": "Define 'engagement', 'adoption' and 'action item' precisely, including the event that counts each one."}
+ ],
+ "top_fixes": ["prd-problem-first", "prd-scope-audience", "prd-evals-as-requirements"],
+ "questions": [
+  "Which user did you watch struggle with this, and what did they do instead?",
+  "If you could ship only one of the nine features, which one, and what would make you kill it?",
+  "How will you know a summary is good before customers tell you it isn't?"
+ ]
+}

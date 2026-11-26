@@ -1,0 +1,2717 @@
+[
+ {
+  "id": "eval_plan-error-analysis-first",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Ground the eval plan in error analysis: review a batch of real traces, write notes on what went wrong, and cluster them into named failure modes before choosing metrics.",
+  "check": "Look for a step where someone reads real traces (roughly 50-100), annotates them, and groups the notes into failure modes that the evals then target. Fails if the metrics are picked up front with no reference to observed failures.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Shreya Shankar",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "00:00:57",
+    "seconds": 57,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "The ability to look at your outputs and systematically figure out what makes for a bad output, quantify how many of these failure modes you see in a big batch of traces for your system",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=57s"
+   },
+   {
+    "speaker": "Shreya Shankar",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "00:59:41",
+    "seconds": 3581,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "Then after going through about 100 of those, they will try to merge similar notes together into clusters. And this determines your failure modes.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=3581s"
+   },
+   {
+    "speaker": "Hamel Husain",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "01:04:24",
+    "seconds": 3864,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "you should be grounding it in things that are going wrong or the things that will probably go wrong.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=3864s"
+   },
+   {
+    "speaker": "Teresa Torres",
+    "file": "2025-08-12-teresa-torres-podcast.md",
+    "date": "2025-08-12",
+    "ts": "00:46:50",
+    "seconds": 2810,
+    "youtube_url": "https://www.youtube.com/watch?v=wGuRuuPuYNQ",
+    "quote": "once I've done a batch of 50, I'm looking across my annotations and I'm looking for what are my common errors.",
+    "clip": "https://www.youtube.com/watch?v=wGuRuuPuYNQ&t=2810s"
+   }
+  ],
+  "guests": [
+   "Hamel Husain",
+   "Shreya Shankar",
+   "Teresa Torres"
+  ]
+ },
+ {
+  "id": "eval_plan-no-generic-metrics",
+  "artifact": "eval_plan",
+  "kind": "avoid",
+  "criterion": "Avoid generic, off-the-shelf metrics like a 'hallucination score' or 'helpfulness score'; define evals specific to your product's domain and observed failures.",
+  "check": "Flag any metric that could be pasted into any AI product's plan unchanged (helpfulness, toxicity, hallucination score, general benchmarks) without a product-specific definition of what that failure looks like here.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Hamel Husain",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "00:17:07",
+    "seconds": 1027,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "So the first thing to know about evals where people go off the rails is do not reach for generic metrics.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=1027s"
+   },
+   {
+    "speaker": "Hamel Husain",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "00:42:51",
+    "seconds": 2571,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "And then there's another kind of eval, which is your domain specific eval evals for your business. And they're very, very different.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=2571s"
+   },
+   {
+    "speaker": "Jayesh Govindarajan",
+    "file": "2026-11-03-salesforce-ai-native-product-team.md",
+    "date": "2026-11-03",
+    "ts": "00:18:52",
+    "seconds": 1132,
+    "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+    "quote": "And these are not generic. These are very specific to the agent you're building or the code you're writing.",
+    "clip": "https://www.youtube.com/watch?v=_jBa_YEobGI&t=1132s"
+   }
+  ],
+  "guests": [
+   "Hamel Husain",
+   "Jayesh Govindarajan"
+  ]
+ },
+ {
+  "id": "eval_plan-validate-llm-judge",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Validate every LLM-as-judge against human labels and measure how often the judge agrees with the human before trusting its scores.",
+  "check": "Check that the plan includes a human-labeled set and an agreement check between judge and human labels, with a step to fix the judge where it disagrees. Fails if the judge prompt is written and run with no validation.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Aman Khan",
+    "file": "2025-06-15-aman-khan-podcast.md",
+    "date": "2025-06-15",
+    "ts": "01:24:40",
+    "seconds": 5080,
+    "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+    "quote": "I don't see too many people actually, when they talk about evals saying that you need to check the work of the LLM as a judge",
+    "clip": "https://www.youtube.com/watch?v=Ej4pBDaHspk&t=5080s"
+   },
+   {
+    "speaker": "Hamel Husain",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "01:08:29",
+    "seconds": 4109,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "I would say 80% of people who are using LLM as a judge are just writing a prompt and just praying that is doing the right thing.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=4109s"
+   },
+   {
+    "speaker": "Laura Burkhauser",
+    "file": "2025-12-15-she-went-from-ic-pm-to-ceo-of-550m.md",
+    "date": "2025-12-15",
+    "ts": "00:14:23",
+    "seconds": 863,
+    "youtube_url": "https://www.youtube.com/watch?v=LR_WOmcE9WI",
+    "quote": "Then we have a human and an LLM both judge it and we see, does the LLM agree with the human or does the LLM disagree?",
+    "clip": "https://www.youtube.com/watch?v=LR_WOmcE9WI&t=863s"
+   }
+  ],
+  "guests": [
+   "Aman Khan",
+   "Hamel Husain",
+   "Laura Burkhauser"
+  ]
+ },
+ {
+  "id": "eval_plan-pm-owns-labeling",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Have the PM personally label outputs and do the error analysis instead of outsourcing that judgment to someone else.",
+  "check": "Look for the PM (or named product owner) as the person labeling good/bad outputs and defining what the product should and should not do. Fails if labeling is assigned wholesale to contractors, engineers, or an unnamed 'annotation team'.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Aman Khan",
+    "file": "2025-06-15-aman-khan-podcast.md",
+    "date": "2025-06-15",
+    "ts": "01:15:28",
+    "seconds": 4528,
+    "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+    "quote": "And that's really an important role for an AI PM is to know when I'm looking at an output, is this what I want the LLM or the agent to actually generate?",
+    "clip": "https://www.youtube.com/watch?v=Ej4pBDaHspk&t=4528s"
+   },
+   {
+    "speaker": "Shreya Shankar",
+    "file": "2026-01-15-hamel-shreya-podcast-2.md",
+    "date": "2026-01-15",
+    "ts": "01:00:25",
+    "seconds": 3625,
+    "youtube_url": "https://www.youtube.com/watch?v=J7N9FMouSKg",
+    "quote": "But then they think it's worth some human doing error analysis, not them. So they'll just outsource it out, which again, huge pitfall.",
+    "clip": "https://www.youtube.com/watch?v=J7N9FMouSKg&t=3625s"
+   },
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:25:29",
+    "seconds": 1529,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "they're very well positioned to write evals because they have a very strong opinion on here's what the product should be good at and here's what the product should not attempt to do.",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1529s"
+   }
+  ],
+  "guests": [
+   "Aman Khan",
+   "Jake Brill",
+   "Shreya Shankar"
+  ]
+ },
+ {
+  "id": "eval_plan-define-pass-fail-bar",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Write down concrete pass/fail criteria (or graded levels like high pass, pass, fail) that spell out what a good output looks like for each kind of query.",
+  "check": "Check that each eval has an explicit rubric with observable properties (format, required elements, style) and defined grade levels. Fails if 'good' is left implicit or described only with adjectives like 'accurate and helpful'.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Laura Burkhauser",
+    "file": "2025-12-15-she-went-from-ic-pm-to-ceo-of-550m.md",
+    "date": "2025-12-15",
+    "ts": "00:14:23",
+    "seconds": 863,
+    "youtube_url": "https://www.youtube.com/watch?v=LR_WOmcE9WI",
+    "quote": "the role that the pm plays in setting up our evals is in setting up the decision criteria for what pass what high pass, pass, and fail looks like for different queries.",
+    "clip": "https://www.youtube.com/watch?v=LR_WOmcE9WI&t=863s"
+   },
+   {
+    "speaker": "Jayesh Govindarajan",
+    "file": "2026-11-03-salesforce-ai-native-product-team.md",
+    "date": "2026-11-03",
+    "ts": "00:37:01",
+    "seconds": 2221,
+    "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+    "quote": "Can you set a bar on what good looks like? Because that's what translates into evals.",
+    "clip": "https://www.youtube.com/watch?v=_jBa_YEobGI&t=2221s"
+   },
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:07:40",
+    "seconds": 460,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "And now you have to measure how do you know if it's good? You know, it might be formatted right. It might have all the ingredients listed.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=460s"
+   }
+  ],
+  "guests": [
+   "Daniel McKinnon",
+   "Jayesh Govindarajan",
+   "Laura Burkhauser"
+  ]
+ },
+ {
+  "id": "eval_plan-evals-must-fail",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Design evals with headroom so a meaningful share of cases currently fail; treat a 100% pass rate as a sign the eval gives no signal.",
+  "check": "Look for an expected or baseline pass rate well below 100% and a plan to replace evals that saturate. Fails if the plan's target is 100% or every listed test is expected to pass.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Hamel Husain",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "00:36:21",
+    "seconds": 2181,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "if you're getting 100% accuracy in your evals, it's likely your evals are worthless because they are providing you with no signal.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=2181s"
+   },
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:39:12",
+    "seconds": 2352,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "I think one of the most important things is to have evals that fail. If you only have evals that succeed, then you don't know what problems there are.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=2352s"
+   },
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:13:35",
+    "seconds": 815,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "A typical good eval will have something like 25%, 50% success rate.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=815s"
+   }
+  ],
+  "guests": [
+   "Ankur Goyal",
+   "Daniel McKinnon",
+   "Hamel Husain"
+  ]
+ },
+ {
+  "id": "eval_plan-use-real-production-data",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Build test sets from real production queries or real user examples, randomly selected to be representative, not invented samples.",
+  "check": "Check where test cases come from: real logs, sampled production queries, or real user artifacts. Fails if the dataset is entirely synthetic or hypothetical with no source of real usage named.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Laura Burkhauser",
+    "file": "2025-12-15-she-went-from-ic-pm-to-ceo-of-550m.md",
+    "date": "2025-12-15",
+    "ts": "00:14:23",
+    "seconds": 863,
+    "youtube_url": "https://www.youtube.com/watch?v=LR_WOmcE9WI",
+    "quote": "We randomly select representative queries across real production data and don't share those with engineers",
+    "clip": "https://www.youtube.com/watch?v=LR_WOmcE9WI&t=863s"
+   },
+   {
+    "speaker": "Laura Burkhauser",
+    "file": "2025-12-15-she-went-from-ic-pm-to-ceo-of-550m.md",
+    "date": "2025-12-15",
+    "ts": "00:06:58",
+    "seconds": 418,
+    "youtube_url": "https://www.youtube.com/watch?v=LR_WOmcE9WI",
+    "quote": "I'm going to test this out on a bunch of production data and see if I would use the result as a customer",
+    "clip": "https://www.youtube.com/watch?v=LR_WOmcE9WI&t=418s"
+   },
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:47:48",
+    "seconds": 2868,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "I think that the best workflow looks like looking at real production examples.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=2868s"
+   },
+   {
+    "speaker": "Bryan Helmig",
+    "file": "2025-04-01-ai-draft-email-mcp.md",
+    "date": "2025-04-01",
+    "ts": "00:37:26",
+    "seconds": 2246,
+    "youtube_url": "https://www.youtube.com/watch?v=a9wO6GSAoGk",
+    "quote": "those are really great pieces to kind of ground either evals on or build some scoring mechanisms on",
+    "clip": "https://www.youtube.com/watch?v=a9wO6GSAoGk&t=2246s"
+   }
+  ],
+  "guests": [
+   "Ankur Goyal",
+   "Bryan Helmig",
+   "Laura Burkhauser"
+  ]
+ },
+ {
+  "id": "eval_plan-suite-of-specific-evals",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Define a small suite of evals (typically three to ten), each naming one quality criterion and exactly how it will be measured.",
+  "check": "Each eval should state the criterion (e.g., conciseness) and the measurement (e.g., under 300 words). Fails if the plan relies on a single overall quality score or lists criteria with no measurement method.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Shreya Shankar",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "00:05:29",
+    "seconds": 329,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "I've never seen just one eval doing the job. I see three to five, sometimes even up to 10 evals that are really important for a product.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=329s"
+   },
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2026-02-19-ai-evals-explained-simply.md",
+    "date": "2026-02-19",
+    "ts": "00:07:33",
+    "seconds": 453,
+    "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+    "quote": "I want to make sure that the summary of the job description should be less than 300 words. Otherwise, it's not a summary.",
+    "clip": "https://www.youtube.com/watch?v=Raa3qjEBvKE&t=453s"
+   }
+  ],
+  "guests": [
+   "Ankit Shukla",
+   "Shreya Shankar"
+  ]
+ },
+ {
+  "id": "eval_plan-match-method-to-criterion",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Pick the scoring method per criterion: code checks for deterministic rules, LLM judges for subjective qualities, and humans where judgment or final calls are needed.",
+  "check": "Look for each eval to be tagged with its method (code, LLM judge, human, or hybrid) and a reason. Fails if everything is routed to an LLM judge, including checks that simple code could do.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Aman Khan",
+    "file": "2025-06-15-aman-khan-podcast.md",
+    "date": "2025-06-15",
+    "ts": "01:15:28",
+    "seconds": 4528,
+    "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+    "quote": "So think of this as there are basically three types of evals that you have options to use right now.",
+    "clip": "https://www.youtube.com/watch?v=Ej4pBDaHspk&t=4528s"
+   },
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2026-02-19-ai-evals-explained-simply.md",
+    "date": "2026-02-19",
+    "ts": "00:31:10",
+    "seconds": 1870,
+    "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+    "quote": "Things which are very definitive. I am going to use code for the same, such as whether I have all the words mentioned or not.",
+    "clip": "https://www.youtube.com/watch?v=Raa3qjEBvKE&t=1870s"
+   },
+   {
+    "speaker": "Jayesh Govindarajan",
+    "file": "2026-11-03-salesforce-ai-native-product-team.md",
+    "date": "2026-11-03",
+    "ts": "00:18:52",
+    "seconds": 1132,
+    "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+    "quote": "Outcomes and having these custom scorers using both LLMs and other models to score the output.",
+    "clip": "https://www.youtube.com/watch?v=_jBa_YEobGI&t=1132s"
+   }
+  ],
+  "guests": [
+   "Aman Khan",
+   "Ankit Shukla",
+   "Jayesh Govindarajan"
+  ]
+ },
+ {
+  "id": "eval_plan-offline-and-online",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Plan both offline evals on a fixed dataset before release and online evals that run the same scorers on live production traffic, and compare the two.",
+  "check": "Check for an offline dataset run pre-launch and an online component scoring sampled production logs, with a note on comparing offline vs online scores. Fails if only one side exists.",
+  "slop_signal": false,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:03:29",
+    "seconds": 209,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "That's run offline during the development of your product. And you use that as a proxy for real user traffic.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=209s"
+   },
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2026-02-19-ai-evals-explained-simply.md",
+    "date": "2026-02-19",
+    "ts": "00:37:03",
+    "seconds": 2223,
+    "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+    "quote": "you are going to run the online evals, which is the same evals on your production level data.",
+    "clip": "https://www.youtube.com/watch?v=Raa3qjEBvKE&t=2223s"
+   },
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:45:27",
+    "seconds": 2727,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "it gives you insight into how well the same eval functions that you're using to test things offline are actually translating into real-world performance.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=2727s"
+   }
+  ],
+  "guests": [
+   "Ankit Shukla",
+   "Ankur Goyal",
+   "Daniel McKinnon"
+  ]
+ },
+ {
+  "id": "eval_plan-production-to-dataset-flywheel",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Feed failures and novel patterns found in production back into the offline eval dataset so it keeps growing.",
+  "check": "Look for a process that pulls low-scoring or new kinds of production examples into the test set. Fails if the dataset is described as fixed once built.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:46:20",
+    "seconds": 2780,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "it becomes a really good flywheel for you to find examples that are worth including in your offline eval.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=2780s"
+   },
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2026-02-19-ai-evals-explained-simply.md",
+    "date": "2026-02-19",
+    "ts": "00:38:26",
+    "seconds": 2306,
+    "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+    "quote": "We are going to create evaluations based on the mistake that we have found.",
+    "clip": "https://www.youtube.com/watch?v=Raa3qjEBvKE&t=2306s"
+   },
+   {
+    "speaker": "Tyler Fisk",
+    "file": "2025-10-16-tyler-fisk-podcast.md",
+    "date": "2025-10-16",
+    "ts": "01:31:57",
+    "seconds": 5517,
+    "youtube_url": "https://www.youtube.com/watch?v=WVU7MCfFet4",
+    "quote": "We put that into a Golden's database to reinforce what's going well.",
+    "clip": "https://www.youtube.com/watch?v=WVU7MCfFet4&t=5517s"
+   }
+  ],
+  "guests": [
+   "Ankit Shukla",
+   "Ankur Goyal",
+   "Tyler Fisk"
+  ]
+ },
+ {
+  "id": "eval_plan-explicit-thresholds",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Set explicit numeric thresholds per eval that trigger an action, such as blocking a release or flagging a regression.",
+  "check": "Check for concrete numbers (e.g., accuracy below 98% flags; listed issues block deployment) and what happens when they are crossed. Fails if success is described without any target number or consequence.",
+  "slop_signal": false,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2026-02-19-ai-evals-explained-simply.md",
+    "date": "2026-02-19",
+    "ts": "00:39:03",
+    "seconds": 2343,
+    "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+    "quote": "So if we believe that accuracy is anytime going less than 98% in these evaluations, then we should get flagged",
+    "clip": "https://www.youtube.com/watch?v=Raa3qjEBvKE&t=2343s"
+   },
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2026-02-19-ai-evals-explained-simply.md",
+    "date": "2026-02-19",
+    "ts": "00:50:28",
+    "seconds": 3028,
+    "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+    "quote": "This is the criteria that at any moment of time, we have any kind of these issues, we are going to make sure that we are going to block the deployment, right?",
+    "clip": "https://www.youtube.com/watch?v=Raa3qjEBvKE&t=3028s"
+   },
+   {
+    "speaker": "Mahesh Yadav",
+    "file": "2026-04-20-how-to-become-a-builder-pm.md",
+    "date": "2026-04-20",
+    "ts": "00:27:35",
+    "seconds": 1655,
+    "youtube_url": "https://www.youtube.com/watch?v=PL7908aNeSE",
+    "quote": "You're able to detect 80% of risk correctly. But your modification quality, the suggestions AI is making, is only 30% as good as a human would have done.",
+    "clip": "https://www.youtube.com/watch?v=PL7908aNeSE&t=1655s"
+   }
+  ],
+  "guests": [
+   "Ankit Shukla",
+   "Mahesh Yadav"
+  ]
+ },
+ {
+  "id": "eval_plan-eval-as-requirements",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Use the eval (data plus scores) as the requirements handed to engineering, so the team knows what success looks like and can optimize against it.",
+  "check": "Look for the plan to function as a spec: a dataset and scoring the engineering team can run and improve against. Fails if requirements stay as prose with evals as an afterthought.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Aman Khan",
+    "file": "2025-06-15-aman-khan-podcast.md",
+    "date": "2025-06-15",
+    "ts": "01:47:00",
+    "seconds": 6420,
+    "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+    "quote": "What if that actually looked like an evals requirements doc? And instead of a doc, it's actually just, here's the data, here's the eval score.",
+    "clip": "https://www.youtube.com/watch?v=Ej4pBDaHspk&t=6420s"
+   },
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:07:49",
+    "seconds": 469,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "Fast forward to now, I think the modern PRD is an eval.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=469s"
+   },
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:04:52",
+    "seconds": 292,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "an eval is the best way to communicate what your product should be doing and to Explain to the engineering team working on making the product work what success looks like.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=292s"
+   }
+  ],
+  "guests": [
+   "Aman Khan",
+   "Ankur Goyal",
+   "Daniel McKinnon"
+  ]
+ },
+ {
+  "id": "eval_plan-involve-domain-experts",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Involve subject matter experts to review outputs and define what counts as a mistake, especially in specialized or regulated domains.",
+  "check": "Check that a named domain expert role reviews outputs or shapes the criteria. Fails if a specialized-domain plan has criteria written only by PMs or engineers without domain review.",
+  "slop_signal": false,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2026-02-19-ai-evals-explained-simply.md",
+    "date": "2026-02-19",
+    "ts": "00:16:59",
+    "seconds": 1019,
+    "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+    "quote": "when you are writing good evals you are always going to involve the subject matter experts",
+    "clip": "https://www.youtube.com/watch?v=Raa3qjEBvKE&t=1019s"
+   },
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:20:24",
+    "seconds": 1224,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "this kind of comes back to the absolute first point I was making is you really need to know the space to do these evals.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=1224s"
+   },
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:09:55",
+    "seconds": 595,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "They probably have great software engineers who are passionate about healthcare, but are not necessarily healthcare subject matter experts.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=595s"
+   }
+  ],
+  "guests": [
+   "Ankit Shukla",
+   "Ankur Goyal",
+   "Daniel McKinnon"
+  ]
+ },
+ {
+  "id": "eval_plan-iterate-on-evals",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Plan to revise the evals themselves when they disagree with your judgment, deciding each time whether the eval or the product was wrong.",
+  "check": "Look for a step that triages failures as 'eval wrong' vs 'output wrong' and updates the eval accordingly. Fails if evals are treated as fixed and correct once written.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:07:49",
+    "seconds": 469,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "oftentimes it will fit the eval and the product will still suck. And that means that it's actually on the product manager to then go and improve the evals.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=469s"
+   },
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2025-07-27-ankit-shukla-podcast.md",
+    "date": "2025-07-27",
+    "ts": "01:00:35",
+    "seconds": 3635,
+    "youtube_url": "https://www.youtube.com/watch?v=MZlKnSJ_gaA",
+    "quote": "if the output was correct but the evaluation was wrong then you are going to improve the evaluation",
+    "clip": "https://www.youtube.com/watch?v=MZlKnSJ_gaA&t=3635s"
+   },
+   {
+    "speaker": "Aman Khan",
+    "file": "2025-06-15-aman-khan-podcast.md",
+    "date": "2025-06-15",
+    "ts": "01:21:58",
+    "seconds": 4918,
+    "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+    "quote": "Now, you might disagree with the LLM judge, and that's okay, right?",
+    "clip": "https://www.youtube.com/watch?v=Ej4pBDaHspk&t=4918s"
+   }
+  ],
+  "guests": [
+   "Aman Khan",
+   "Ankit Shukla",
+   "Ankur Goyal"
+  ]
+ },
+ {
+  "id": "eval_plan-rerun-on-model-changes",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Use the eval suite to rerun and compare whenever you switch models, prompts, or components, so changes are judged by numbers.",
+  "check": "Check that the plan names model or prompt swaps as triggers to rerun the suite and compare scores. Fails if model changes are decided by spot checks alone.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Shreya Shankar",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "00:48:30",
+    "seconds": 2910,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "Because you have good evals, you can just make that switch, run it, see if your numbers go up.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=2910s"
+   },
+   {
+    "speaker": "Hamel Husain",
+    "file": "2025-07-11-hamel-shreya-podcast.md",
+    "date": "2025-07-11",
+    "ts": "00:46:59",
+    "seconds": 2819,
+    "youtube_url": "https://www.youtube.com/watch?v=g_3LJ2QBOQE",
+    "quote": "You should be able to switch models or switch components and see what the effect of that is.",
+    "clip": "https://www.youtube.com/watch?v=g_3LJ2QBOQE&t=2819s"
+   },
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:39:12",
+    "seconds": 2352,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "If you have evals that are failing, then when a new model comes out, the first thing you should do is just rerun those evals.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=2352s"
+   },
+   {
+    "speaker": "Jan Oberhauser",
+    "file": "2026-10-05-n8n-vs-claude-code.md",
+    "date": "2026-10-05",
+    "ts": "01:02:25",
+    "seconds": 3745,
+    "youtube_url": "https://www.youtube.com/watch?v=PkoX6R5sn8Y",
+    "quote": "you need evos to kind of just get very fast a good understanding if the performance is the same way",
+    "clip": "https://www.youtube.com/watch?v=PkoX6R5sn8Y&t=3745s"
+   }
+  ],
+  "guests": [
+   "Ankur Goyal",
+   "Hamel Husain",
+   "Jan Oberhauser",
+   "Shreya Shankar"
+  ]
+ },
+ {
+  "id": "eval_plan-sized-dataset-with-answer-key",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Specify a test set of around 100 representative prompts spanning easy and hard cases, each paired with an expected answer or ground truth to score against.",
+  "check": "Look for a stated dataset size, a mix of difficulty, and an answer key or ground-truth values. Fails if the plan lists a handful of examples or has no reference answers to compare against.",
+  "slop_signal": false,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:07:40",
+    "seconds": 460,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "Come up with probably 100 prompts that are in this distribution. Can be less, can be more, but this is a typical size of an eval in the Gen AI world.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=460s"
+   },
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:03:29",
+    "seconds": 209,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "And the answer key would be a correct answer or a plausibly correct answer with a way to score whether it's good.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=209s"
+   },
+   {
+    "speaker": "Mahesh Yadav",
+    "file": "2026-04-20-how-to-become-a-builder-pm.md",
+    "date": "2026-04-20",
+    "ts": "00:26:06",
+    "seconds": 1566,
+    "youtube_url": "https://www.youtube.com/watch?v=PL7908aNeSE",
+    "quote": "it will go and run an automatic eval and suggest comparing to my ground truth here, which is my real values",
+    "clip": "https://www.youtube.com/watch?v=PL7908aNeSE&t=1566s"
+   }
+  ],
+  "guests": [
+   "Daniel McKinnon",
+   "Mahesh Yadav"
+  ]
+ },
+ {
+  "id": "eval_plan-define-failure-handling",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "For evals that run inside the product, define what happens when an eval fails, such as regenerating with the failure as input or routing to a draft for human review.",
+  "check": "Check that runtime evals specify a failure path (retry, fallback, human review). Fails if the plan only says the eval 'checks' output with no defined consequence.",
+  "slop_signal": false,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Greg Greiner",
+    "file": "2026-11-13-ai-customer-research.md",
+    "date": "2026-11-13",
+    "ts": "00:26:10",
+    "seconds": 1570,
+    "youtube_url": "https://www.youtube.com/watch?v=JpyhPePe150",
+    "quote": "it starts building this loop that I think is really important of when an eval fails, what happens? So the eval should not just stop the whole process.",
+    "clip": "https://www.youtube.com/watch?v=JpyhPePe150&t=1570s"
+   },
+   {
+    "speaker": "Greg Greiner",
+    "file": "2026-11-13-ai-customer-research.md",
+    "date": "2026-11-13",
+    "ts": "00:24:49",
+    "seconds": 1489,
+    "youtube_url": "https://www.youtube.com/watch?v=JpyhPePe150",
+    "quote": "If the eval fails, rerun the generation process and save. The new generation as a draft for review.",
+    "clip": "https://www.youtube.com/watch?v=JpyhPePe150&t=1489s"
+   }
+  ],
+  "guests": [
+   "Greg Greiner"
+  ]
+ },
+ {
+  "id": "eval_plan-review-cadence",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Set a recurring cadence for reviewing production examples and updating evals and prompts to catch drift.",
+  "check": "Look for a stated rhythm (daily standup review, weekly or per-release runs) and an owner. Fails if the plan ends at launch with no ongoing review.",
+  "slop_signal": false,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:47:48",
+    "seconds": 2868,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "some of our customers have kind of like a ritual where every morning in stand up, they'll look at some examples from the previous day's usage of their product.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=2868s"
+   },
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2026-02-19-ai-evals-explained-simply.md",
+    "date": "2026-02-19",
+    "ts": "00:54:57",
+    "seconds": 3297,
+    "youtube_url": "https://www.youtube.com/watch?v=Raa3qjEBvKE",
+    "quote": "if you're not setting a cadence for improving your evals, improving your prompts, then you are going to suffer from data drift.",
+    "clip": "https://www.youtube.com/watch?v=Raa3qjEBvKE&t=3297s"
+   }
+  ],
+  "guests": [
+   "Ankit Shukla",
+   "Ankur Goyal"
+  ]
+ },
+ {
+  "id": "eval_plan-log-traces",
+  "artifact": "eval_plan",
+  "kind": "do",
+  "criterion": "Make sure traces (inputs and outputs) are logged in production so there is data to review and score.",
+  "check": "Check that the plan states what is logged, at what sampling rate, and where. Fails if the plan assumes data for review exists without any logging or observability step.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Teresa Torres",
+    "file": "2025-08-12-teresa-torres-podcast.md",
+    "date": "2025-08-12",
+    "ts": "00:46:01",
+    "seconds": 2761,
+    "youtube_url": "https://www.youtube.com/watch?v=wGuRuuPuYNQ",
+    "quote": "So we need a way to log at least a percentage of our traces, if not all of our traces, so we can start to look at them.",
+    "clip": "https://www.youtube.com/watch?v=wGuRuuPuYNQ&t=2761s"
+   },
+   {
+    "speaker": "Tyler Fisk",
+    "file": "2025-10-16-tyler-fisk-podcast.md",
+    "date": "2025-10-16",
+    "ts": "01:31:57",
+    "seconds": 5517,
+    "youtube_url": "https://www.youtube.com/watch?v=WVU7MCfFet4",
+    "quote": "They're so key because that's what gives you observability and a detailed audit trail to know what it is, what's happening in production",
+    "clip": "https://www.youtube.com/watch?v=WVU7MCfFet4&t=5517s"
+   }
+  ],
+  "guests": [
+   "Teresa Torres",
+   "Tyler Fisk"
+  ]
+ },
+ {
+  "id": "prd-problem-first",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "State the specific customer problem, and why it occurs, before any solution.",
+  "check": "Look for a sharp problem statement grounded in what customers actually said or did, with its cause. Fails if the doc opens with features or the problem is vague or generic.",
+  "slop_signal": false,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Poorvi Shrivastav",
+    "file": "2025-02-08-senior-director-at-meta-salesforce.md",
+    "date": "2025-02-08",
+    "ts": "01:02:36",
+    "seconds": 3756,
+    "youtube_url": "https://www.youtube.com/watch?v=DKfrMpvbCp4",
+    "quote": "Write the customer problems that you have encountered when you were spending time with.",
+    "clip": "https://www.youtube.com/watch?v=DKfrMpvbCp4&t=3756s"
+   },
+   {
+    "speaker": "Jack Hirsch",
+    "file": "2025-09-22-jack-hirsch-podcast.md",
+    "date": "2025-09-22",
+    "ts": "00:52:16",
+    "seconds": 3136,
+    "youtube_url": "https://www.youtube.com/watch?v=4dWbwGCPjUY",
+    "quote": "The spec still remains very, very problem and customer focused, right?",
+    "clip": "https://www.youtube.com/watch?v=4dWbwGCPjUY&t=3136s"
+   },
+   {
+    "speaker": "Guillaume Moubeche",
+    "file": "2024-10-08-how-i-built-lempire-guillaume-moubeche.md",
+    "date": "2024-10-08",
+    "ts": "00:00:28",
+    "seconds": 28,
+    "youtube_url": "https://www.youtube.com/watch?v=AF7FVRo821w",
+    "quote": "I have not seen really like a product manager coming up with an idea from like a customer and explain it in a super sharp way",
+    "clip": "https://www.youtube.com/watch?v=AF7FVRo821w&t=28s"
+   }
+  ],
+  "guests": [
+   "Guillaume Moubeche",
+   "Jack Hirsch",
+   "Poorvi Shrivastav"
+  ]
+ },
+ {
+  "id": "prd-clear-concise",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Write it clearly and concisely so readers can act on it without decoding it.",
+  "check": "Check whether each section earns its length and a reader can quickly tell what to build. Fails if it is long, padded, or ambiguous enough that engineers would have to ask what it means.",
+  "slop_signal": true,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Guillaume Moubeche",
+    "file": "2024-10-08-how-i-built-lempire-guillaume-moubeche.md",
+    "date": "2024-10-08",
+    "ts": "00:00:28",
+    "seconds": 28,
+    "youtube_url": "https://www.youtube.com/watch?v=AF7FVRo821w",
+    "quote": "product manager should be able to write very very clear and very very concise documents and the concise part is extremely important",
+    "clip": "https://www.youtube.com/watch?v=AF7FVRo821w&t=28s"
+   },
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:22:53",
+    "seconds": 1373,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "I do think PRDs will be less wordy Because you won't have to spend as much time describing oh you click on this button and this thing happens",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1373s"
+   }
+  ],
+  "guests": [
+   "Guillaume Moubeche",
+   "Jake Brill"
+  ]
+ },
+ {
+  "id": "prd-no-detail-dump",
+  "artifact": "prd",
+  "kind": "avoid",
+  "criterion": "Avoid documenting every detail; a wall of specifics gets skimmed and the important parts get missed.",
+  "check": "Look for exhaustive user stories, task lists, deadlines, and click-by-click behavior that bury the key decisions. Fails if the doc reads like a 20+ page waterfall spec.",
+  "slop_signal": true,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Pawel Huryn",
+    "file": "2025-04-22-complete-course-ai-product-management.md",
+    "date": "2025-04-22",
+    "ts": "00:13:49",
+    "seconds": 829,
+    "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+    "quote": "We don't necessarily need, and I actually don't like it, documenting every single detail, like user stories, tasks, very detailed deadlines, roadmaps.",
+    "clip": "https://www.youtube.com/watch?v=IfW1FMDkw4k&t=829s"
+   },
+   {
+    "speaker": "Nadav Abrahami",
+    "file": "2026-02-27-nadav-abrahami-podcast.md",
+    "date": "2026-02-27",
+    "ts": "01:03:07",
+    "seconds": 3787,
+    "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+    "quote": "First of all is that it's a lot of text that people sometimes skim over and they miss some of the parts.",
+    "clip": "https://www.youtube.com/watch?v=rW4MZEwGYY0&t=3787s"
+   },
+   {
+    "speaker": "Stephanie Leue",
+    "file": "2024-09-03-how-to-build-high-performing-product.md",
+    "date": "2024-09-03",
+    "ts": "01:21:25",
+    "seconds": 4885,
+    "youtube_url": "https://www.youtube.com/watch?v=erql22ZbLWI",
+    "quote": "A 72 pages long PRD that was the standard at PayPal back then. Yes, it's cool to think through it from beginning to end, right? It's nice, but actually that's so waterfall.",
+    "clip": "https://www.youtube.com/watch?v=erql22ZbLWI&t=4885s"
+   },
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:01:52",
+    "seconds": 112,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "The majority of most PRDs that I've seen in my career Have spent most of the document talking about specifics, how it will work, how it will behave in certain situations",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=112s"
+   }
+  ],
+  "guests": [
+   "Daniel McKinnon",
+   "Nadav Abrahami",
+   "Pawel Huryn",
+   "Stephanie Leue"
+  ]
+ },
+ {
+  "id": "prd-own-thinking",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Make sure the PM's own thinking and judgment is in the document, not just text an AI produced from a short prompt.",
+  "check": "Look for specific insights, trade-offs, and calls only someone close to the problem would make. Fails if the draft reads like a one-shot AI output that would need as much fixing as writing from scratch.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Ankit Shukla",
+    "file": "2025-07-27-ankit-shukla-podcast.md",
+    "date": "2025-07-27",
+    "ts": "00:32:17",
+    "seconds": 1937,
+    "youtube_url": "https://www.youtube.com/watch?v=MZlKnSJ_gaA",
+    "quote": "Now, AI can generate a PRD, right? But that does not mean that AI should generate a PRD.",
+    "clip": "https://www.youtube.com/watch?v=MZlKnSJ_gaA&t=1937s"
+   },
+   {
+    "speaker": "Mahesh Yadav",
+    "file": "2025-09-13-mahesh-yadav-podcast.md",
+    "date": "2025-09-13",
+    "ts": "01:07:06",
+    "seconds": 4026,
+    "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+    "quote": "They don't understand how much is about credibility of the person. And their intuition goes in that PRD.",
+    "clip": "https://www.youtube.com/watch?v=cddB0JA5kAg&t=4026s"
+   },
+   {
+    "speaker": "Claire Vo",
+    "file": "2025-03-04-pm-is-dead-so-now-what-the-claire.md",
+    "date": "2025-03-04",
+    "ts": "00:52:34",
+    "seconds": 3154,
+    "youtube_url": "https://www.youtube.com/watch?v=EZQUrQzd280",
+    "quote": "And it's not going to be great based off one sentence.",
+    "clip": "https://www.youtube.com/watch?v=EZQUrQzd280&t=3154s"
+   }
+  ],
+  "guests": [
+   "Ankit Shukla",
+   "Claire Vo",
+   "Mahesh Yadav"
+  ]
+ },
+ {
+  "id": "prd-human-first-draft",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Have the PM write the first version (problems, causes, intent) and use AI to refine and check it afterwards.",
+  "check": "Ask whether the core problem framing came from the PM before tools polished it. Fails if the document is an agent's draft with no human-authored core.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Poorvi Shrivastav",
+    "file": "2025-02-08-senior-director-at-meta-salesforce.md",
+    "date": "2025-02-08",
+    "ts": "01:02:36",
+    "seconds": 3756,
+    "youtube_url": "https://www.youtube.com/watch?v=DKfrMpvbCp4",
+    "quote": "But I feel like PMs should spend time writing the first version of PRD. Sure, you can use chat PRD after that.",
+    "clip": "https://www.youtube.com/watch?v=DKfrMpvbCp4&t=3756s"
+   },
+   {
+    "speaker": "Mahesh Yadav",
+    "file": "2025-09-13-mahesh-yadav-podcast.md",
+    "date": "2025-09-13",
+    "ts": "01:07:06",
+    "seconds": 4026,
+    "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+    "quote": "What I need is I will write the PRD and I will check it with AI.",
+    "clip": "https://www.youtube.com/watch?v=cddB0JA5kAg&t=4026s"
+   },
+   {
+    "speaker": "Jacob Bank",
+    "file": "2025-09-19-jacob-bank-podcast.md",
+    "date": "2025-09-19",
+    "ts": "00:18:58",
+    "seconds": 1138,
+    "youtube_url": "https://www.youtube.com/watch?v=SGUXMugyo6g",
+    "quote": "So if I'm writing a PRD, I don't want an agent to write a PRD for me.",
+    "clip": "https://www.youtube.com/watch?v=SGUXMugyo6g&t=1138s"
+   }
+  ],
+  "guests": [
+   "Jacob Bank",
+   "Mahesh Yadav",
+   "Poorvi Shrivastav"
+  ]
+ },
+ {
+  "id": "prd-real-context",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Ground the PRD in real business, customer, competitor, and data context instead of generic statements.",
+  "check": "Look for specifics drawn from the company's actual goals, research, data, and market. Fails if claims could apply to any company or are unsupported boilerplate.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Jack Hirsch",
+    "file": "2025-09-22-jack-hirsch-podcast.md",
+    "date": "2025-09-22",
+    "ts": "00:52:16",
+    "seconds": 3136,
+    "youtube_url": "https://www.youtube.com/watch?v=4dWbwGCPjUY",
+    "quote": "There's going to be business context. There's going to be customer context. There's going to be, depending on the market, there might be competitor context.",
+    "clip": "https://www.youtube.com/watch?v=4dWbwGCPjUY&t=3136s"
+   },
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:22:53",
+    "seconds": 1373,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "With connectors, you can connect to external data sources to help bring these documents to life.",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1373s"
+   }
+  ],
+  "guests": [
+   "Jack Hirsch",
+   "Jake Brill"
+  ]
+ },
+ {
+  "id": "prd-own-voice",
+  "artifact": "prd",
+  "kind": "avoid",
+  "criterion": "Avoid generic AI voice; the PRD should sound like the author and match the standard of the team's best PRDs.",
+  "check": "Compare tone and structure to the author's style and strong internal examples. Fails if it reads like a generic template output that sounds like no one in particular.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:22:02",
+    "seconds": 1322,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "I kept trying to use AI for writing the PRDs and it just like came up short. The product form factor wasn't right. It didn't sound like my voice",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1322s"
+   },
+   {
+    "speaker": "Carl Vellotti",
+    "file": "2025-10-04-carl-vellotti-podcast.md",
+    "date": "2025-10-04",
+    "ts": "00:26:29",
+    "seconds": 1589,
+    "youtube_url": "https://www.youtube.com/watch?v=4nthc76rSl8",
+    "quote": "So let's say I'm working at this company, a bunch of killer PMs who are writing some really great PRDs. You can use those as examples for your own PRDs.",
+    "clip": "https://www.youtube.com/watch?v=4nthc76rSl8&t=1589s"
+   }
+  ],
+  "guests": [
+   "Carl Vellotti",
+   "Jake Brill"
+  ]
+ },
+ {
+  "id": "prd-strategy-why",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Explain why this is worth building now: how it differentiates, acquires users, and improves monetization.",
+  "check": "Look for explicit answers on why now, competitive differentiation, go-to-market, and business impact. Fails if the doc only describes UX and functionality.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:55:00",
+    "seconds": 3300,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "It doesn't touch product strategy and all the strategic questions that a good PRD includes.",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=3300s"
+   },
+   {
+    "speaker": "Pawel Huryn",
+    "file": "2025-04-22-complete-course-ai-product-management.md",
+    "date": "2025-04-22",
+    "ts": "00:13:49",
+    "seconds": 829,
+    "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+    "quote": "we would like to explain why this is something that we should build right now and maybe this is something that has just become possible.",
+    "clip": "https://www.youtube.com/watch?v=IfW1FMDkw4k&t=829s"
+   },
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:22:53",
+    "seconds": 1373,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "What is our marketing strategy that we're gonna bring with the product when we bring it to market?",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1373s"
+   },
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:01:52",
+    "seconds": 112,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "without a product strategy or a particular customer, like your product is nothing.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=112s"
+   }
+  ],
+  "guests": [
+   "Daniel McKinnon",
+   "Jake Brill",
+   "Pawel Huryn",
+   "Sachin Rekhi"
+  ]
+ },
+ {
+  "id": "prd-success-criteria",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Define success criteria and the metric the work is expected to move.",
+  "check": "Look for concrete goals and metrics tied to what the company cares about. Fails if success is undefined or stated only as vague benefits.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Pawel Huryn",
+    "file": "2025-04-22-complete-course-ai-product-management.md",
+    "date": "2025-04-22",
+    "ts": "00:13:49",
+    "seconds": 829,
+    "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+    "quote": "So just briefly, we'll briefly summarize what this initiative is about and how it will, what are the success criteria, how it will benefit the organization.",
+    "clip": "https://www.youtube.com/watch?v=IfW1FMDkw4k&t=829s"
+   },
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:06:50",
+    "seconds": 410,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "it's an unstructured document that is a spec that is meant to communicate how you should build something and what maybe the success criteria are for the product working.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=410s"
+   },
+   {
+    "speaker": "James McAulay",
+    "file": "2026-10-20-claude-code-for-growth.md",
+    "date": "2026-10-20",
+    "ts": "00:38:37",
+    "seconds": 2317,
+    "youtube_url": "https://www.youtube.com/watch?v=FTbkpiKWLKw",
+    "quote": "Tell me why, like what metric is it going to move?",
+    "clip": "https://www.youtube.com/watch?v=FTbkpiKWLKw&t=2317s"
+   }
+  ],
+  "guests": [
+   "Ankur Goyal",
+   "James McAulay",
+   "Pawel Huryn"
+  ]
+ },
+ {
+  "id": "prd-edge-cases",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Spell out edge cases, failure cases, and rules a prototype would not show.",
+  "check": "Look for how failures, exceptions, and constraints (including regulatory rules) are handled. Fails if only the happy path is described.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:22:53",
+    "seconds": 1373,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "the value of PRDs is you can do a prototype, but you may be missing a bunch of things in that prototype. Like, how do I handle, you know, like...",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1373s"
+   },
+   {
+    "speaker": "Abhishek Fatehpuria",
+    "file": "2025-09-11-abhishek-fatehpuria-podcast.md",
+    "date": "2025-09-11",
+    "ts": "00:53:01",
+    "seconds": 3181,
+    "youtube_url": "https://www.youtube.com/watch?v=pc04_TW7Z3U",
+    "quote": "here are the rules and the regs and here are the edge cases we need to capture. So I don't think you can ever effectively like get rid of it.",
+    "clip": "https://www.youtube.com/watch?v=pc04_TW7Z3U&t=3181s"
+   }
+  ],
+  "guests": [
+   "Abhishek Fatehpuria",
+   "Jake Brill"
+  ]
+ },
+ {
+  "id": "prd-scope-audience",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Say who it is for, what it will do, and what it will not do.",
+  "check": "Look for a named target audience and explicit in-scope and out-of-scope items. Fails if the audience is unclear or nothing is ruled out.",
+  "slop_signal": false,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Tyler Fisk",
+    "file": "2025-10-16-tyler-fisk-podcast.md",
+    "date": "2025-10-16",
+    "ts": "00:23:58",
+    "seconds": 1438,
+    "youtube_url": "https://www.youtube.com/watch?v=WVU7MCfFet4",
+    "quote": "what are we building who is it for what's this journey look like what is it gonna do what is it not gonna do",
+    "clip": "https://www.youtube.com/watch?v=WVU7MCfFet4&t=1438s"
+   },
+   {
+    "speaker": "Maria Cuasay",
+    "file": "2024-11-02-how-to-build-things-faster.md",
+    "date": "2024-11-02",
+    "ts": "00:16:18",
+    "seconds": 978,
+    "youtube_url": "https://www.youtube.com/watch?v=U8jlVqplC5I",
+    "quote": "It's like, oh, what audience are you targeting? It's like, no, what are all like the requirements?",
+    "clip": "https://www.youtube.com/watch?v=U8jlVqplC5I&t=978s"
+   }
+  ],
+  "guests": [
+   "Maria Cuasay",
+   "Tyler Fisk"
+  ]
+ },
+ {
+  "id": "prd-self-sufficient",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Make it complete enough that design and engineering can build without coming back with questions.",
+  "check": "Imagine handing it off with the author absent: are requirements, audience, and intent all there? Fails if a builder would need a meeting to understand it.",
+  "slop_signal": false,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Maria Cuasay",
+    "file": "2024-11-02-how-to-build-things-faster.md",
+    "date": "2024-11-02",
+    "ts": "00:16:18",
+    "seconds": 978,
+    "youtube_url": "https://www.youtube.com/watch?v=U8jlVqplC5I",
+    "quote": "And also with engineering, like fewer questions, the better, is it all down there? And so there's no more back and forth, right?",
+    "clip": "https://www.youtube.com/watch?v=U8jlVqplC5I&t=978s"
+   },
+   {
+    "speaker": "Shravan Tickoo",
+    "file": "2024-10-26-pm-job-search-2024.md",
+    "date": "2024-10-26",
+    "ts": "02:03:00",
+    "seconds": 7380,
+    "youtube_url": "https://www.youtube.com/watch?v=dOrrxtVsbyQ",
+    "quote": "it is like if someone is not there, it communicates the same thing to engineering, right? It gives the same depth, right?",
+    "clip": "https://www.youtube.com/watch?v=dOrrxtVsbyQ&t=7380s"
+   },
+   {
+    "speaker": "Claire Vo",
+    "file": "2025-03-04-pm-is-dead-so-now-what-the-claire.md",
+    "date": "2025-03-04",
+    "ts": "00:58:13",
+    "seconds": 3493,
+    "youtube_url": "https://www.youtube.com/watch?v=EZQUrQzd280",
+    "quote": "So I tend to do this just because it tends to save me a bunch of back and forth on on tasks.",
+    "clip": "https://www.youtube.com/watch?v=EZQUrQzd280&t=3493s"
+   }
+  ],
+  "guests": [
+   "Claire Vo",
+   "Maria Cuasay",
+   "Shravan Tickoo"
+  ]
+ },
+ {
+  "id": "prd-what-and-why-not-how",
+  "artifact": "prd",
+  "kind": "avoid",
+  "criterion": "Avoid over-specifying how to build it; give builders the context and criteria and let them make trade-offs.",
+  "check": "Check that the doc explains what and why with clear criteria, leaving implementation choices to engineers or agents. Fails if it dictates every implementation step.",
+  "slop_signal": false,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Melissa Perri",
+    "file": "2024-12-03-mastering-product-strategy-with-melissa.md",
+    "date": "2024-12-03",
+    "ts": "00:59:02",
+    "seconds": 3542,
+    "youtube_url": "https://www.youtube.com/watch?v=Zn8oryvqsTo",
+    "quote": "If you give the developers the right context, they should be able to make very small tradeoff decisions, big tradeoff decisions as well, honestly, if you set them up well.",
+    "clip": "https://www.youtube.com/watch?v=Zn8oryvqsTo&t=3542s"
+   },
+   {
+    "speaker": "Thibault Louis-Lucas",
+    "file": "2024-11-29-how-tibo-sold-over-10m-in-saas-products.md",
+    "date": "2024-11-29",
+    "ts": "01:43:28",
+    "seconds": 6208,
+    "youtube_url": "https://www.youtube.com/watch?v=o_KfvIHTsiA",
+    "quote": "The builder's job is not to perfectly spec something.",
+    "clip": "https://www.youtube.com/watch?v=o_KfvIHTsiA&t=6208s"
+   },
+   {
+    "speaker": "Jack Hirsch",
+    "file": "2025-09-22-jack-hirsch-podcast.md",
+    "date": "2025-09-22",
+    "ts": "00:52:16",
+    "seconds": 3136,
+    "youtube_url": "https://www.youtube.com/watch?v=4dWbwGCPjUY",
+    "quote": "We're responsible for what we're building and why, not how we're building it.",
+    "clip": "https://www.youtube.com/watch?v=4dWbwGCPjUY&t=3136s"
+   },
+   {
+    "speaker": "Sahil Lavingia",
+    "file": "2025-10-19-sahil-lavingia-podcast.md",
+    "date": "2025-10-19",
+    "ts": "00:04:52",
+    "seconds": 292,
+    "youtube_url": "https://www.youtube.com/watch?v=I_ue2vrTM9M",
+    "quote": "And AI can decide, however, to tackle the problem. You know, as long as it meets the criteria in the spec",
+    "clip": "https://www.youtube.com/watch?v=I_ue2vrTM9M&t=292s"
+   }
+  ],
+  "guests": [
+   "Jack Hirsch",
+   "Melissa Perri",
+   "Sahil Lavingia",
+   "Thibault Louis-Lucas"
+  ]
+ },
+ {
+  "id": "prd-multi-audience-narrative",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Write it as a narrative with a clear objective and summary that executives as well as engineers can follow.",
+  "check": "Look for an executive summary and a clear objective up front, and a story that holds together. Fails if it is only a list of execution details.",
+  "slop_signal": false,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Shravan Tickoo",
+    "file": "2024-10-26-pm-job-search-2024.md",
+    "date": "2024-10-26",
+    "ts": "02:03:00",
+    "seconds": 7380,
+    "youtube_url": "https://www.youtube.com/watch?v=dOrrxtVsbyQ",
+    "quote": "your PRD not only is just read by the engineers, but the CXOs might also want a summary at some point",
+    "clip": "https://www.youtube.com/watch?v=dOrrxtVsbyQ&t=7380s"
+   },
+   {
+    "speaker": "Shravan Tickoo",
+    "file": "2024-10-26-pm-job-search-2024.md",
+    "date": "2024-10-26",
+    "ts": "02:03:00",
+    "seconds": 7380,
+    "youtube_url": "https://www.youtube.com/watch?v=dOrrxtVsbyQ",
+    "quote": "So I think most PMs start thinking that PRD is a more execution level document, right?",
+    "clip": "https://www.youtube.com/watch?v=dOrrxtVsbyQ&t=7380s"
+   },
+   {
+    "speaker": "Benjamin Humphrey",
+    "file": "2024-11-27-what-it-means-to-be-design-led-with.md",
+    "date": "2024-11-27",
+    "ts": "01:41:31",
+    "seconds": 6091,
+    "youtube_url": "https://www.youtube.com/watch?v=Rdo2N_xO8z8",
+    "quote": "I'm actually a big believer more in storytelling, I guess, than requirements documents.",
+    "clip": "https://www.youtube.com/watch?v=Rdo2N_xO8z8&t=6091s"
+   }
+  ],
+  "guests": [
+   "Benjamin Humphrey",
+   "Shravan Tickoo"
+  ]
+ },
+ {
+  "id": "prd-checklist-not-form",
+  "artifact": "prd",
+  "kind": "avoid",
+  "criterion": "Avoid filling a template section by section; use it as a checklist of points that must be covered.",
+  "check": "Check whether each section adds real thinking rather than filler written to satisfy the template. Fails if sections are present but empty of substance.",
+  "slop_signal": true,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Sam Kawsarani",
+    "file": "2024-09-09-product-management-ai-era.md",
+    "date": "2024-09-09",
+    "ts": "01:23:03",
+    "seconds": 4983,
+    "youtube_url": "https://www.youtube.com/watch?v=Q3jc5NAAUT4",
+    "quote": "It's more like a checklist, not a template that you should fill.",
+    "clip": "https://www.youtube.com/watch?v=Q3jc5NAAUT4&t=4983s"
+   },
+   {
+    "speaker": "Vineeth Madhusudanan",
+    "file": "2024-11-13-stop-using-frameworks-lessons-from.md",
+    "date": "2024-11-13",
+    "ts": "00:21:29",
+    "seconds": 1289,
+    "youtube_url": "https://www.youtube.com/watch?v=vZDTWn--zrc",
+    "quote": "Filling out a former document is sometimes useful because it helps you think about, oh, what are the things that you should have considered?",
+    "clip": "https://www.youtube.com/watch?v=vZDTWn--zrc&t=1289s"
+   },
+   {
+    "speaker": "Jack Hirsch",
+    "file": "2025-09-22-jack-hirsch-podcast.md",
+    "date": "2025-09-22",
+    "ts": "00:52:16",
+    "seconds": 3136,
+    "youtube_url": "https://www.youtube.com/watch?v=4dWbwGCPjUY",
+    "quote": "And it's there effectively to ensure comprehensive thinking, right? Make sure that we're hitting all the angles.",
+    "clip": "https://www.youtube.com/watch?v=4dWbwGCPjUY&t=3136s"
+   }
+  ],
+  "guests": [
+   "Jack Hirsch",
+   "Sam Kawsarani",
+   "Vineeth Madhusudanan"
+  ]
+ },
+ {
+  "id": "prd-show-dont-describe",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Pair the PRD with a prototype or visual instead of describing the UI in long text.",
+  "check": "Look for a linked mock or prototype carrying the UX, with text focused on what visuals can't show. Fails if pages of prose describe screens and clicks.",
+  "slop_signal": false,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Nadav Abrahami",
+    "file": "2026-02-27-nadav-abrahami-podcast.md",
+    "date": "2026-02-27",
+    "ts": "01:03:07",
+    "seconds": 3787,
+    "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+    "quote": "everybody knows it takes a thousand words to describe one picture and an application, if you put it down to pictures, is like a thousand.",
+    "clip": "https://www.youtube.com/watch?v=rW4MZEwGYY0&t=3787s"
+   },
+   {
+    "speaker": "Pavneet Singh Ahluwalia",
+    "file": "2026-09-14-together-ai-product-team.md",
+    "date": "2026-09-14",
+    "ts": "00:28:50",
+    "seconds": 1730,
+    "youtube_url": "https://www.youtube.com/watch?v=8TgxUPSuvNQ",
+    "quote": "What replaces the bulk of that is actually a prototype.",
+    "clip": "https://www.youtube.com/watch?v=8TgxUPSuvNQ&t=1730s"
+   },
+   {
+    "speaker": "Abhishek Fatehpuria",
+    "file": "2025-09-11-abhishek-fatehpuria-podcast.md",
+    "date": "2025-09-11",
+    "ts": "00:53:01",
+    "seconds": 3181,
+    "youtube_url": "https://www.youtube.com/watch?v=pc04_TW7Z3U",
+    "quote": "I don't like personally doing product reviews with like PRDs. I find them to be not that like high signal on like, are we going to build a good product?",
+    "clip": "https://www.youtube.com/watch?v=pc04_TW7Z3U&t=3181s"
+   },
+   {
+    "speaker": "Benjamin Humphrey",
+    "file": "2024-11-27-what-it-means-to-be-design-led-with.md",
+    "date": "2024-11-27",
+    "ts": "01:41:31",
+    "seconds": 6091,
+    "youtube_url": "https://www.youtube.com/watch?v=Rdo2N_xO8z8",
+    "quote": "I think that a lot of... probably what you would put in that document can be solved through or communicated through Figma these days in a visual way.",
+    "clip": "https://www.youtube.com/watch?v=Rdo2N_xO8z8&t=6091s"
+   }
+  ],
+  "guests": [
+   "Abhishek Fatehpuria",
+   "Benjamin Humphrey",
+   "Nadav Abrahami",
+   "Pavneet Singh Ahluwalia"
+  ]
+ },
+ {
+  "id": "prd-assumptions-living-doc",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Surface key assumptions with their evidence, and keep updating the PRD as building and prototyping test them.",
+  "check": "Look for an explicit assumptions list with supporting evidence, and signs the doc reflects what prototypes or builds taught. Fails if assumptions are hidden or stated as facts, or the doc reads as a frozen up-front phase.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Pawel Huryn",
+    "file": "2025-04-22-complete-course-ai-product-management.md",
+    "date": "2025-04-22",
+    "ts": "00:13:49",
+    "seconds": 829,
+    "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+    "quote": "We would rather want to use PRD as a tool to highlight our assumptions and provide some evidence and also connect our initiative to the broader organizational context.",
+    "clip": "https://www.youtube.com/watch?v=IfW1FMDkw4k&t=829s"
+   },
+   {
+    "speaker": "Pawel Huryn",
+    "file": "2025-04-22-complete-course-ai-product-management.md",
+    "date": "2025-04-22",
+    "ts": "00:13:49",
+    "seconds": 829,
+    "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+    "quote": "We usually start with a draft and as we build our feature or AI powered product, we iterate on our PRD.",
+    "clip": "https://www.youtube.com/watch?v=IfW1FMDkw4k&t=829s"
+   },
+   {
+    "speaker": "Alex Danilowicz",
+    "file": "2025-11-16-alex-danilowicz-podcast.md",
+    "date": "2025-11-16",
+    "ts": "00:33:09",
+    "seconds": 1989,
+    "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+    "quote": "If you don't have a PRD yet, use the visual mockup to influence what you need to update about the PRD.",
+    "clip": "https://www.youtube.com/watch?v=qPFRsJzb8tk&t=1989s"
+   }
+  ],
+  "guests": [
+   "Alex Danilowicz",
+   "Pawel Huryn"
+  ]
+ },
+ {
+  "id": "prd-evals-as-requirements",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "For AI features, express requirements as evals and concrete examples of good and bad behavior.",
+  "check": "Look for example inputs and outputs, eval criteria, or a dataset that defines what good looks like. Fails if AI behavior is described only in qualitative prose.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Aman Khan",
+    "file": "2025-06-15-aman-khan-podcast.md",
+    "date": "2025-06-15",
+    "ts": "01:47:00",
+    "seconds": 6420,
+    "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+    "quote": "what if evals were your requirements instead of your AI product?",
+    "clip": "https://www.youtube.com/watch?v=Ej4pBDaHspk&t=6420s"
+   },
+   {
+    "speaker": "Ankur Goyal",
+    "file": "2026-03-20-ankur-goyal-podcast.md",
+    "date": "2026-03-20",
+    "ts": "00:07:49",
+    "seconds": 469,
+    "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+    "quote": "Fast forward to now, I think the modern PRD is an eval.",
+    "clip": "https://www.youtube.com/watch?v=71qvIkO9d_A&t=469s"
+   },
+   {
+    "speaker": "Daniel McKinnon",
+    "file": "2026-07-28-how-to-build-your-first-eval.md",
+    "date": "2026-07-28",
+    "ts": "00:01:52",
+    "seconds": 112,
+    "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+    "quote": "the best way to actually communicate what the product should do is through examples. And that's what an eval is.",
+    "clip": "https://www.youtube.com/watch?v=ztN6bE_FuQQ&t=112s"
+   },
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:24:23",
+    "seconds": 1463,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "it's going to be describing not just the way the product work, but the way the model that's powering the product should work.",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1463s"
+   }
+  ],
+  "guests": [
+   "Aman Khan",
+   "Ankur Goyal",
+   "Daniel McKinnon",
+   "Jake Brill"
+  ]
+ },
+ {
+  "id": "prd-agent-ready",
+  "artifact": "prd",
+  "kind": "do",
+  "criterion": "Structure the PRD so a coding agent can use it as a persistent reference with checkable criteria.",
+  "check": "Look for clear criteria or checklist items an agent can verify and track progress against. Fails if requirements are too vague for an agent to know when it is done.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Colin Matthews",
+    "file": "2025-02-28-ai-prototyping-for-pms.md",
+    "date": "2025-02-28",
+    "ts": "00:10:11",
+    "seconds": 611,
+    "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+    "quote": "having a file like this one, like a PRD, kind of helps you maintain that context over time.",
+    "clip": "https://www.youtube.com/watch?v=Gp6tMkCr_0w&t=611s"
+   },
+   {
+    "speaker": "James McAulay",
+    "file": "2026-10-20-claude-code-for-growth.md",
+    "date": "2026-10-20",
+    "ts": "00:38:37",
+    "seconds": 2317,
+    "youtube_url": "https://www.youtube.com/watch?v=FTbkpiKWLKw",
+    "quote": "Once it's got the PRD, it's set up in a way that it's got all these checkboxes and the PRD and it just basically sort of ticks off its work as it goes.",
+    "clip": "https://www.youtube.com/watch?v=FTbkpiKWLKw&t=2317s"
+   },
+   {
+    "speaker": "Nadav Abrahami",
+    "file": "2026-02-27-nadav-abrahami-podcast.md",
+    "date": "2026-02-27",
+    "ts": "01:03:07",
+    "seconds": 3787,
+    "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+    "quote": "And in a way, the PRD becomes something that is more useful for the AI, even.",
+    "clip": "https://www.youtube.com/watch?v=rW4MZEwGYY0&t=3787s"
+   }
+  ],
+  "guests": [
+   "Colin Matthews",
+   "James McAulay",
+   "Nadav Abrahami"
+  ]
+ },
+ {
+  "id": "prd-defined-terms",
+  "artifact": "prd",
+  "kind": "avoid",
+  "criterion": "Avoid using terms loosely; define key terms, events, and metrics precisely.",
+  "check": "Check that important terms and metrics have explicit definitions. Fails if terms are used inconsistently or left for readers to interpret.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Mahesh Yadav",
+    "file": "2025-09-13-mahesh-yadav-podcast.md",
+    "date": "2025-09-13",
+    "ts": "01:07:06",
+    "seconds": 4026,
+    "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+    "quote": "because they have these documents which are immature, they had used terms loosely and not to their fault, they are just new.",
+    "clip": "https://www.youtube.com/watch?v=cddB0JA5kAg&t=4026s"
+   },
+   {
+    "speaker": "James McAulay",
+    "file": "2026-10-20-claude-code-for-growth.md",
+    "date": "2026-10-20",
+    "ts": "00:50:40",
+    "seconds": 3040,
+    "youtube_url": "https://www.youtube.com/watch?v=FTbkpiKWLKw",
+    "quote": "And I noticed that one or two things were getting misinterpreted. And it was because we had event names, but we didn't have event definitions.",
+    "clip": "https://www.youtube.com/watch?v=FTbkpiKWLKw&t=3040s"
+   }
+  ],
+  "guests": [
+   "James McAulay",
+   "Mahesh Yadav"
+  ]
+ },
+ {
+  "id": "prototype-shared-picture",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Use the prototype to give stakeholders one shared, concrete picture of the experience instead of relying on a written description.",
+  "check": "Look for evidence the prototype is meant to be shown and discussed (who it is for, what decision it informs). Fails if it is built as a private toy or if the plan still expects alignment to happen through a long doc alone.",
+  "slop_signal": false,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Brian Balfour",
+    "file": "2025-02-25-reforge-growth-crash-course.md",
+    "date": "2025-02-25",
+    "ts": "00:58:32",
+    "seconds": 3512,
+    "youtube_url": "https://www.youtube.com/watch?v=sWWRBOXo6rA",
+    "quote": "It's about, okay, how do we get everybody to have the same picture in their head?",
+    "clip": "https://www.youtube.com/watch?v=sWWRBOXo6rA&t=3512s"
+   },
+   {
+    "speaker": "Benjamin Humphrey",
+    "file": "2024-11-27-what-it-means-to-be-design-led-with.md",
+    "date": "2024-11-27",
+    "ts": "00:23:26",
+    "seconds": 1406,
+    "youtube_url": "https://www.youtube.com/watch?v=Rdo2N_xO8z8",
+    "quote": "And I find that the best thing is just like just to visualize where we're going.",
+    "clip": "https://www.youtube.com/watch?v=Rdo2N_xO8z8&t=1406s"
+   },
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:20:11",
+    "seconds": 1211,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "rather than just writing a proposal for how something works, just build a prototype of how something could work and you put that in people's hands",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1211s"
+   },
+   {
+    "speaker": "Sam Kawsarani",
+    "file": "2024-09-09-product-management-ai-era.md",
+    "date": "2024-09-09",
+    "ts": "01:18:03",
+    "seconds": 4683,
+    "youtube_url": "https://www.youtube.com/watch?v=Q3jc5NAAUT4",
+    "quote": "So I absolutely think you probably need that prototype because it helps with buying even more versus just putting a strategy doc.",
+    "clip": "https://www.youtube.com/watch?v=Q3jc5NAAUT4&t=4683s"
+   }
+  ],
+  "guests": [
+   "Benjamin Humphrey",
+   "Brian Balfour",
+   "Jake Brill",
+   "Sam Kawsarani"
+  ]
+ },
+ {
+  "id": "prototype-customer-reactions",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Put the prototype in front of real customers and capture how they interpret and use it.",
+  "check": "Check for a named plan to test with actual users (think-aloud sessions, a set of customers, recorded walkthroughs). Fails if the only audience is the team or if success is judged by how impressive it looks.",
+  "slop_signal": false,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Jeremy Epling",
+    "file": "2025-05-26-jeremy-epling-podcast.md",
+    "date": "2025-05-26",
+    "ts": "00:04:38",
+    "seconds": 278,
+    "youtube_url": "https://www.youtube.com/watch?v=o-eelkFXF-w",
+    "quote": "Maybe it will get better there, but it's enough to show a customer and get a reaction.",
+    "clip": "https://www.youtube.com/watch?v=o-eelkFXF-w&t=278s"
+   },
+   {
+    "speaker": "Pawel Huryn",
+    "file": "2024-11-21-how-to-do-product-discovery-right.md",
+    "date": "2024-11-21",
+    "ts": "00:32:29",
+    "seconds": 1949,
+    "youtube_url": "https://www.youtube.com/watch?v=KkqYDbSPrbQ",
+    "quote": "So as they were going through the prototype, they were asked to describe what they see on the screen and how they interpret what they see",
+    "clip": "https://www.youtube.com/watch?v=KkqYDbSPrbQ&t=1949s"
+   },
+   {
+    "speaker": "Tanguy Crusson",
+    "file": "2025-07-08-tanguy-crusson-podcast.md",
+    "date": "2025-07-08",
+    "ts": "00:42:48",
+    "seconds": 2568,
+    "youtube_url": "https://www.youtube.com/watch?v=6oottgko7pQ",
+    "quote": "Get the same 10 people in a video after you've presented your solutions and get them to explain how that's solving it for them.",
+    "clip": "https://www.youtube.com/watch?v=6oottgko7pQ&t=2568s"
+   }
+  ],
+  "guests": [
+   "Jeremy Epling",
+   "Pawel Huryn",
+   "Tanguy Crusson"
+  ]
+ },
+ {
+  "id": "prototype-problem-first",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Ground the prototype in a researched customer problem before you start generating screens.",
+  "check": "The draft or its prompt should name the customer problem or opportunity and the research behind it. Fails if it starts from a cool feature or 'add AI to X' with no stated user need.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Nadav Abrahami",
+    "file": "2026-02-27-nadav-abrahami-podcast.md",
+    "date": "2026-02-27",
+    "ts": "00:06:36",
+    "seconds": 396,
+    "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+    "quote": "There's a lot to do before you even get to prototyping, and I would never give up that step.",
+    "clip": "https://www.youtube.com/watch?v=rW4MZEwGYY0&t=396s"
+   },
+   {
+    "speaker": "Dan Olsen",
+    "file": "2025-06-20-dan-olsen-podcast.md",
+    "date": "2025-06-20",
+    "ts": "00:30:58",
+    "seconds": 1858,
+    "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+    "quote": "of course you should start off with discovery research. You should talk to customers to understand their needs and preferences",
+    "clip": "https://www.youtube.com/watch?v=sl7r3wsoVGY&t=1858s"
+   },
+   {
+    "speaker": "Dan Olsen",
+    "file": "2025-06-20-dan-olsen-podcast.md",
+    "date": "2025-06-20",
+    "ts": "01:12:43",
+    "seconds": 4363,
+    "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+    "quote": "The other thing is you're not starting with a customer problem.",
+    "clip": "https://www.youtube.com/watch?v=sl7r3wsoVGY&t=4363s"
+   },
+   {
+    "speaker": "Teresa Torres",
+    "file": "2025-08-12-teresa-torres-podcast.md",
+    "date": "2025-08-12",
+    "ts": "00:17:35",
+    "seconds": 1055,
+    "youtube_url": "https://www.youtube.com/watch?v=wGuRuuPuYNQ",
+    "quote": "I've chosen a target opportunity. Ideally, I've brainstormed multiple solutions for that target opportunity.",
+    "clip": "https://www.youtube.com/watch?v=wGuRuuPuYNQ&t=1055s"
+   }
+  ],
+  "guests": [
+   "Dan Olsen",
+   "Nadav Abrahami",
+   "Teresa Torres"
+  ]
+ },
+ {
+  "id": "prototype-diverge-variants",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Generate and compare several distinct variants instead of accepting the first output.",
+  "check": "Look for two or more meaningfully different directions and a note on how they were compared. Fails if there is a single design with no alternatives considered.",
+  "slop_signal": true,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:09:36",
+    "seconds": 576,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "AI shouldn't be used just to create one output. We should be using it to create multiple outputs, just the way we'd use a designer.",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=576s"
+   },
+   {
+    "speaker": "Oji Udezue",
+    "file": "2026-08-06-oji-udezue-claude-skills.md",
+    "date": "2026-08-06",
+    "ts": "00:39:45",
+    "seconds": 2385,
+    "youtube_url": "https://www.youtube.com/watch?v=Eo26_4JcyNA",
+    "quote": "And then we will generate a set of X prototypes to evaluate what direction to take this in.",
+    "clip": "https://www.youtube.com/watch?v=Eo26_4JcyNA&t=2385s"
+   },
+   {
+    "speaker": "Tyler Folkman",
+    "file": "2026-09-04-how-to-build-product-loops-in-claude-code.md",
+    "date": "2026-09-04",
+    "ts": "00:16:10",
+    "seconds": 970,
+    "youtube_url": "https://www.youtube.com/watch?v=XsnSvFo4MHQ",
+    "quote": "It's actually using our product skill, which the first step is to build a bunch of prototypes.",
+    "clip": "https://www.youtube.com/watch?v=XsnSvFo4MHQ&t=970s"
+   }
+  ],
+  "guests": [
+   "Oji Udezue",
+   "Sachin Rekhi",
+   "Tyler Folkman"
+  ]
+ },
+ {
+  "id": "prototype-generic-look",
+  "artifact": "prototype",
+  "kind": "avoid",
+  "criterion": "Don't ship a prototype that looks like every other AI-generated prototype.",
+  "check": "Compare the screenshots against default tool output: stock layouts, placeholder copy, generic component styling. Fails if nothing in it is specific to this product, user, or problem.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Jayesh Govindarajan",
+    "file": "2026-11-03-salesforce-ai-native-product-team.md",
+    "date": "2026-11-03",
+    "ts": "00:37:01",
+    "seconds": 2221,
+    "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+    "quote": "AI slop comes in many different forms. You know, prototype that looks like any other prototype, AI slop.",
+    "clip": "https://www.youtube.com/watch?v=_jBa_YEobGI&t=2221s"
+   },
+   {
+    "speaker": "Dan Olsen",
+    "file": "2025-06-20-dan-olsen-podcast.md",
+    "date": "2025-06-20",
+    "ts": "00:10:07",
+    "seconds": 607,
+    "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+    "quote": "These things will generate kind of plain vanilla UI, and they are getting better and better.",
+    "clip": "https://www.youtube.com/watch?v=sl7r3wsoVGY&t=607s"
+   },
+   {
+    "speaker": "Elizabeth Laraki",
+    "file": "2025-10-07-elizabeth-laraki-podcast.md",
+    "date": "2025-10-07",
+    "ts": "00:42:09",
+    "seconds": 2529,
+    "youtube_url": "https://www.youtube.com/watch?v=83ajrVQDowc",
+    "quote": "I think what I find frustrating with design tools is that my expectations are pretty high and the output does not match what I want from them.",
+    "clip": "https://www.youtube.com/watch?v=83ajrVQDowc&t=2529s"
+   }
+  ],
+  "guests": [
+   "Dan Olsen",
+   "Elizabeth Laraki",
+   "Jayesh Govindarajan"
+  ]
+ },
+ {
+  "id": "prototype-existing-product-baseline",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "When the idea extends an existing product, start from a faithful baseline of that product and its design system.",
+  "check": "Check whether the prototype recreates the real product screen or design system before adding the new feature. Fails if a feature for an existing product is shown in an invented UI that looks nothing like it.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Dan Olsen",
+    "file": "2025-06-20-dan-olsen-podcast.md",
+    "date": "2025-06-20",
+    "ts": "00:25:14",
+    "seconds": 1514,
+    "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+    "quote": "Well, if a new PM comes in and says, I'm just going to create a vibe-coding prototype, and it looks nothing like it, that's going to be a problem, right?",
+    "clip": "https://www.youtube.com/watch?v=sl7r3wsoVGY&t=1514s"
+   },
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "01:05:40",
+    "seconds": 3940,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "As I said, the best way to start is with a baseline.",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=3940s"
+   },
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:26:33",
+    "seconds": 1593,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "the first thing I asked it to do was please recreate the screenshot of LinkedIn.",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=1593s"
+   }
+  ],
+  "guests": [
+   "Dan Olsen",
+   "Sachin Rekhi"
+  ]
+ },
+ {
+  "id": "prototype-deliberate-visual-direction",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Set a deliberate visual direction from chosen references or a design brief rather than leaving aesthetics to the tool's defaults.",
+  "check": "Look for named inspiration screenshots, a design brief, or defined type and color choices in the prompt or plan. Fails if styling is whatever the tool produced by default.",
+  "slop_signal": true,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:47:19",
+    "seconds": 2839,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "find some inspiration as a screenshot. okay, I wanna build a feature like this.",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=2839s"
+   },
+   {
+    "speaker": "Gabor Meyer",
+    "file": "2026-04-30-claude-code-dev-team.md",
+    "date": "2026-04-30",
+    "ts": "00:47:06",
+    "seconds": 2826,
+    "youtube_url": "https://www.youtube.com/watch?v=kQelqKkI-EQ",
+    "quote": "I create a app guideline, design guideline or design brief with typology and color definitions and all the different buttons and color transitions",
+    "clip": "https://www.youtube.com/watch?v=kQelqKkI-EQ&t=2826s"
+   }
+  ],
+  "guests": [
+   "Gabor Meyer",
+   "Sachin Rekhi"
+  ]
+ },
+ {
+  "id": "prototype-structured-spec",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Write a structured spec or PRD-style prompt, broken into parts, before asking the tool to build.",
+  "check": "Inspect the prompt or plan: it should state goal, users, key flows and constraints, and be split into manageable pieces. Fails if it is a one-line vague request.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Gabor Meyer",
+    "file": "2026-04-30-claude-code-dev-team.md",
+    "date": "2026-04-30",
+    "ts": "00:13:49",
+    "seconds": 829,
+    "youtube_url": "https://www.youtube.com/watch?v=kQelqKkI-EQ",
+    "quote": "If you build a good specification and you break it down appropriately, then you will have a much better quality end product.",
+    "clip": "https://www.youtube.com/watch?v=kQelqKkI-EQ&t=829s"
+   },
+   {
+    "speaker": "Mahesh Yadav",
+    "file": "2025-09-13-mahesh-yadav-podcast.md",
+    "date": "2025-09-13",
+    "ts": "00:32:17",
+    "seconds": 1937,
+    "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+    "quote": "Do you structure your prompt? And that tells me that, yes, you have done some interactions with AI.",
+    "clip": "https://www.youtube.com/watch?v=cddB0JA5kAg&t=1937s"
+   },
+   {
+    "speaker": "Colin Matthews",
+    "file": "2025-02-28-ai-prototyping-for-pms.md",
+    "date": "2025-02-28",
+    "ts": "00:10:11",
+    "seconds": 611,
+    "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+    "quote": "I find that creating a PRD gives us something that we can reference back to.",
+    "clip": "https://www.youtube.com/watch?v=Gp6tMkCr_0w&t=611s"
+   },
+   {
+    "speaker": "Alex Danilowicz",
+    "file": "2025-11-16-alex-danilowicz-podcast.md",
+    "date": "2025-11-16",
+    "ts": "00:33:09",
+    "seconds": 1989,
+    "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+    "quote": "If you already have a PRD, I don't think it replaces the PRD, right? Like use the PRD as the prompt.",
+    "clip": "https://www.youtube.com/watch?v=qPFRsJzb8tk&t=1989s"
+   }
+  ],
+  "guests": [
+   "Alex Danilowicz",
+   "Colin Matthews",
+   "Gabor Meyer",
+   "Mahesh Yadav"
+  ]
+ },
+ {
+  "id": "prototype-one-prompt-done",
+  "artifact": "prototype",
+  "kind": "avoid",
+  "criterion": "Don't treat the output of one or two prompts as a finished prototype.",
+  "check": "Check how many deliberate passes went into it and whether anything was refined after the first generation. Fails if the first output is presented as ready to ship or test.",
+  "slop_signal": true,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Gabor Meyer",
+    "file": "2026-04-30-claude-code-dev-team.md",
+    "date": "2026-04-30",
+    "ts": "00:13:49",
+    "seconds": 829,
+    "youtube_url": "https://www.youtube.com/watch?v=kQelqKkI-EQ",
+    "quote": "they start by giving one prompt and then they expect that at the end of that one prompt there will be a completely beautifully done software on the other side",
+    "clip": "https://www.youtube.com/watch?v=kQelqKkI-EQ&t=829s"
+   },
+   {
+    "speaker": "Colin Matthews",
+    "file": "2026-01-22-colin-matthews-podcast.md",
+    "date": "2026-01-22",
+    "ts": "00:38:53",
+    "seconds": 2333,
+    "youtube_url": "https://www.youtube.com/watch?v=Q2MfgGBUVwQ",
+    "quote": "I think some people might have the tendency to want to, like, ship the AI prototype when we did right at the beginning.",
+    "clip": "https://www.youtube.com/watch?v=Q2MfgGBUVwQ&t=2333s"
+   }
+  ],
+  "guests": [
+   "Colin Matthews",
+   "Gabor Meyer"
+  ]
+ },
+ {
+  "id": "prototype-show-iterations",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Show how the prototype improved across iterations, with specific changes driven by user insight.",
+  "check": "Look for a version history or notes explaining what changed between iterations and why. Fails if there is only one version or changes are broad re-rolls with no stated reason.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Mahesh Yadav",
+    "file": "2025-09-13-mahesh-yadav-podcast.md",
+    "date": "2025-09-13",
+    "ts": "00:33:05",
+    "seconds": 1985,
+    "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+    "quote": "second once you build it show me what kind of user insights you are bringing in your second iteration",
+    "clip": "https://www.youtube.com/watch?v=cddB0JA5kAg&t=1985s"
+   },
+   {
+    "speaker": "Alex Danilowicz",
+    "file": "2025-11-16-alex-danilowicz-podcast.md",
+    "date": "2025-11-16",
+    "ts": "00:28:35",
+    "seconds": 1715,
+    "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+    "quote": "I always recommend iterating very specifically, like using select mode and being very specific on exactly what you want to update.",
+    "clip": "https://www.youtube.com/watch?v=qPFRsJzb8tk&t=1715s"
+   }
+  ],
+  "guests": [
+   "Alex Danilowicz",
+   "Mahesh Yadav"
+  ]
+ },
+ {
+  "id": "prototype-core-happy-path",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Scope the prototype to the core flow that solves the most pressing problem, not every use case.",
+  "check": "Check that the screens center on one main flow. Fails if it is padded with settings, filters, secondary features or backend plumbing that the test does not need.",
+  "slop_signal": true,
+  "era": "2024",
+  "sources": [
+   {
+    "speaker": "Pawel Huryn",
+    "file": "2024-11-21-how-to-do-product-discovery-right.md",
+    "date": "2024-11-21",
+    "ts": "00:32:29",
+    "seconds": 1949,
+    "youtube_url": "https://www.youtube.com/watch?v=KkqYDbSPrbQ",
+    "quote": "we selected a very small subset of functionality, basically solving the most pressing problem simple way, so not implementing all the additional use cases",
+    "clip": "https://www.youtube.com/watch?v=KkqYDbSPrbQ&t=1949s"
+   },
+   {
+    "speaker": "Alex Danilowicz",
+    "file": "2025-11-16-alex-danilowicz-podcast.md",
+    "date": "2025-11-16",
+    "ts": "00:26:25",
+    "seconds": 1585,
+    "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+    "quote": "When you realize that you don't actually need Supabase, but you've spent two hours debugging Supabase, and all you need is an interactive prototype",
+    "clip": "https://www.youtube.com/watch?v=qPFRsJzb8tk&t=1585s"
+   },
+   {
+    "speaker": "Colin Matthews",
+    "file": "2025-02-28-ai-prototyping-for-pms.md",
+    "date": "2025-02-28",
+    "ts": "00:30:29",
+    "seconds": 1829,
+    "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+    "quote": "But I personally find for the purpose of prototyping, most of the time, I don't need to do that.",
+    "clip": "https://www.youtube.com/watch?v=Gp6tMkCr_0w&t=1829s"
+   }
+  ],
+  "guests": [
+   "Alex Danilowicz",
+   "Colin Matthews",
+   "Pawel Huryn"
+  ]
+ },
+ {
+  "id": "prototype-fit-to-end-goal",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Choose the fidelity and technical depth based on the end goal and audience of the prototype.",
+  "check": "The draft should say who will see it and what it must prove, and its fidelity should match. Fails if it is over-built (auth, databases) for a usability check, or too thin to answer the question asked.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Alex Danilowicz",
+    "file": "2025-11-16-alex-danilowicz-podcast.md",
+    "date": "2025-11-16",
+    "ts": "00:27:00",
+    "seconds": 1620,
+    "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+    "quote": "I always have them think, like, what's the end goal? Like, what am I trying to accomplish with this?",
+    "clip": "https://www.youtube.com/watch?v=qPFRsJzb8tk&t=1620s"
+   },
+   {
+    "speaker": "Mike Davey",
+    "file": "2025-02-11-how-he-became-a-series-c-vp-of-product.md",
+    "date": "2025-02-11",
+    "ts": "00:23:47",
+    "seconds": 1427,
+    "youtube_url": "https://www.youtube.com/watch?v=59mpQHNXsPI",
+    "quote": "I don't need a working prototype to be able to prove that something is usable and viable.",
+    "clip": "https://www.youtube.com/watch?v=59mpQHNXsPI&t=1427s"
+   },
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "01:00:43",
+    "seconds": 3643,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "So you really want to ask yourself, do you need that capability or not?",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=3643s"
+   }
+  ],
+  "guests": [
+   "Alex Danilowicz",
+   "Mike Davey",
+   "Sachin Rekhi"
+  ]
+ },
+ {
+  "id": "prototype-real-experience",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Prototype the actual experience, including live AI output where it matters, not just static UI.",
+  "check": "For AI or dynamic features, check whether the prototype shows real model responses or behavior a user can react to. Fails if an AI feature is represented only by mocked screens with canned text.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Colin Matthews",
+    "file": "2025-02-28-ai-prototyping-for-pms.md",
+    "date": "2025-02-28",
+    "ts": "00:31:49",
+    "seconds": 1909,
+    "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+    "quote": "You can't really prototype an experience like that and get user feedback inside of Figma.",
+    "clip": "https://www.youtube.com/watch?v=Gp6tMkCr_0w&t=1909s"
+   },
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:37:04",
+    "seconds": 2224,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "not only am I prototyping interactions, I am literally able to see the different output coming from different models.",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=2224s"
+   },
+   {
+    "speaker": "Anthony Maggio",
+    "file": "2025-04-11-airtable-vp-of-pm-heres-how-to-automate.md",
+    "date": "2025-04-11",
+    "ts": "01:12:35",
+    "seconds": 4355,
+    "youtube_url": "https://www.youtube.com/watch?v=vh-urCCJhTs",
+    "quote": "getting hands-on to understand where the edges are of what's possible in a way that just never existed to the same extent.",
+    "clip": "https://www.youtube.com/watch?v=vh-urCCJhTs&t=4355s"
+   }
+  ],
+  "guests": [
+   "Anthony Maggio",
+   "Colin Matthews",
+   "Sachin Rekhi"
+  ]
+ },
+ {
+  "id": "prototype-instrument-feedback",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Build in ways to collect feedback and usage data from the prototype beyond one-on-one demos.",
+  "check": "Look for embedded surveys, analytics events, or heatmaps tied to the key actions. Fails if the only feedback plan is informal impressions.",
+  "slop_signal": false,
+  "era": "2026",
+  "sources": [
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:41:07",
+    "seconds": 2467,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "I could go and do one-on-one customer interviews, which I should certainly do, but now I'm showing you how do you scale that feedback?",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=2467s"
+   },
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:41:59",
+    "seconds": 2519,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "Now, this is really interesting from the perspective of, I can say, do people even come back to my prototypes, right?",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=2519s"
+   }
+  ],
+  "guests": [
+   "Sachin Rekhi"
+  ]
+ },
+ {
+  "id": "prototype-learning-goal",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "State the assumption the prototype tests and what result would change your decision.",
+  "check": "The draft should name a hypothesis or learning goal and how it will be judged. Fails if the prototype exists to show that something can be built, with no question it answers.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Frederic de Todaro",
+    "file": "2025-08-29-frederic-de-todaro-podcast.md",
+    "date": "2025-08-29",
+    "ts": "00:37:45",
+    "seconds": 2265,
+    "youtube_url": "https://www.youtube.com/watch?v=MC1FfWdAyX4",
+    "quote": "As a product manager, my goal isn't to just, you know, build and deliver faster. It's to learn faster, right?",
+    "clip": "https://www.youtube.com/watch?v=MC1FfWdAyX4&t=2265s"
+   },
+   {
+    "speaker": "Teresa Torres",
+    "file": "2025-08-12-teresa-torres-podcast.md",
+    "date": "2025-08-12",
+    "ts": "00:17:35",
+    "seconds": 1055,
+    "youtube_url": "https://www.youtube.com/watch?v=wGuRuuPuYNQ",
+    "quote": "Yeah, I like it in the context of assumption testing.",
+    "clip": "https://www.youtube.com/watch?v=wGuRuuPuYNQ&t=1055s"
+   },
+   {
+    "speaker": "Tim Herbig",
+    "file": "2026-10-14-how-the-best-pms-think-about-product-strategy.md",
+    "date": "2026-10-14",
+    "ts": "00:04:00",
+    "seconds": 240,
+    "youtube_url": "https://www.youtube.com/watch?v=u2NFqrbvAeY",
+    "quote": "companies are excited about amping up the output 100 times, but somewhere down the line, They have to ask themselves, did any of that make a difference?",
+    "clip": "https://www.youtube.com/watch?v=u2NFqrbvAeY&t=240s"
+   },
+   {
+    "speaker": "Frederic de Todaro",
+    "file": "2025-08-29-frederic-de-todaro-podcast.md",
+    "date": "2025-08-29",
+    "ts": "00:59:37",
+    "seconds": 3577,
+    "youtube_url": "https://www.youtube.com/watch?v=MC1FfWdAyX4",
+    "quote": "They have a prototype, they go and show that prototype to 10 users and then they think that all their users will love the feature.",
+    "clip": "https://www.youtube.com/watch?v=MC1FfWdAyX4&t=3577s"
+   }
+  ],
+  "guests": [
+   "Frederic de Todaro",
+   "Teresa Torres",
+   "Tim Herbig"
+  ]
+ },
+ {
+  "id": "prototype-not-the-product",
+  "artifact": "prototype",
+  "kind": "avoid",
+  "criterion": "Don't treat the vibe-coded prototype as the production product or ship it to users as the test.",
+  "check": "Check whether the plan positions the prototype as a discovery tool handed to engineering. Fails if it proposes launching the vibe-coded app itself as the real product.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:51:39",
+    "seconds": 3099,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "I think that if a PM is trying to get a full version of their product out through these vibe coding tools, they're doing it wrong.",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=3099s"
+   },
+   {
+    "speaker": "Tanguy Crusson",
+    "file": "2025-07-08-tanguy-crusson-podcast.md",
+    "date": "2025-07-08",
+    "ts": "00:08:34",
+    "seconds": 514,
+    "youtube_url": "https://www.youtube.com/watch?v=6oottgko7pQ",
+    "quote": "No, that's still the most expensive way you can test stuff because now people have an app.",
+    "clip": "https://www.youtube.com/watch?v=6oottgko7pQ&t=514s"
+   },
+   {
+    "speaker": "Linda Tong",
+    "file": "2026-11-10-can-saas-survive-the-ai-era.md",
+    "date": "2026-11-10",
+    "ts": "00:24:06",
+    "seconds": 1446,
+    "youtube_url": "https://www.youtube.com/watch?v=vPBUYcJIk1c",
+    "quote": "if you vibe code that in an afternoon, software, just like everything else, it deteriorates over time.",
+    "clip": "https://www.youtube.com/watch?v=vPBUYcJIk1c&t=1446s"
+   }
+  ],
+  "guests": [
+   "Linda Tong",
+   "Sachin Rekhi",
+   "Tanguy Crusson"
+  ]
+ },
+ {
+  "id": "prototype-pair-with-strategy",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Pair the prototype with written reasoning on strategy and failure cases it cannot show.",
+  "check": "Look for accompanying notes on why this matters (differentiation, acquisition, monetization) and how failures or edge cases are handled. Fails if the prototype is presented alone as the whole case.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Sachin Rekhi",
+    "file": "2026-01-26-sachin-rekhi-podcast.md",
+    "date": "2026-01-26",
+    "ts": "00:55:00",
+    "seconds": 3300,
+    "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+    "quote": "It doesn't touch product strategy and all the strategic questions that a good PRD includes.",
+    "clip": "https://www.youtube.com/watch?v=74kamD2jUng&t=3300s"
+   },
+   {
+    "speaker": "Jake Brill",
+    "file": "2025-08-24-jake-brill-podcast.md",
+    "date": "2025-08-24",
+    "ts": "00:22:53",
+    "seconds": 1373,
+    "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+    "quote": "the value of PRDs is you can do a prototype, but you may be missing a bunch of things in that prototype.",
+    "clip": "https://www.youtube.com/watch?v=j4gdMHYfHaE&t=1373s"
+   },
+   {
+    "speaker": "Nadav Abrahami",
+    "file": "2026-02-27-nadav-abrahami-podcast.md",
+    "date": "2026-02-27",
+    "ts": "01:03:07",
+    "seconds": 3787,
+    "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+    "quote": "And I think the prototype and the PRD, they're not coming to replace each other.",
+    "clip": "https://www.youtube.com/watch?v=rW4MZEwGYY0&t=3787s"
+   }
+  ],
+  "guests": [
+   "Jake Brill",
+   "Nadav Abrahami",
+   "Sachin Rekhi"
+  ]
+ },
+ {
+  "id": "prototype-evals-not-vibes",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "For AI-powered prototypes, define what good output looks like and test against it instead of eyeballing it.",
+  "check": "Check for defined quality criteria or test cases (evals) for the AI behavior, including edge cases. Fails if quality was judged only by 'looks good' after a few tries.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Aman Khan",
+    "file": "2025-06-15-aman-khan-podcast.md",
+    "date": "2025-06-15",
+    "ts": "01:10:10",
+    "seconds": 4210,
+    "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+    "quote": "you've made tweaks to the prompt and you're like, looks good, looks fine. But I think that going one step beyond that is actually being able to run evals.",
+    "clip": "https://www.youtube.com/watch?v=Ej4pBDaHspk&t=4210s"
+   },
+   {
+    "speaker": "Colin Matthews",
+    "file": "2026-01-22-colin-matthews-podcast.md",
+    "date": "2026-01-22",
+    "ts": "00:38:53",
+    "seconds": 2333,
+    "youtube_url": "https://www.youtube.com/watch?v=Q2MfgGBUVwQ",
+    "quote": "This is going to help you really understand the corner edge cases, like some of the things we used to have in a deeper PRD",
+    "clip": "https://www.youtube.com/watch?v=Q2MfgGBUVwQ&t=2333s"
+   },
+   {
+    "speaker": "Jayesh Govindarajan",
+    "file": "2026-11-03-salesforce-ai-native-product-team.md",
+    "date": "2026-11-03",
+    "ts": "00:37:01",
+    "seconds": 2221,
+    "youtube_url": "https://www.youtube.com/watch?v=_jBa_YEobGI",
+    "quote": "how do you translate that skepticism into test cases and evals that are failing?",
+    "clip": "https://www.youtube.com/watch?v=_jBa_YEobGI&t=2221s"
+   }
+  ],
+  "guests": [
+   "Aman Khan",
+   "Colin Matthews",
+   "Jayesh Govindarajan"
+  ]
+ },
+ {
+  "id": "prototype-directional-with-design",
+  "artifact": "prototype",
+  "kind": "do",
+  "criterion": "Present the prototype as directional input to design, not a replacement for designers' work.",
+  "check": "Check how the prototype is framed when a designer exists: as illustrative and open to design refinement. Fails if the PM presents generated UI as final design.",
+  "slop_signal": false,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Dan Olsen",
+    "file": "2025-06-20-dan-olsen-podcast.md",
+    "date": "2025-06-20",
+    "ts": "00:29:27",
+    "seconds": 1767,
+    "youtube_url": "https://www.youtube.com/watch?v=sl7r3wsoVGY",
+    "quote": "It's always with the intent that if it needs to go through a design process, this is just kind of directional and illustrative.",
+    "clip": "https://www.youtube.com/watch?v=sl7r3wsoVGY&t=1767s"
+   },
+   {
+    "speaker": "Jeremy Epling",
+    "file": "2025-05-26-jeremy-epling-podcast.md",
+    "date": "2025-05-26",
+    "ts": "00:07:31",
+    "seconds": 451,
+    "youtube_url": "https://www.youtube.com/watch?v=o-eelkFXF-w",
+    "quote": "for pms i think them being able to prototype but then not having to kind of obsess on the exact ui and then partner with the designer",
+    "clip": "https://www.youtube.com/watch?v=o-eelkFXF-w&t=451s"
+   }
+  ],
+  "guests": [
+   "Dan Olsen",
+   "Jeremy Epling"
+  ]
+ },
+ {
+  "id": "prototype-unstructured-code",
+  "artifact": "prototype",
+  "kind": "avoid",
+  "criterion": "Don't let the prototype pile up as one tangled, unstructured code blob from loose prompting.",
+  "check": "If code or a build plan is visible, check for reasonable structure (small files, clear components). Fails if it is one giant file or the prompts invite sprawling, unreviewed code.",
+  "slop_signal": true,
+  "era": "2025",
+  "sources": [
+   {
+    "speaker": "Andre Albuquerque",
+    "file": "2026-05-18-claude-code-non-technical-pms.md",
+    "date": "2026-05-18",
+    "ts": "00:40:36",
+    "seconds": 2436,
+    "youtube_url": "https://www.youtube.com/watch?v=bYiXxeinhbg",
+    "quote": "it's very easy with very simple prompts to be creating a lot of slop or a lot of trash",
+    "clip": "https://www.youtube.com/watch?v=bYiXxeinhbg&t=2436s"
+   },
+   {
+    "speaker": "Gabor Meyer",
+    "file": "2026-04-30-claude-code-dev-team.md",
+    "date": "2026-04-30",
+    "ts": "00:19:37",
+    "seconds": 1177,
+    "youtube_url": "https://www.youtube.com/watch?v=kQelqKkI-EQ",
+    "quote": "vibe coding is just the rebranding of unmaintainable low quality source code",
+    "clip": "https://www.youtube.com/watch?v=kQelqKkI-EQ&t=1177s"
+   },
+   {
+    "speaker": "Colin Matthews",
+    "file": "2025-02-28-ai-prototyping-for-pms.md",
+    "date": "2025-02-28",
+    "ts": "00:13:11",
+    "seconds": 791,
+    "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+    "quote": "this is a good pattern where we don't just have one massive file, but we have a couple of small files.",
+    "clip": "https://www.youtube.com/watch?v=Gp6tMkCr_0w&t=791s"
+   }
+  ],
+  "guests": [
+   "Andre Albuquerque",
+   "Colin Matthews",
+   "Gabor Meyer"
+  ]
+ }
+]

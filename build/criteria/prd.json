@@ -1,0 +1,780 @@
+[
+  {
+    "id": "prd-problem-first",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "State the specific customer problem, and why it occurs, before any solution.",
+    "check": "Look for a sharp problem statement grounded in what customers actually said or did, with its cause. Fails if the doc opens with features or the problem is vague or generic.",
+    "slop_signal": false,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Poorvi Shrivastav",
+        "file": "2025-02-08-senior-director-at-meta-salesforce.md",
+        "date": "2025-02-08",
+        "ts": "01:02:36",
+        "seconds": 3756,
+        "youtube_url": "https://www.youtube.com/watch?v=DKfrMpvbCp4",
+        "quote": "Write the customer problems that you have encountered when you were spending time with."
+      },
+      {
+        "speaker": "Jack Hirsch",
+        "file": "2025-09-22-jack-hirsch-podcast.md",
+        "date": "2025-09-22",
+        "ts": "00:52:16",
+        "seconds": 3136,
+        "youtube_url": "https://www.youtube.com/watch?v=4dWbwGCPjUY",
+        "quote": "The spec still remains very, very problem and customer focused, right?"
+      },
+      {
+        "speaker": "Guillaume Moubeche",
+        "file": "2024-10-08-how-i-built-lempire-guillaume-moubeche.md",
+        "date": "2024-10-08",
+        "ts": "00:00:28",
+        "seconds": 28,
+        "youtube_url": "https://www.youtube.com/watch?v=AF7FVRo821w",
+        "quote": "I have not seen really like a product manager coming up with an idea from like a customer and explain it in a super sharp way"
+      }
+    ]
+  },
+  {
+    "id": "prd-clear-concise",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Write it clearly and concisely so readers can act on it without decoding it.",
+    "check": "Check whether each section earns its length and a reader can quickly tell what to build. Fails if it is long, padded, or ambiguous enough that engineers would have to ask what it means.",
+    "slop_signal": true,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Guillaume Moubeche",
+        "file": "2024-10-08-how-i-built-lempire-guillaume-moubeche.md",
+        "date": "2024-10-08",
+        "ts": "00:00:28",
+        "seconds": 28,
+        "youtube_url": "https://www.youtube.com/watch?v=AF7FVRo821w",
+        "quote": "product manager should be able to write very very clear and very very concise documents and the concise part is extremely important"
+      },
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:22:53",
+        "seconds": 1373,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "I do think PRDs will be less wordy Because you won't have to spend as much time describing oh you click on this button and this thing happens"
+      }
+    ]
+  },
+  {
+    "id": "prd-no-detail-dump",
+    "artifact": "prd",
+    "kind": "avoid",
+    "criterion": "Avoid documenting every detail; a wall of specifics gets skimmed and the important parts get missed.",
+    "check": "Look for exhaustive user stories, task lists, deadlines, and click-by-click behavior that bury the key decisions. Fails if the doc reads like a 20+ page waterfall spec.",
+    "slop_signal": true,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Pawel Huryn",
+        "file": "2025-04-22-complete-course-ai-product-management.md",
+        "date": "2025-04-22",
+        "ts": "00:13:49",
+        "seconds": 829,
+        "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+        "quote": "We don't necessarily need, and I actually don't like it, documenting every single detail, like user stories, tasks, very detailed deadlines, roadmaps."
+      },
+      {
+        "speaker": "Nadav Abrahami",
+        "file": "2026-02-27-nadav-abrahami-podcast.md",
+        "date": "2026-02-27",
+        "ts": "01:03:07",
+        "seconds": 3787,
+        "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+        "quote": "First of all is that it's a lot of text that people sometimes skim over and they miss some of the parts."
+      },
+      {
+        "speaker": "Stephanie Leue",
+        "file": "2024-09-03-how-to-build-high-performing-product.md",
+        "date": "2024-09-03",
+        "ts": "01:21:25",
+        "seconds": 4885,
+        "youtube_url": "https://www.youtube.com/watch?v=erql22ZbLWI",
+        "quote": "A 72 pages long PRD that was the standard at PayPal back then. Yes, it's cool to think through it from beginning to end, right? It's nice, but actually that's so waterfall."
+      },
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:01:52",
+        "seconds": 112,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "The majority of most PRDs that I've seen in my career Have spent most of the document talking about specifics, how it will work, how it will behave in certain situations"
+      }
+    ]
+  },
+  {
+    "id": "prd-own-thinking",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Make sure the PM's own thinking and judgment is in the document, not just text an AI produced from a short prompt.",
+    "check": "Look for specific insights, trade-offs, and calls only someone close to the problem would make. Fails if the draft reads like a one-shot AI output that would need as much fixing as writing from scratch.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "OpenAI's Claude Code",
+        "file": "2025-12-08-chatgpt-codex-guide.md",
+        "date": "2025-12-08",
+        "ts": "00:33:43",
+        "seconds": 2023,
+        "youtube_url": "https://www.youtube.com/watch?v=NYSZ4g7igDg",
+        "quote": "Because if you just ask an AI to build a PRD, it will do it, but it won't be very good."
+      },
+      {
+        "speaker": "Ankit Shukla",
+        "file": "2025-07-27-ankit-shukla-podcast.md",
+        "date": "2025-07-27",
+        "ts": "00:32:17",
+        "seconds": 1937,
+        "youtube_url": "https://www.youtube.com/watch?v=MZlKnSJ_gaA",
+        "quote": "Now, AI can generate a PRD, right? But that does not mean that AI should generate a PRD."
+      },
+      {
+        "speaker": "Mahesh Yadav",
+        "file": "2025-09-13-mahesh-yadav-podcast.md",
+        "date": "2025-09-13",
+        "ts": "01:07:06",
+        "seconds": 4026,
+        "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+        "quote": "They don't understand how much is about credibility of the person. And their intuition goes in that PRD."
+      },
+      {
+        "speaker": "Claire Vo",
+        "file": "2025-03-04-pm-is-dead-so-now-what-the-claire.md",
+        "date": "2025-03-04",
+        "ts": "00:52:34",
+        "seconds": 3154,
+        "youtube_url": "https://www.youtube.com/watch?v=EZQUrQzd280",
+        "quote": "And it's not going to be great based off one sentence."
+      }
+    ]
+  },
+  {
+    "id": "prd-human-first-draft",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Have the PM write the first version (problems, causes, intent) and use AI to refine and check it afterwards.",
+    "check": "Ask whether the core problem framing came from the PM before tools polished it. Fails if the document is an agent's draft with no human-authored core.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Poorvi Shrivastav",
+        "file": "2025-02-08-senior-director-at-meta-salesforce.md",
+        "date": "2025-02-08",
+        "ts": "01:02:36",
+        "seconds": 3756,
+        "youtube_url": "https://www.youtube.com/watch?v=DKfrMpvbCp4",
+        "quote": "But I feel like PMs should spend time writing the first version of PRD. Sure, you can use chat PRD after that."
+      },
+      {
+        "speaker": "Mahesh Yadav",
+        "file": "2025-09-13-mahesh-yadav-podcast.md",
+        "date": "2025-09-13",
+        "ts": "01:07:06",
+        "seconds": 4026,
+        "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+        "quote": "What I need is I will write the PRD and I will check it with AI."
+      },
+      {
+        "speaker": "Jacob Bank",
+        "file": "2025-09-19-jacob-bank-podcast.md",
+        "date": "2025-09-19",
+        "ts": "00:18:58",
+        "seconds": 1138,
+        "youtube_url": "https://www.youtube.com/watch?v=SGUXMugyo6g",
+        "quote": "So if I'm writing a PRD, I don't want an agent to write a PRD for me."
+      }
+    ]
+  },
+  {
+    "id": "prd-real-context",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Ground the PRD in real business, customer, competitor, and data context instead of generic statements.",
+    "check": "Look for specifics drawn from the company's actual goals, research, data, and market. Fails if claims could apply to any company or are unsupported boilerplate.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Jack Hirsch",
+        "file": "2025-09-22-jack-hirsch-podcast.md",
+        "date": "2025-09-22",
+        "ts": "00:52:16",
+        "seconds": 3136,
+        "youtube_url": "https://www.youtube.com/watch?v=4dWbwGCPjUY",
+        "quote": "There's going to be business context. There's going to be customer context. There's going to be, depending on the market, there might be competitor context."
+      },
+      {
+        "speaker": "OpenAI's Claude Code",
+        "file": "2025-12-08-chatgpt-codex-guide.md",
+        "date": "2025-12-08",
+        "ts": "00:42:20",
+        "seconds": 2540,
+        "youtube_url": "https://www.youtube.com/watch?v=NYSZ4g7igDg",
+        "quote": "And these are all tied to things that the company actually cares about from that folder we had before."
+      },
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:22:53",
+        "seconds": 1373,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "With connectors, you can connect to external data sources to help bring these documents to life."
+      }
+    ]
+  },
+  {
+    "id": "prd-own-voice",
+    "artifact": "prd",
+    "kind": "avoid",
+    "criterion": "Avoid generic AI voice; the PRD should sound like the author and match the standard of the team's best PRDs.",
+    "check": "Compare tone and structure to the author's style and strong internal examples. Fails if it reads like a generic template output that sounds like no one in particular.",
+    "slop_signal": true,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:22:02",
+        "seconds": 1322,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "I kept trying to use AI for writing the PRDs and it just like came up short. The product form factor wasn't right. It didn't sound like my voice"
+      },
+      {
+        "speaker": "Carl Vellotti",
+        "file": "2025-10-04-carl-vellotti-podcast.md",
+        "date": "2025-10-04",
+        "ts": "00:26:29",
+        "seconds": 1589,
+        "youtube_url": "https://www.youtube.com/watch?v=4nthc76rSl8",
+        "quote": "So let's say I'm working at this company, a bunch of killer PMs who are writing some really great PRDs. You can use those as examples for your own PRDs."
+      },
+      {
+        "speaker": "OpenAI's Claude Code",
+        "file": "2025-12-08-chatgpt-codex-guide.md",
+        "date": "2025-12-08",
+        "ts": "00:39:02",
+        "seconds": 2342,
+        "youtube_url": "https://www.youtube.com/watch?v=NYSZ4g7igDg",
+        "quote": "let's say you're working in a company where there are some like really killer PMs who write amazing PRDs."
+      }
+    ]
+  },
+  {
+    "id": "prd-strategy-why",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Explain why this is worth building now: how it differentiates, acquires users, and improves monetization.",
+    "check": "Look for explicit answers on why now, competitive differentiation, go-to-market, and business impact. Fails if the doc only describes UX and functionality.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Sachin Rekhi",
+        "file": "2026-01-26-sachin-rekhi-podcast.md",
+        "date": "2026-01-26",
+        "ts": "00:55:00",
+        "seconds": 3300,
+        "youtube_url": "https://www.youtube.com/watch?v=74kamD2jUng",
+        "quote": "It doesn't touch product strategy and all the strategic questions that a good PRD includes."
+      },
+      {
+        "speaker": "Pawel Huryn",
+        "file": "2025-04-22-complete-course-ai-product-management.md",
+        "date": "2025-04-22",
+        "ts": "00:13:49",
+        "seconds": 829,
+        "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+        "quote": "we would like to explain why this is something that we should build right now and maybe this is something that has just become possible."
+      },
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:22:53",
+        "seconds": 1373,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "What is our marketing strategy that we're gonna bring with the product when we bring it to market?"
+      },
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:01:52",
+        "seconds": 112,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "without a product strategy or a particular customer, like your product is nothing."
+      }
+    ]
+  },
+  {
+    "id": "prd-success-criteria",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Define success criteria and the metric the work is expected to move.",
+    "check": "Look for concrete goals and metrics tied to what the company cares about. Fails if success is undefined or stated only as vague benefits.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Pawel Huryn",
+        "file": "2025-04-22-complete-course-ai-product-management.md",
+        "date": "2025-04-22",
+        "ts": "00:13:49",
+        "seconds": 829,
+        "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+        "quote": "So just briefly, we'll briefly summarize what this initiative is about and how it will, what are the success criteria, how it will benefit the organization."
+      },
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:06:50",
+        "seconds": 410,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "it's an unstructured document that is a spec that is meant to communicate how you should build something and what maybe the success criteria are for the product working."
+      },
+      {
+        "speaker": "James McAulay",
+        "file": "2026-10-20-claude-code-for-growth.md",
+        "date": "2026-10-20",
+        "ts": "00:38:37",
+        "seconds": 2317,
+        "youtube_url": "https://www.youtube.com/watch?v=FTbkpiKWLKw",
+        "quote": "Tell me why, like what metric is it going to move?"
+      }
+    ]
+  },
+  {
+    "id": "prd-edge-cases",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Spell out edge cases, failure cases, and rules a prototype would not show.",
+    "check": "Look for how failures, exceptions, and constraints (including regulatory rules) are handled. Fails if only the happy path is described.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:22:53",
+        "seconds": 1373,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "the value of PRDs is you can do a prototype, but you may be missing a bunch of things in that prototype. Like, how do I handle, you know, like..."
+      },
+      {
+        "speaker": "Abhishek Fatehpuria",
+        "file": "2025-09-11-abhishek-fatehpuria-podcast.md",
+        "date": "2025-09-11",
+        "ts": "00:53:01",
+        "seconds": 3181,
+        "youtube_url": "https://www.youtube.com/watch?v=pc04_TW7Z3U",
+        "quote": "here are the rules and the regs and here are the edge cases we need to capture. So I don't think you can ever effectively like get rid of it."
+      }
+    ]
+  },
+  {
+    "id": "prd-scope-audience",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Say who it is for, what it will do, and what it will not do.",
+    "check": "Look for a named target audience and explicit in-scope and out-of-scope items. Fails if the audience is unclear or nothing is ruled out.",
+    "slop_signal": false,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Tyler Fisk",
+        "file": "2025-10-16-tyler-fisk-podcast.md",
+        "date": "2025-10-16",
+        "ts": "00:23:58",
+        "seconds": 1438,
+        "youtube_url": "https://www.youtube.com/watch?v=WVU7MCfFet4",
+        "quote": "what are we building who is it for what's this journey look like what is it gonna do what is it not gonna do"
+      },
+      {
+        "speaker": "Maria Cuasay",
+        "file": "2024-11-02-how-to-build-things-faster.md",
+        "date": "2024-11-02",
+        "ts": "00:16:18",
+        "seconds": 978,
+        "youtube_url": "https://www.youtube.com/watch?v=U8jlVqplC5I",
+        "quote": "It's like, oh, what audience are you targeting? It's like, no, what are all like the requirements?"
+      }
+    ]
+  },
+  {
+    "id": "prd-self-sufficient",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Make it complete enough that design and engineering can build without coming back with questions.",
+    "check": "Imagine handing it off with the author absent: are requirements, audience, and intent all there? Fails if a builder would need a meeting to understand it.",
+    "slop_signal": false,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Maria Cuasay",
+        "file": "2024-11-02-how-to-build-things-faster.md",
+        "date": "2024-11-02",
+        "ts": "00:16:18",
+        "seconds": 978,
+        "youtube_url": "https://www.youtube.com/watch?v=U8jlVqplC5I",
+        "quote": "And also with engineering, like fewer questions, the better, is it all down there? And so there's no more back and forth, right?"
+      },
+      {
+        "speaker": "Shravan Tickoo",
+        "file": "2024-10-26-pm-job-search-2024.md",
+        "date": "2024-10-26",
+        "ts": "02:03:00",
+        "seconds": 7380,
+        "youtube_url": "https://www.youtube.com/watch?v=dOrrxtVsbyQ",
+        "quote": "it is like if someone is not there, it communicates the same thing to engineering, right? It gives the same depth, right?"
+      },
+      {
+        "speaker": "Claire Vo",
+        "file": "2025-03-04-pm-is-dead-so-now-what-the-claire.md",
+        "date": "2025-03-04",
+        "ts": "00:58:13",
+        "seconds": 3493,
+        "youtube_url": "https://www.youtube.com/watch?v=EZQUrQzd280",
+        "quote": "So I tend to do this just because it tends to save me a bunch of back and forth on on tasks."
+      }
+    ]
+  },
+  {
+    "id": "prd-what-and-why-not-how",
+    "artifact": "prd",
+    "kind": "avoid",
+    "criterion": "Avoid over-specifying how to build it; give builders the context and criteria and let them make trade-offs.",
+    "check": "Check that the doc explains what and why with clear criteria, leaving implementation choices to engineers or agents. Fails if it dictates every implementation step.",
+    "slop_signal": false,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Melissa Perri",
+        "file": "2024-12-03-mastering-product-strategy-with-melissa.md",
+        "date": "2024-12-03",
+        "ts": "00:59:02",
+        "seconds": 3542,
+        "youtube_url": "https://www.youtube.com/watch?v=Zn8oryvqsTo",
+        "quote": "If you give the developers the right context, they should be able to make very small tradeoff decisions, big tradeoff decisions as well, honestly, if you set them up well."
+      },
+      {
+        "speaker": "Thibault Louis-Lucas",
+        "file": "2024-11-29-how-tibo-sold-over-10m-in-saas-products.md",
+        "date": "2024-11-29",
+        "ts": "01:43:28",
+        "seconds": 6208,
+        "youtube_url": "https://www.youtube.com/watch?v=o_KfvIHTsiA",
+        "quote": "The builder's job is not to perfectly spec something."
+      },
+      {
+        "speaker": "Jack Hirsch",
+        "file": "2025-09-22-jack-hirsch-podcast.md",
+        "date": "2025-09-22",
+        "ts": "00:52:16",
+        "seconds": 3136,
+        "youtube_url": "https://www.youtube.com/watch?v=4dWbwGCPjUY",
+        "quote": "We're responsible for what we're building and why, not how we're building it."
+      },
+      {
+        "speaker": "Sahil Lavingia",
+        "file": "2025-10-19-sahil-lavingia-podcast.md",
+        "date": "2025-10-19",
+        "ts": "00:04:52",
+        "seconds": 292,
+        "youtube_url": "https://www.youtube.com/watch?v=I_ue2vrTM9M",
+        "quote": "And AI can decide, however, to tackle the problem. You know, as long as it meets the criteria in the spec"
+      }
+    ]
+  },
+  {
+    "id": "prd-multi-audience-narrative",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Write it as a narrative with a clear objective and summary that executives as well as engineers can follow.",
+    "check": "Look for an executive summary and a clear objective up front, and a story that holds together. Fails if it is only a list of execution details.",
+    "slop_signal": false,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Shravan Tickoo",
+        "file": "2024-10-26-pm-job-search-2024.md",
+        "date": "2024-10-26",
+        "ts": "02:03:00",
+        "seconds": 7380,
+        "youtube_url": "https://www.youtube.com/watch?v=dOrrxtVsbyQ",
+        "quote": "your PRD not only is just read by the engineers, but the CXOs might also want a summary at some point"
+      },
+      {
+        "speaker": "Shravan Tickoo",
+        "file": "2024-10-26-pm-job-search-2024.md",
+        "date": "2024-10-26",
+        "ts": "02:03:00",
+        "seconds": 7380,
+        "youtube_url": "https://www.youtube.com/watch?v=dOrrxtVsbyQ",
+        "quote": "So I think most PMs start thinking that PRD is a more execution level document, right?"
+      },
+      {
+        "speaker": "Benjamin Humphrey",
+        "file": "2024-11-27-what-it-means-to-be-design-led-with.md",
+        "date": "2024-11-27",
+        "ts": "01:41:31",
+        "seconds": 6091,
+        "youtube_url": "https://www.youtube.com/watch?v=Rdo2N_xO8z8",
+        "quote": "I'm actually a big believer more in storytelling, I guess, than requirements documents."
+      }
+    ]
+  },
+  {
+    "id": "prd-checklist-not-form",
+    "artifact": "prd",
+    "kind": "avoid",
+    "criterion": "Avoid filling a template section by section; use it as a checklist of points that must be covered.",
+    "check": "Check whether each section adds real thinking rather than filler written to satisfy the template. Fails if sections are present but empty of substance.",
+    "slop_signal": true,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Sam Kawsarani",
+        "file": "2024-09-09-product-management-ai-era.md",
+        "date": "2024-09-09",
+        "ts": "01:23:03",
+        "seconds": 4983,
+        "youtube_url": "https://www.youtube.com/watch?v=Q3jc5NAAUT4",
+        "quote": "It's more like a checklist, not a template that you should fill."
+      },
+      {
+        "speaker": "Vineeth Madhusudanan",
+        "file": "2024-11-13-stop-using-frameworks-lessons-from.md",
+        "date": "2024-11-13",
+        "ts": "00:21:29",
+        "seconds": 1289,
+        "youtube_url": "https://www.youtube.com/watch?v=vZDTWn--zrc",
+        "quote": "Filling out a former document is sometimes useful because it helps you think about, oh, what are the things that you should have considered?"
+      },
+      {
+        "speaker": "Jack Hirsch",
+        "file": "2025-09-22-jack-hirsch-podcast.md",
+        "date": "2025-09-22",
+        "ts": "00:52:16",
+        "seconds": 3136,
+        "youtube_url": "https://www.youtube.com/watch?v=4dWbwGCPjUY",
+        "quote": "And it's there effectively to ensure comprehensive thinking, right? Make sure that we're hitting all the angles."
+      }
+    ]
+  },
+  {
+    "id": "prd-show-dont-describe",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Pair the PRD with a prototype or visual instead of describing the UI in long text.",
+    "check": "Look for a linked mock or prototype carrying the UX, with text focused on what visuals can't show. Fails if pages of prose describe screens and clicks.",
+    "slop_signal": false,
+    "era": "2024",
+    "sources": [
+      {
+        "speaker": "Nadav Abrahami",
+        "file": "2026-02-27-nadav-abrahami-podcast.md",
+        "date": "2026-02-27",
+        "ts": "01:03:07",
+        "seconds": 3787,
+        "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+        "quote": "everybody knows it takes a thousand words to describe one picture and an application, if you put it down to pictures, is like a thousand."
+      },
+      {
+        "speaker": "Pavneet Singh Ahluwalia",
+        "file": "2026-09-14-together-ai-product-team.md",
+        "date": "2026-09-14",
+        "ts": "00:28:50",
+        "seconds": 1730,
+        "youtube_url": "https://www.youtube.com/watch?v=8TgxUPSuvNQ",
+        "quote": "What replaces the bulk of that is actually a prototype."
+      },
+      {
+        "speaker": "Abhishek Fatehpuria",
+        "file": "2025-09-11-abhishek-fatehpuria-podcast.md",
+        "date": "2025-09-11",
+        "ts": "00:53:01",
+        "seconds": 3181,
+        "youtube_url": "https://www.youtube.com/watch?v=pc04_TW7Z3U",
+        "quote": "I don't like personally doing product reviews with like PRDs. I find them to be not that like high signal on like, are we going to build a good product?"
+      },
+      {
+        "speaker": "Benjamin Humphrey",
+        "file": "2024-11-27-what-it-means-to-be-design-led-with.md",
+        "date": "2024-11-27",
+        "ts": "01:41:31",
+        "seconds": 6091,
+        "youtube_url": "https://www.youtube.com/watch?v=Rdo2N_xO8z8",
+        "quote": "I think that a lot of... probably what you would put in that document can be solved through or communicated through Figma these days in a visual way."
+      }
+    ]
+  },
+  {
+    "id": "prd-assumptions-living-doc",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Surface key assumptions with their evidence, and keep updating the PRD as building and prototyping test them.",
+    "check": "Look for an explicit assumptions list with supporting evidence, and signs the doc reflects what prototypes or builds taught. Fails if assumptions are hidden or stated as facts, or the doc reads as a frozen up-front phase.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Pawel Huryn",
+        "file": "2025-04-22-complete-course-ai-product-management.md",
+        "date": "2025-04-22",
+        "ts": "00:13:49",
+        "seconds": 829,
+        "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+        "quote": "We would rather want to use PRD as a tool to highlight our assumptions and provide some evidence and also connect our initiative to the broader organizational context."
+      },
+      {
+        "speaker": "Pawel Huryn",
+        "file": "2025-04-22-complete-course-ai-product-management.md",
+        "date": "2025-04-22",
+        "ts": "00:13:49",
+        "seconds": 829,
+        "youtube_url": "https://www.youtube.com/watch?v=IfW1FMDkw4k",
+        "quote": "We usually start with a draft and as we build our feature or AI powered product, we iterate on our PRD."
+      },
+      {
+        "speaker": "Alex Danilowicz",
+        "file": "2025-11-16-alex-danilowicz-podcast.md",
+        "date": "2025-11-16",
+        "ts": "00:33:09",
+        "seconds": 1989,
+        "youtube_url": "https://www.youtube.com/watch?v=qPFRsJzb8tk",
+        "quote": "If you don't have a PRD yet, use the visual mockup to influence what you need to update about the PRD."
+      }
+    ]
+  },
+  {
+    "id": "prd-evals-as-requirements",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "For AI features, express requirements as evals and concrete examples of good and bad behavior.",
+    "check": "Look for example inputs and outputs, eval criteria, or a dataset that defines what good looks like. Fails if AI behavior is described only in qualitative prose.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Aman Khan",
+        "file": "2025-06-15-aman-khan-podcast.md",
+        "date": "2025-06-15",
+        "ts": "01:47:00",
+        "seconds": 6420,
+        "youtube_url": "https://www.youtube.com/watch?v=Ej4pBDaHspk",
+        "quote": "what if evals were your requirements instead of your AI product?"
+      },
+      {
+        "speaker": "Ankur Goyal",
+        "file": "2026-03-20-ankur-goyal-podcast.md",
+        "date": "2026-03-20",
+        "ts": "00:07:49",
+        "seconds": 469,
+        "youtube_url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+        "quote": "Fast forward to now, I think the modern PRD is an eval."
+      },
+      {
+        "speaker": "Daniel McKinnon",
+        "file": "2026-07-28-how-to-build-your-first-eval.md",
+        "date": "2026-07-28",
+        "ts": "00:01:52",
+        "seconds": 112,
+        "youtube_url": "https://www.youtube.com/watch?v=ztN6bE_FuQQ",
+        "quote": "the best way to actually communicate what the product should do is through examples. And that's what an eval is."
+      },
+      {
+        "speaker": "Jake Brill",
+        "file": "2025-08-24-jake-brill-podcast.md",
+        "date": "2025-08-24",
+        "ts": "00:24:23",
+        "seconds": 1463,
+        "youtube_url": "https://www.youtube.com/watch?v=j4gdMHYfHaE",
+        "quote": "it's going to be describing not just the way the product work, but the way the model that's powering the product should work."
+      }
+    ]
+  },
+  {
+    "id": "prd-agent-ready",
+    "artifact": "prd",
+    "kind": "do",
+    "criterion": "Structure the PRD so a coding agent can use it as a persistent reference with checkable criteria.",
+    "check": "Look for clear criteria or checklist items an agent can verify and track progress against. Fails if requirements are too vague for an agent to know when it is done.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Colin Matthews",
+        "file": "2025-02-28-ai-prototyping-for-pms.md",
+        "date": "2025-02-28",
+        "ts": "00:10:11",
+        "seconds": 611,
+        "youtube_url": "https://www.youtube.com/watch?v=Gp6tMkCr_0w",
+        "quote": "having a file like this one, like a PRD, kind of helps you maintain that context over time."
+      },
+      {
+        "speaker": "James McAulay",
+        "file": "2026-10-20-claude-code-for-growth.md",
+        "date": "2026-10-20",
+        "ts": "00:38:37",
+        "seconds": 2317,
+        "youtube_url": "https://www.youtube.com/watch?v=FTbkpiKWLKw",
+        "quote": "Once it's got the PRD, it's set up in a way that it's got all these checkboxes and the PRD and it just basically sort of ticks off its work as it goes."
+      },
+      {
+        "speaker": "Nadav Abrahami",
+        "file": "2026-02-27-nadav-abrahami-podcast.md",
+        "date": "2026-02-27",
+        "ts": "01:03:07",
+        "seconds": 3787,
+        "youtube_url": "https://www.youtube.com/watch?v=rW4MZEwGYY0",
+        "quote": "And in a way, the PRD becomes something that is more useful for the AI, even."
+      }
+    ]
+  },
+  {
+    "id": "prd-defined-terms",
+    "artifact": "prd",
+    "kind": "avoid",
+    "criterion": "Avoid using terms loosely; define key terms, events, and metrics precisely.",
+    "check": "Check that important terms and metrics have explicit definitions. Fails if terms are used inconsistently or left for readers to interpret.",
+    "slop_signal": false,
+    "era": "2025",
+    "sources": [
+      {
+        "speaker": "Mahesh Yadav",
+        "file": "2025-09-13-mahesh-yadav-podcast.md",
+        "date": "2025-09-13",
+        "ts": "01:07:06",
+        "seconds": 4026,
+        "youtube_url": "https://www.youtube.com/watch?v=cddB0JA5kAg",
+        "quote": "because they have these documents which are immature, they had used terms loosely and not to their fault, they are just new."
+      },
+      {
+        "speaker": "James McAulay",
+        "file": "2026-10-20-claude-code-for-growth.md",
+        "date": "2026-10-20",
+        "ts": "00:50:40",
+        "seconds": 3040,
+        "youtube_url": "https://www.youtube.com/watch?v=FTbkpiKWLKw",
+        "quote": "And I noticed that one or two things were getting misinterpreted. And it was because we had event names, but we didn't have event definitions."
+      }
+    ]
+  }
+]
