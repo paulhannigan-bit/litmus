@@ -21,15 +21,16 @@ async function sha256(text) {
   return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }
 
-async function passesTurnstile(env, token, ip) {
-  if (!token) return false;
+// Returns { ok, codes }. codes are Cloudflare's reason codes (e.g. "invalid-input-secret"); not sensitive.
+async function checkTurnstile(env, token, ip) {
+  if (!token) return { ok: false, codes: ["missing-input-response"] };
   const form = new FormData();
-  form.append("secret", env.TURNSTILE_SECRET);
+  form.append("secret", String(env.TURNSTILE_SECRET).trim());
   form.append("response", token);
   if (ip) form.append("remoteip", ip);
   const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form });
   const out = await r.json().catch(() => ({}));
-  return out.success === true;
+  return { ok: out.success === true, codes: out["error-codes"] || [], hostname: out.hostname };
 }
 
 // KV counters. KV isn't transactional, so under a burst of simultaneous requests a cap can be
@@ -54,8 +55,15 @@ export async function onRequestPost({ request, env }) {
   if (draft.trim().length < 80) return json(400, { error: "too_short", message: "Paste a draft of at least a few lines first." });
 
   const ip = request.headers.get("CF-Connecting-IP") || "";
-  if (!(await passesTurnstile(env, String(body.turnstileToken || ""), ip))) {
-    return json(403, { error: "bot_check", message: "The quick human check didn't pass. Wait a moment, then press Test again." });
+  const human = await checkTurnstile(env, String(body.turnstileToken || ""), ip);
+  if (!human.ok) {
+    console.error("turnstile failed:", human.codes, human.hostname);
+    const config = human.codes.some((c) => c.startsWith("invalid-input-secret") || c.startsWith("missing-input-secret"));
+    return json(config ? 500 : 403, {
+      error: config ? "config" : "bot_check",
+      message: config ? "Litmus's human check isn't set up correctly yet. Try again later." : "The quick human check didn't pass. Wait a moment, then press Test again.",
+      codes: human.codes,
+    });
   }
 
   const day = new Date().toISOString().slice(0, 10); // UTC day

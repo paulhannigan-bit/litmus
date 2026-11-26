@@ -507,7 +507,7 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
         body: JSON.stringify({ draft, type: chosen, turnstileToken: humanToken() }), signal: ctl.signal,
       });
       const body = await r.json().catch(() => ({}));
-      if (!r.ok) throw { message: body.message };
+      if (!r.ok) throw { message: body.message + (body.codes && body.codes.length ? ` (code: ${body.codes.join(", ")})` : "") };
       if (!body || !TYPE_NAME[body.artifact]) throw {};
       renderReport(body, false);
       const q = body.quota;
