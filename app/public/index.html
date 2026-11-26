@@ -172,6 +172,38 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
 .foot { margin-top: 40px; color: var(--muted); font-size: 12.5px; max-width: 80ch; }
 .foot a { color: inherit; }
 @media (prefers-reduced-motion: no-preference) { .bar i { transition: width .6s ease; } }
+
+/* Saving a result: a small bar at the top of the report. */
+.report-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.report-top .flags { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.export { display: flex; gap: 6px; flex-wrap: wrap; }
+.export button { font: 500 12.5px var(--body); background: var(--surface); border: 1px solid var(--line); color: var(--ink); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+.export button:hover { border-color: var(--ink); }
+.saved-flag { font: 600 11px var(--body); letter-spacing: .09em; text-transform: uppercase; color: var(--muted); background: var(--chip); padding: 4px 8px; border-radius: 4px; }
+.print-head, .print-link { display: none; }
+
+/* Save as PDF: print only the report, in light colours, with the clips and buttons left out. */
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #ffffff; --surface: #ffffff; --ink: #14161b; --muted: #5d6370; --line: #dde0e6;
+    --pen: #d6332a; --pen-soft: #fbe5e3; --pass: #18794e; --pass-soft: #ddf3e6; --part: #9a6700; --part-soft: #fbf0d4;
+    --chip: #eceef2; --quote-bg: #fbf1ef; color-scheme: light; }
+  @page { margin: 16mm 14mm; }
+  body { background: #fff; font-size: 11.5pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .wrap { max-width: none; padding: 0; }
+  header.top, .hero, .steps, .draft, #view-lib, .foot, .export, .clip, button.play, details.xp { display: none !important; }
+  .desk { display: block; margin: 0; }
+  .panel.report { border: 0; padding: 0; }
+  .print-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+  .print-head .t { font: 800 16pt var(--display); }
+  .print-head .m { font: 10pt var(--body); color: var(--muted); }
+  .print-head a { color: inherit; }
+  .print-link { display: inline; font: 600 9.5pt var(--body); color: var(--pen); text-decoration: underline; }
+  article.fix, figure.source, tr, .verdict { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  .tablewrap { overflow: visible !important; }
+  .bar i { transition: none !important; }
+}
 </style>
 
 <div class="wrap">
@@ -336,7 +368,9 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     }
     fig.append(el("figcaption", { class: "who" },
       el("span", { class: "name", text: s.speaker }),
-      el("span", { class: "when", text: niceDate(s.date) }), play));
+      el("span", { class: "when", text: niceDate(s.date) }), play,
+      // Shown only in a saved PDF, where the play button can't work: a real link the PDF keeps clickable.
+      url ? el("a", { class: "print-link", href: url, text: `Watch from ${shortTs(s.ts)} \u2197` }) : null));
     return fig;
   };
   // A disclosure that breaks the expert quotes out into their own panel when opened.
@@ -352,7 +386,85 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     return { got, n, pct: n ? got / n : 0 };
   }
 
-  function renderReport(rep, isExample) {
+  // ---------- saving a result ----------
+  // A result can be saved as a PDF (the browser's print dialog, using the print styles above) or as a
+  // Markdown file. The latest real result is also kept in this browser, so a reload doesn't lose it.
+  const LAST_KEY = "litmus:last-report";
+  const verdictOf = (rep) => {
+    const results = (rep.results || []).filter((r) => BYID[r.id] && BYID[r.id].artifact === rep.artifact);
+    const s = score(results);
+    const slopFail = results.some((r) => BYID[r.id].slop_signal && r.verdict === "misses");
+    return { results, ...s, clears: s.pct >= .75 && !slopFail };
+  };
+  const draftTitle = (text) => {
+    const line = (text.split("\n").find((l) => l.trim()) || "").replace(/^[#\s*_>-]+/, "").trim();
+    return line.slice(0, 90) || "Untitled draft";
+  };
+  const longDate = (iso) => new Date(iso).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "draft";
+  const fileBase = (rep) => `litmus-${slug(rep._title || TYPE_NAME[rep.artifact] || "report")}-${new Date(rep._at || Date.now()).toLocaleDateString("en-CA")}`; // local YYYY-MM-DD
+
+  function reportMarkdown(rep) {
+    const { results, got, n, clears } = verdictOf(rep);
+    const oneLine = (s) => String(s || "").replace(/\s+/g, " ").trim();
+    const cell = (s) => oneLine(s).replace(/\|/g, "\\|");
+    const L = [];
+    L.push(`# Litmus report: ${rep._title || TYPE_NAME[rep.artifact]}`, "");
+    L.push(`${TYPE_NAME[rep.artifact]} \u00b7 tested ${longDate(rep._at || new Date().toISOString())} \u00b7 [litmuspm.com](https://litmuspm.com)`, "");
+    L.push(`## ${clears ? "Passes" : "Not yet"}: ${got} / ${n}`, "", oneLine(rep.summary), "",
+      "_Pass mark: 75% of the standards met, with no AI-slop signals missed. Partly counts as half._", "");
+    const slop = results.filter((r) => BYID[r.id].slop_signal);
+    if (slop.length) {
+      L.push("## AI slop check", "");
+      for (const r of slop) L.push(`- **${VERDICT_LABEL[r.verdict]}**: ${BYID[r.id].criterion}`);
+      L.push("");
+    }
+    const order = (rep.top_fixes || []).filter((id) => results.some((r) => r.id === id && r.verdict !== "meets" && r.verdict !== "na"));
+    for (const r of results) if (order.length < 3 && r.verdict === "misses" && !order.includes(r.id)) order.push(r.id);
+    if (order.length) {
+      L.push("## Fix these first", "");
+      order.slice(0, 3).forEach((id, i) => {
+        const r = results.find((x) => x.id === id), c = BYID[id];
+        L.push(`### ${i + 1}. ${c.criterion}`, "", `**${VERDICT_LABEL[r.verdict]}.** ${r.evidence ? `Your draft: "${oneLine(r.evidence)}"` : "Not addressed anywhere in the draft."}`, "");
+        if (r.fix) L.push(`**Fix:** ${oneLine(r.fix)}`, "");
+        L.push(c.sources.length > 1 ? "**What the experts say:**" : "**What the expert says:**", "");
+        for (const s of c.sources.slice(0, 2)) L.push(`> "${oneLine(s.quote)}"`, `> \u2014 ${s.speaker}, ${niceDate(s.date)} \u00b7 [play from ${shortTs(s.ts)}](${s.clip})`, "");
+      });
+    }
+    const moved = results.filter((r) => BYID[r.id].era === "2026" && r.verdict === "misses");
+    if (moved.length) {
+      L.push("## Newer standards you're missing", "", "_Experts only started asking for these in 2026._", "");
+      for (const r of moved) L.push(`- ${BYID[r.id].criterion}`);
+      L.push("");
+    }
+    if (rep.questions && rep.questions.length) {
+      L.push("## Questions a sharp reviewer will ask", "");
+      rep.questions.slice(0, 3).forEach((q, i) => L.push(`${i + 1}. ${oneLine(q)}`));
+      L.push("");
+    }
+    L.push("## Full scorecard", "", "| Standard | Verdict | In your draft |", "| --- | --- | --- |");
+    for (const r of results) L.push(`| ${cell(BYID[r.id].criterion)} | ${VERDICT_LABEL[r.verdict] || r.verdict} | ${r.evidence ? cell(`"${r.evidence}"`) : ""} |`);
+    L.push("", "---", "", "_Experts are credited as the source of a standard. They have not reviewed Litmus or this draft._", "");
+    return L.join("\n");
+  }
+
+  function downloadText(name, text, type) {
+    const a = el("a", { href: URL.createObjectURL(new Blob([text], { type })), download: name });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  function savePdf(rep) {
+    // The browser uses the page title as the PDF's default file name.
+    const prev = document.title; document.title = fileBase(rep);
+    const restore = () => { document.title = prev; window.removeEventListener("afterprint", restore); };
+    window.addEventListener("afterprint", restore);
+    window.print();
+    setTimeout(restore, 1000);
+  }
+
+  function renderReport(rep, mode) {
+    // mode: "example" (the built-in sample), "restored" (the last result, kept in this browser) or "live"
+    const isExample = mode === "example" || mode === true;
     const box = $("#report"); box.replaceChildren();
     const results = (rep.results || []).filter((r) => BYID[r.id] && BYID[r.id].artifact === rep.artifact);
     if (!results.length) { box.append(el("p", { text: "The review came back without usable results. Try again, or pick the type yourself." })); return; }
@@ -361,7 +473,19 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     const slopFail = slop.some((r) => r.verdict === "misses");
     const clears = pct >= .75 && !slopFail;
 
-    if (isExample) box.append(el("span", { class: "example-flag", text: "Example result \u00b7 a typical AI-written PRD" }));
+    const md = el("button", { type: "button", text: "Download Markdown" });
+    md.onclick = () => downloadText(fileBase(rep) + ".md", reportMarkdown(rep), "text/markdown;charset=utf-8");
+    const pdf = el("button", { type: "button", text: "Save as PDF" });
+    pdf.onclick = () => savePdf(rep);
+    box.append(el("div", { class: "report-top" },
+      el("div", { class: "flags" },
+        isExample ? el("span", { class: "example-flag", text: "Example result \u00b7 a typical AI-written PRD" }) : null,
+        mode === "restored" ? el("span", { class: "saved-flag", text: `Your last result \u00b7 ${longDate(rep._at)}` }) : null),
+      el("div", { class: "export", role: "group", "aria-label": "Save this result" }, pdf, md)));
+    box.append(el("div", { class: "print-head" },
+      el("span", { class: "t", text: "Litmus report: " + (rep._title || TYPE_NAME[rep.artifact]) }),
+      el("span", { class: "m" }, `${TYPE_NAME[rep.artifact]} \u00b7 ${longDate(rep._at || new Date().toISOString())} \u00b7 `,
+        el("a", { href: "https://litmuspm.com", text: "litmuspm.com" }))));
 
     const fill = el("i"); fill.style.width = "0%";
     requestAnimationFrame(() => { fill.style.width = (pct * 100).toFixed(0) + "%"; });
@@ -509,8 +633,10 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
       const body = await r.json().catch(() => ({}));
       if (!r.ok) throw { message: body.message + (body.codes && body.codes.length ? ` (code: ${body.codes.join(", ")})` : "") };
       if (!body || !TYPE_NAME[body.artifact]) throw {};
-      renderReport(body, false);
-      const q = body.quota;
+      body._title = draftTitle(draft); body._at = new Date().toISOString();
+      const { quota: q, ...keep } = body;
+      try { localStorage.setItem(LAST_KEY, JSON.stringify(keep)); } catch {}
+      renderReport(body, "live");
       st.textContent = q ? `Test done. You have ${q.remaining_today} of ${q.per_day} tests left today.` : "Test done.";
       if (window.matchMedia("(max-width: 880px)").matches) $("#report").scrollIntoView({ behavior: "smooth" });
     } catch (e) {
@@ -535,7 +661,10 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
       CRITERIA = crit; BYID = Object.fromEntries(crit.map((c) => [c.id, c]));
       renderLibrary();
       if (sampleDraft) $("#draft").value = sampleDraft;
-      if (ex) renderReport(ex, true);
+      let last = null;
+      try { last = JSON.parse(localStorage.getItem(LAST_KEY) || "null"); } catch {}
+      if (last && TYPE_NAME[last.artifact] && last._at) renderReport(last, "restored");
+      else if (ex) { if (sampleDraft) ex._title = draftTitle(sampleDraft); renderReport(ex, "example"); }
     } catch {
       $("#report").replaceChildren(el("p", { text: "The standards didn't load. Reload the page." }));
     }
