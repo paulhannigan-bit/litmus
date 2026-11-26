@@ -2,6 +2,8 @@
 
 **Know if your AI-assisted PM work is good enough before anyone else reads it.**
 
+**▶ Try it live: [litmuspm.com](https://litmuspm.com)** (no sign-up, 3 free tests a day)
+
 AI makes drafting fast, and it makes generic, unconvincing drafts just as fast. Litmus tests a PRD, prototype or
 AI-feature eval plan against 60 standards set by 52 product leaders. It tells you whether the draft passes and which
 three fixes matter most. Each fix links to a clip of the expert who set the standard.

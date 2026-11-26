@@ -7,3 +7,6 @@ node_modules/
 .impeccable/
 # Raw transcript excerpts: the source repo's license forbids re-hosting the raw files as a dataset.
 build/passages/
+
+# Local screenshots for posts
+screenshots/
