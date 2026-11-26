@@ -72,6 +72,19 @@ textarea { width: 100%; min-height: 380px; resize: vertical; font: 13px/1.6 var(
 .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .run { font: 700 15px var(--display); font-stretch: 105%; letter-spacing: .02em; background: var(--pen); color: var(--on-pen); border: 0; border-radius: 8px; padding: 11px 20px; cursor: pointer; }
 .run:disabled { opacity: .55; cursor: progress; }
+/* While a test runs the button stays full strength, with a spinner and the elapsed time. */
+.run.busy, .run.busy:disabled { opacity: 1; cursor: progress; display: inline-flex; align-items: center; gap: 10px; }
+.spin { width: 15px; height: 15px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--on-pen) 35%, transparent); border-top-color: var(--on-pen); animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.running { display: grid; gap: 10px; padding: 16px 18px; border: 1px solid var(--line); border-left: 3px solid var(--pen); border-radius: 8px; background: var(--bg); }
+.running .t { font: 700 16px var(--display); font-stretch: 105%; margin: 0; }
+.running .m { font-size: 13px; color: var(--muted); margin: 0; font-variant-numeric: tabular-nums; }
+.pbar { position: relative; height: 8px; border-radius: 4px; background: var(--chip); overflow: hidden; }
+.pbar i { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 4px; background: var(--pen); transition: width .9s linear; }
+.pbar i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgb(255 255 255 / .45), transparent); animation: sheen 1.4s ease-in-out infinite; }
+@keyframes sheen { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+.report.is-busy > :not(.running) { opacity: .3; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .spin { animation-duration: 2.4s; } .pbar i::after { animation: none; } .pbar i { transition: none; } }
 .ghost { font: 500 13px var(--body); background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 8px; padding: 9px 14px; cursor: pointer; }
 .status { font-size: 13px; color: var(--muted); }
 .human-check:empty { display: none; }
@@ -626,6 +639,35 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
   }
   const HUMAN_FAIL = "The human check couldn't finish. If you use an ad or privacy blocker, allow challenges.cloudflare.com for this page, or try another browser, then reload.";
 
+  // ---------- progress while a test runs ----------
+  // The API returns one complete result, so there is no real progress to report. The bar is a time-based
+  // estimate that eases towards 92% and never claims to finish early; the elapsed time is real.
+  const mmss = (sec) => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`;
+  function startProgress(n) {
+    const btn = $("#run"), box = $("#report"), t0 = Date.now();
+    const label = btn.textContent;
+    const spin = el("span", { class: "spin", "aria-hidden": "true" }), btnText = el("span", { text: "Testing\u2026 0:00" });
+    btn.classList.add("busy"); btn.setAttribute("aria-busy", "true"); btn.replaceChildren(spin, btnText);
+    const fill = el("i"), msg = el("p", { class: "m", text: "0:00 \u00b7 usually 20 to 60 seconds" });
+    const card = el("div", { class: "running", role: "status", "aria-live": "polite" },
+      el("p", { class: "t", text: `Testing your draft against ${n} standards` }),
+      el("div", { class: "pbar", role: "progressbar", "aria-label": "Test in progress" }, fill), msg);
+    box.classList.add("is-busy"); box.prepend(card);
+    const tick = () => {
+      const sec = Math.floor((Date.now() - t0) / 1000);
+      fill.style.width = (92 * (1 - Math.exp(-sec / 22))).toFixed(1) + "%";
+      btnText.textContent = `Testing\u2026 ${mmss(sec)}`;
+      msg.textContent = sec < 60 ? `${mmss(sec)} \u00b7 usually 20 to 60 seconds`
+        : `${mmss(sec)} \u00b7 taking longer than usual, still working`;
+    };
+    tick(); const timer = setInterval(tick, 1000);
+    if (window.matchMedia("(max-width: 880px)").matches) card.scrollIntoView({ behavior: "smooth", block: "center" });
+    return () => {
+      clearInterval(timer); card.remove(); box.classList.remove("is-busy");
+      btn.classList.remove("busy"); btn.removeAttribute("aria-busy"); btn.textContent = label;
+    };
+  }
+
   // ---------- reviewing (POST /api/review on this app's own server) ----------
   async function run() {
     const draft = $("#draft").value.trim();
@@ -639,8 +681,10 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     }
     ctl = new AbortController();
     $("#stop").hidden = false;
-    const n = CRITERIA.filter((c) => chosen === "auto" || c.artifact === chosen).length;
-    st.textContent = `Testing against ${n} standards. This usually takes 20 to 60 seconds.`;
+    // A draft is judged only against the standards for its type (20 each), even when Litmus detects the type.
+    const n = CRITERIA.filter((c) => c.artifact === (chosen === "auto" ? "prd" : chosen)).length;
+    st.textContent = "";
+    const stopProgress = startProgress(n);
     try {
       const r = await fetch("/api/review", {
         method: "POST", headers: { "content-type": "application/json" },
@@ -652,6 +696,7 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
       body._title = draftTitle(draft); body._at = new Date().toISOString();
       const { quota: q, ...keep } = body;
       try { localStorage.setItem(LAST_KEY, JSON.stringify(keep)); } catch {}
+      stopProgress();
       renderReport(body, "live");
       st.textContent = q ? `Test done. You have ${q.remaining_today} of ${q.per_day} tests left today.` : "Test done.";
       if (window.matchMedia("(max-width: 880px)").matches) $("#report").scrollIntoView({ behavior: "smooth" });
@@ -659,6 +704,7 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
       if (e && e.name === "AbortError") st.textContent = "Stopped.";
       else { st.textContent = (e && e.message) || "The test didn't finish. Run it again."; st.classList.add("err"); }
     } finally {
+      stopProgress(); // safe to call twice
       $("#run").disabled = false; $("#stop").hidden = true;
       resetHumanCheck(); // Turnstile tokens are single-use
     }
