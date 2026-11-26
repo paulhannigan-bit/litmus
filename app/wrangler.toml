@@ -6,7 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 
 # Testing limits (counted per UTC day). Change these and push to adjust.
 [vars]
-DAILY_CAP = "100"
+DAILY_CAP = "300"
 PER_VISITOR_DAILY = "3"
 
 # Where the daily counts are stored. Replace the id with your KV namespace ID.

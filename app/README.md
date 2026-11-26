@@ -58,7 +58,7 @@ Only `/api/review`, which spends your API key, is protected:
 
 - **Turnstile bot check.** The site key goes in the `turnstile-sitekey` meta tag in `public/index.html`. The secret
   key goes in the Pages secret `TURNSTILE_SECRET`.
-- **Per-visitor and site-wide daily limits.** These are `PER_VISITOR_DAILY` (default 3) and `DAILY_CAP` (default 100)
+- **Per-visitor and site-wide daily limits.** These are `PER_VISITOR_DAILY` (3) and `DAILY_CAP` (300)
   in `wrangler.toml`, counted per UTC day in the KV namespace bound as `LITMUS_KV`. Visitors' IPs are stored only as
   salted hashes, and counts expire after two days. A failed test doesn't count against the visitor.
 - **The Anthropic workspace spend limit** is the hard backstop. KV isn't transactional, so a burst of simultaneous
