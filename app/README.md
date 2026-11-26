@@ -53,10 +53,19 @@ npx wrangler pages secret put ANTHROPIC_API_KEY
 
 Optional variable: `LITMUS_MODEL` (default `claude-opus-5-5`).
 
-**Rate limiting on Cloudflare.** The Pages function has no built-in per-visitor limit. Its isolates don't share
-memory, so an in-memory counter wouldn't hold. Once the site is on a custom domain in your Cloudflare account, add a
-rate-limiting rule under **Security → WAF** for the path `/api/review`. Until then, keep the `*.pages.dev` link
-private, or put the site behind **Cloudflare Access** (Zero Trust).
+**Protection on Cloudflare (open site, limited testing).** Browsing, the standards and the clips are free and open.
+Only `/api/review`, which spends your API key, is protected:
+
+- **Turnstile bot check.** The site key goes in the `turnstile-sitekey` meta tag in `public/index.html`. The secret
+  key goes in the Pages secret `TURNSTILE_SECRET`.
+- **Per-visitor and site-wide daily limits.** These are `PER_VISITOR_DAILY` (default 3) and `DAILY_CAP` (default 100)
+  in `wrangler.toml`, counted per UTC day in the KV namespace bound as `LITMUS_KV`. Visitors' IPs are stored only as
+  salted hashes, and counts expire after two days. A failed test doesn't count against the visitor.
+- **The Anthropic workspace spend limit** is the hard backstop. KV isn't transactional, so a burst of simultaneous
+  requests can overshoot a cap slightly.
+
+If any of `ANTHROPIC_API_KEY`, `TURNSTILE_SECRET` or the `LITMUS_KV` binding is missing, testing is refused, so a
+half-finished setup can never spend without limits.
 
 ## Deploy to Vercel
 

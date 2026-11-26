@@ -3,3 +3,13 @@ name = "litmus"
 pages_build_output_dir = "public"
 compatibility_date = "2026-11-01"
 compatibility_flags = ["nodejs_compat"]
+
+# Testing limits (counted per UTC day). Change these and push to adjust.
+[vars]
+DAILY_CAP = "100"
+PER_VISITOR_DAILY = "3"
+
+# Where the daily counts are stored. Replace the id with your KV namespace ID.
+[[kv_namespaces]]
+binding = "LITMUS_KV"
+id = "a7fe713ab0234fc98c648f11351b5aff"
