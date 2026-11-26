@@ -1,6 +1,6 @@
 ---
 name: litmus
-description: Test a PM's AI-assisted PRD, prototype or AI-feature eval plan against 60 standards set by product leaders, before it goes to stakeholders. Gives a pass/fail verdict, an AI slop check and the top fixes, each backed by the expert who set the standard with a link to the clip. Use on "/litmus", "litmus test this", "review my PRD/prototype/eval plan", "is this slop", "is this ready to send".
+description: Test a PM's AI-assisted PRD, prototype or AI-feature eval plan against 60 standards set by product leaders, before it goes to stakeholders. Gives a verdict (passes, borderline or not yet), an AI slop check and the top fixes, each backed by the expert who set the standard with a link to the clip. Use on "/litmus", "litmus test this", "review my PRD/prototype/eval plan", "is this slop", "is this ready to send".
 ---
 
 # Litmus
@@ -46,12 +46,16 @@ Use the standard's `check` field as the test. Quote the draft's own words as evi
 passes everything is useless. Generic filler (every section present but nothing specific to this product, user or
 company) counts as Partly at best.
 
-Score: Meets = 1, Partly = 0.5, N/A excluded. The draft **passes** when the score is at least 75% AND no
-`slop_signal` standard is Misses.
+Score: Meets = 1, Partly = 0.5, N/A excluded. The pass mark is 75% of the standards judged. The verdict is:
+- **Not yet** if any `slop_signal` standard is Misses, whatever the score.
+- **Borderline** if the score is within 1 point of the pass mark (e.g. 14 to 16 out of 20). One standard moving
+  between Partly and Meets shifts the score by half a point, so a rerun could land either side. Say so, and name
+  the standards that would settle it.
+- **Passes** if the score is more than 1 point above the pass mark, otherwise **Not yet**.
 
 ## 5. Report in this shape
 
-**Verdict.** One line: `Passes` or `Not yet`, the score (e.g. 9.5 / 14), and the single biggest reason.
+**Verdict.** One line: `Passes`, `Borderline` or `Not yet`, the score (e.g. 9.5 / 14), and the single biggest reason.
 
 **AI slop check.** Every `slop_signal` standard, with its verdict. If any is Misses, lead the fixes with it.
 

@@ -88,7 +88,8 @@ textarea { width: 100%; min-height: 380px; resize: vertical; font: 13px/1.6 var(
 .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 5px; background: var(--ink); }
 .bar b { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--pen); left: 75%; }
 .v-title { font-family: var(--display); font-stretch: 110%; font-weight: 800; font-size: 30px; line-height: 1.05; margin: 0; }
-.v-title.fail { color: var(--pen); } .v-title.ok { color: var(--pass); }
+.v-title.fail { color: var(--pen); } .v-title.ok { color: var(--pass); } .v-title.near { color: var(--part); }
+.v-note { margin: 6px 0 0; font-size: 13.5px; color: var(--muted); max-width: 62ch; }
 .v-reason { margin: 6px 0 0; color: var(--ink); max-width: 62ch; }
 h2 { font-family: var(--display); font-stretch: 105%; font-weight: 800; font-size: 19px; margin: 0 0 10px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 h2 small { font: 400 13px var(--body); color: var(--muted); }
@@ -386,15 +387,30 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     return { got, n, pct: n ? got / n : 0 };
   }
 
+  // The verdict. A draft passes at 75% of the standards with no AI-slop signal missed. Within a point of
+  // that mark it is Borderline: one standard flipping between partly and meets moves the score by half a
+  // point, so a rerun of the same draft can land either side, and saying Passes or Not yet there would
+  // be false precision.
+  const NEAR = 1;
+  function judge(results) {
+    const s = score(results);
+    const slopFail = results.some((r) => BYID[r.id].slop_signal && r.verdict === "misses");
+    const mark = .75 * s.n;
+    const level = slopFail ? "fail" : Math.abs(s.got - mark) <= NEAR ? "near" : s.got > mark ? "pass" : "fail";
+    const title = { pass: "Passes", near: "Borderline", fail: "Not yet" }[level];
+    const note = level === "near"
+      ? `Within a point of the pass mark (${mark} of ${s.n}), so a rerun can land either side. The fixes below would settle it.`
+      : slopFail && s.got >= mark ? "Scores above the pass mark, but misses an AI slop check." : "";
+    return { ...s, slopFail, level, title, note };
+  }
+
   // ---------- saving a result ----------
   // A result can be saved as a PDF (the browser's print dialog, using the print styles above) or as a
   // Markdown file. The latest real result is also kept in this browser, so a reload doesn't lose it.
   const LAST_KEY = "litmus:last-report";
   const verdictOf = (rep) => {
     const results = (rep.results || []).filter((r) => BYID[r.id] && BYID[r.id].artifact === rep.artifact);
-    const s = score(results);
-    const slopFail = results.some((r) => BYID[r.id].slop_signal && r.verdict === "misses");
-    return { results, ...s, clears: s.pct >= .75 && !slopFail };
+    return { results, ...judge(results) };
   };
   const draftTitle = (text) => {
     const line = (text.split("\n").find((l) => l.trim()) || "").replace(/^[#\s*_>-]+/, "").trim();
@@ -405,13 +421,13 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
   const fileBase = (rep) => `litmus-${slug(rep._title || TYPE_NAME[rep.artifact] || "report")}-${new Date(rep._at || Date.now()).toLocaleDateString("en-CA")}`; // local YYYY-MM-DD
 
   function reportMarkdown(rep) {
-    const { results, got, n, clears } = verdictOf(rep);
+    const { results, got, n, title, note } = verdictOf(rep);
     const oneLine = (s) => String(s || "").replace(/\s+/g, " ").trim();
     const cell = (s) => oneLine(s).replace(/\|/g, "\\|");
     const L = [];
     L.push(`# Litmus report: ${rep._title || TYPE_NAME[rep.artifact]}`, "");
     L.push(`${TYPE_NAME[rep.artifact]} \u00b7 tested ${longDate(rep._at || new Date().toISOString())} \u00b7 [litmuspm.com](https://litmuspm.com)`, "");
-    L.push(`## ${clears ? "Passes" : "Not yet"}: ${got} / ${n}`, "", oneLine(rep.summary), "",
+    L.push(`## ${title}: ${got} / ${n}`, "", ...(note ? [`_${note}_`, ""] : []), oneLine(rep.summary), "",
       "_Pass mark: 75% of the standards met, with no AI-slop signals missed. Partly counts as half._", "");
     const slop = results.filter((r) => BYID[r.id].slop_signal);
     if (slop.length) {
@@ -470,8 +486,7 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     if (!results.length) { box.append(el("p", { text: "The review came back without usable results. Try again, or pick the type yourself." })); return; }
     const { got, n, pct } = score(results);
     const slop = results.filter((r) => BYID[r.id].slop_signal);
-    const slopFail = slop.some((r) => r.verdict === "misses");
-    const clears = pct >= .75 && !slopFail;
+    const v = judge(results);
 
     const md = el("button", { type: "button", text: "Download Markdown" });
     md.onclick = () => downloadText(fileBase(rep) + ".md", reportMarkdown(rep), "text/markdown;charset=utf-8");
@@ -495,7 +510,8 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
         el("div", { class: "bar", title: "Red line: the 75% pass mark" }, fill, el("b"))),
       el("div", {},
         el("div", { class: "label", text: TYPE_NAME[rep.artifact] || rep.artifact }),
-        el("p", { class: "v-title " + (clears ? "ok" : "fail"), text: clears ? "Passes" : "Not yet" }),
+        el("p", { class: "v-title " + { pass: "ok", near: "near", fail: "fail" }[v.level], text: v.title }),
+        v.note ? el("p", { class: "v-note", text: v.note }) : null,
         el("p", { class: "v-reason", text: rep.summary || "" }))));
 
     if (slop.length) {
