@@ -1,22 +1,24 @@
 # Litmus
 
-**Know if your AI-assisted PM work is good enough before anyone else reads it.**
+**Know if your PM draft is good enough before anyone else reads it.**
 
 **▶ Try it live: [litmuspm.com](https://litmuspm.com)** (no sign-up, 3 free tests a day)
 
-AI makes drafting fast, and it makes generic, unconvincing drafts just as fast. Litmus tests a PRD, prototype or
-AI-feature eval plan against 60 standards set by 52 product leaders. It tells you whether the draft passes and which
-three fixes matter most. Each fix links to a clip of the expert who set the standard.
+Litmus tests a PRD, prototype or AI-feature eval plan against 60 standards set by 52 product leaders. It tells you
+whether the draft passes and which three fixes matter most. Each fix links to a clip of the expert who set the standard.
+
+It works on any draft, however it was written. It's built to catch the generic filler that AI makes so easy to produce,
+but people write plenty of that too.
 
 ## How it works
 
 1. **Paste.** A PRD or spec, an eval plan, or a prototype described by its screens or build prompt. Litmus works out
    which one it is.
 2. **Test.** The draft is checked against the 20 standards for that document type, including the ones that catch
-   typical AI-written drafts.
+   generic filler, the mistake AI-written drafts make most.
 3. **Fix.** You get:
    - a score against a 75% pass mark
-   - an AI slop check
+   - a check for generic filler and AI slop
    - your top three fixes, written for this draft
    - what the experts say about each fix, with a clip
    - newer standards you're missing

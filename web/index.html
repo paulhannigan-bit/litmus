@@ -162,8 +162,8 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
   </header>
 
   <section class="hero">
-    <h1>Know if your AI-assisted PM work is <em>good enough</em> before anyone else reads it.</h1>
-    <p class="lede">AI makes drafting fast, and it makes generic, unconvincing drafts just as fast. Litmus tests your PRD, prototype or eval plan against 60 standards set by product leaders, tells you whether it passes, and gives you the fixes that matter most.</p>
+    <h1>Know if your PM draft is <em>good enough</em> before anyone else reads it.</h1>
+    <p class="lede">Litmus tests your PRD, prototype or eval plan against 60 standards set by product leaders, tells you whether it passes, and gives you the fixes that matter most. It works on any draft, however it was written, and it&rsquo;s built to catch the generic filler that AI makes so easy to produce.</p>
     <div class="ctas">
       <button class="run" id="cta-test">Test a draft</button>
       <button class="ghost" id="cta-lib">See the 60 standards</button>
@@ -179,12 +179,12 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     <div class="step">
       <span class="n">02 &middot; TEST</span>
       <h2>It&rsquo;s checked against expert standards</h2>
-      <p>20 standards for each kind of document, drawn from interviews with 52 product leaders. That includes the mistakes AI-written drafts make most.</p>
+      <p>20 standards for each kind of document, drawn from interviews with 52 product leaders. That includes the ones that catch generic filler, the mistake AI drafts make most.</p>
     </div>
     <div class="step">
       <span class="n">03 &middot; FIX</span>
       <h2>Get a verdict and what to change</h2>
-      <p>A score against a 75% pass mark, an AI slop check, and your top three fixes rewritten for your draft. Each fix links to a clip of the expert who set the standard.</p>
+      <p>A score against a 75% pass mark, a check for generic filler and AI slop, and your top three fixes rewritten for your draft. Each fix links to a clip of the expert who set the standard.</p>
     </div>
   </section>
 
@@ -301,7 +301,7 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; margi
     if (slop.length) {
       const ul = el("ul", { class: "clean slop" });
       for (const r of slop) ul.append(el("li", {}, el("span", { class: "pill " + r.verdict, text: VERDICT_LABEL[r.verdict] }), el("span", { text: BYID[r.id].criterion })));
-      box.append(el("section", {}, el("h2", { text: "AI slop check " }, el("small", { text: "the mistakes AI-written drafts make most" })), ul));
+      box.append(el("section", {}, el("h2", { text: "AI slop check " }, el("small", { text: "generic filler, and the giveaway signs of AI writing" })), ul));
     }
 
     const order = (rep.top_fixes || []).filter((id) => results.some((r) => r.id === id && r.verdict !== "meets" && r.verdict !== "na"));

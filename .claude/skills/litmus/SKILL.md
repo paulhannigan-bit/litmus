@@ -1,6 +1,6 @@
 ---
 name: litmus
-description: Test a PM's AI-assisted PRD, prototype or AI-feature eval plan against 60 standards set by product leaders, before it goes to stakeholders. Gives a verdict (passes, borderline or not yet), an AI slop check and the top fixes, each backed by the expert who set the standard with a link to the clip. Use on "/litmus", "litmus test this", "review my PRD/prototype/eval plan", "is this slop", "is this ready to send".
+description: Test a PM's PRD, prototype or AI-feature eval plan, whether written by hand or with AI, against 60 standards set by product leaders, before it goes to stakeholders. Gives a verdict (passes, borderline or not yet), an AI slop check and the top fixes, each backed by the expert who set the standard with a link to the clip. Use on "/litmus", "litmus test this", "review my PRD/prototype/eval plan", "is this slop", "is this ready to send".
 ---
 
 # Litmus
